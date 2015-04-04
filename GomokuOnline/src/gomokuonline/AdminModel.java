@@ -36,4 +36,12 @@ public class AdminModel {
             registerController.openView();
     }
 
+    public void openMainMenu(){
+        if(mainMenuController == null){
+            mainMenuController = new MainMenuController();
+            mainMenuController.createView();
+        }
+        else
+            mainMenuController.openView();
+    }
 }

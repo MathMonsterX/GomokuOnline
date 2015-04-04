@@ -9,13 +9,15 @@ public class MainMenuController {
     MainMenuView view;
     AdminModel model;
     
-    public MainMenuController(){
-        
+    public void createView(){
+        view = new MainMenuView();
+        view.makeVisible();
+    }
+    public void openView(){
+        view.makeVisible();
     }
     
-    public void openOnlineMenu(){
-        model.openOnlineMenu();
-    }
+    
     
     
     
