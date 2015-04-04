@@ -1,1 +1,8 @@
 /ThreeInARow/build/
+*.class
+*.class
+*.class
+*.txt
+GomokuOnline/build/classes/gomokuonline/MainMenuController.class
+GomokuOnline/build/classes/gomokuonline/AdminModel.class
+*.class
