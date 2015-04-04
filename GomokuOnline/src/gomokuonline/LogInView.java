@@ -6,7 +6,7 @@ package gomokuonline;
  * @author clarissapendleton
  */
 public class LogInView extends javax.swing.JPanel {
-
+    LogInController controller;
     /**
      * Creates new form LogOn
      */
@@ -130,9 +130,10 @@ public class LogInView extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
 public void setController(LogInController controller){
+    this.controller = controller;
     
 }
-public void updateBlbError(String errors){
+public void updatelblError(String errors){
     
 }
 private void btnAnonymous_Click(java.awt.event.ActionEvent evt){

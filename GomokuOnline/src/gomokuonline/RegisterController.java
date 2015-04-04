@@ -26,5 +26,12 @@ public class RegisterController {
     public void backClick(){
         
     }
+    public void createView(){
+        view = new RegisterView();
+        
+    }
+    public void openView(){
+        
+    }
     
 }
