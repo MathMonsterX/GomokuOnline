@@ -24,7 +24,6 @@ public class LogInView extends javax.swing.JPanel {
     private void initComponents() {
 
         txtUsername = new javax.swing.JTextField();
-        txtPassword = new javax.swing.JTextField();
         userNameLabel = new javax.swing.JLabel();
         passwordLabel = new javax.swing.JLabel();
         btnSignIn = new javax.swing.JButton();
@@ -32,6 +31,7 @@ public class LogInView extends javax.swing.JPanel {
         orLabel = new javax.swing.JLabel();
         btnAnonymous = new javax.swing.JButton();
         lblError = new javax.swing.JLabel();
+        txtPassword = new javax.swing.JPasswordField();
 
         txtUsername.setColumns(10);
         txtUsername.addActionListener(new java.awt.event.ActionListener() {
@@ -39,8 +39,6 @@ public class LogInView extends javax.swing.JPanel {
                 txtUsernameActionPerformed(evt);
             }
         });
-
-        txtPassword.setColumns(10);
 
         userNameLabel.setText("Username");
 
@@ -54,19 +52,12 @@ public class LogInView extends javax.swing.JPanel {
 
         btnAnonymous.setText("Play Anonymously");
 
+        txtPassword.setColumns(10);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(128, 128, 128)
-                        .addComponent(orLabel))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(93, 93, 93)
-                        .addComponent(btnAnonymous)))
-                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -76,13 +67,22 @@ public class LogInView extends javax.swing.JPanel {
                             .addComponent(userNameLabel)
                             .addComponent(passwordLabel))
                         .addGap(39, 39, 39)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnRegister)
                     .addComponent(lblError, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(128, 128, 128)
+                        .addComponent(orLabel))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(93, 93, 93)
+                        .addComponent(btnAnonymous)))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -97,16 +97,16 @@ public class LogInView extends javax.swing.JPanel {
                         .addGap(55, 55, 55)
                         .addComponent(lblError)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(passwordLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(passwordLabel)
+                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnSignIn)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(orLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnAnonymous)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 74, Short.MAX_VALUE)
                 .addComponent(btnRegister)
                 .addContainerGap())
         );
@@ -124,7 +124,7 @@ public class LogInView extends javax.swing.JPanel {
     private javax.swing.JLabel lblError;
     private javax.swing.JLabel orLabel;
     private javax.swing.JLabel passwordLabel;
-    private javax.swing.JTextField txtPassword;
+    private javax.swing.JPasswordField txtPassword;
     private javax.swing.JTextField txtUsername;
     private javax.swing.JLabel userNameLabel;
     // End of variables declaration//GEN-END:variables
@@ -134,8 +134,7 @@ public void setController(LogInController controller){
     
 }
 public void updatelblError(String errors){
-    
-    
+    lblError.setText(errors);  
 }
 private void btnAnonymous_Click(java.awt.event.ActionEvent evt){
     this.setVisible(false);
@@ -144,10 +143,14 @@ private void btnAnonymous_Click(java.awt.event.ActionEvent evt){
 }
 private void btnSignIn_Click(java.awt.event.ActionEvent evt){
     String username;
-    String password;
+    char[] pass;
+    String password="";
     username = txtUsername.getText();
-    password = txtPassword.getText();
-    
+    pass = txtPassword.getPassword();
+    for(int i=0; i<pass.length;i++){
+        password = password+pass[i];
+    }
+    controller.signIn(username, password);
 }
 private void btnRegister_Click(java.awt.event.ActionEvent evt){
     this.setVisible(false);

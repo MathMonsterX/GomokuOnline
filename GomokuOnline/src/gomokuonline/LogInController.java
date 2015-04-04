@@ -16,9 +16,10 @@ public class LogInController {
         model.openMainMenu();
     }
     public void signIn(String username, String password){
-        
+        //model.signIn(username, password);
     }
     
-    public void invalidSignIn(){
-        
+    public void invalidSignIn(String error){
+        view.updatelblError(error);
     }
+}
