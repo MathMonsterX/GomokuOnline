@@ -135,15 +135,23 @@ public void setController(LogInController controller){
 }
 public void updatelblError(String errors){
     
+    
 }
 private void btnAnonymous_Click(java.awt.event.ActionEvent evt){
+    this.setVisible(false);
+    controller.openMainMenuView();
     
 }
 private void btnSignIn_Click(java.awt.event.ActionEvent evt){
+    String username;
+    String password;
+    username = txtUsername.getText();
+    password = txtPassword.getText();
     
 }
 private void btnRegister_Click(java.awt.event.ActionEvent evt){
-    
+    this.setVisible(false);
+    controller.openRegisterView();
 }
 
 }

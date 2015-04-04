@@ -1,10 +1,6 @@
 
 package gomokuonline;
 
-
-
-
-
 /**
  *
  * @author clarissapendleton
