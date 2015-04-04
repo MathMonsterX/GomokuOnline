@@ -1,23 +1,16 @@
 
 package gomokuonline;
-<<<<<<< HEAD
 
 
 
 
-=======
->>>>>>> master
 /**
  *
  * @author clarissapendleton
  */
 public class MainMenuView extends javax.swing.JPanel {
-<<<<<<< HEAD
     MainMenuController controller;
     
-=======
-    MainMenuController controller = new MainMenuController();
->>>>>>> master
     /**
      * Creates new form MainMenuView
      */
@@ -69,21 +62,14 @@ public class MainMenuView extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
 public void setController(MainMenuController controller){
-<<<<<<< HEAD
     this.controller=controller;
     
 }
 private void btnOnline_Click(java.awt.event.ActionEvent evt){
     this.setVisible(false);
     
+}
 
-=======
-    this.controller = controller;
-}
-private void btnOnline_Click(java.awt.event.ActionEvent evt){
-    controller.openOnlineView();
->>>>>>> master
-}
 private void btnOffline_Click(java.awt.event.ActionEvent evt){
     
 }

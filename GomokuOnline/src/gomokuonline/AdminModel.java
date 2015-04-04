@@ -16,4 +16,16 @@ public class AdminModel {
     RegisterController registerController;
     StatController statController;
     
+    
+    public void openOnlineMenu(){
+        if(onlineMenuController==null){
+            onlineMenuController = new OnlineMenuController();
+            onlineMenuController.createView();
+        }
+        else
+            onlineMenuController.openView();
+            
+        
+        
+    }
 }

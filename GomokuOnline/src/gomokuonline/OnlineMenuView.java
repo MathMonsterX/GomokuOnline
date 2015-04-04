@@ -146,4 +146,7 @@ private void btnDecline_Click(java.awt.event.ActionEvent evt){
 private void btnBack_Click(java.awt.event.ActionEvent evt){
     
 }
+public void makeVisible(){
+    this.setVisible(true);
+}
 }
