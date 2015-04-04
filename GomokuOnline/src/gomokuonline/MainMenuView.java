@@ -60,7 +60,7 @@ public void setController(MainMenuController controller){
     this.controller = controller;
 }
 private void btnOnline_Click(java.awt.event.ActionEvent evt){
-    controller.openOnlineView();
+   // controller.openOnlineView();
 }
 private void btnOffline_Click(java.awt.event.ActionEvent evt){
     
