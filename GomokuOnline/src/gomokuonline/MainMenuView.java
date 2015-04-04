@@ -1,26 +1,17 @@
 
 package gomokuonline;
-
-/**
- * THIS IS A CHANGEd file
- * This is AlsO a cHangeD file
- * Changin'
- */
-
-
 /**
  *
  * @author clarissapendleton
  */
 public class MainMenuView extends javax.swing.JPanel {
-
+    MainMenuController controller = new MainMenuController();
     /**
      * Creates new form MainMenuView
      */
     public MainMenuView() {
         initComponents();
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -65,11 +56,11 @@ public class MainMenuView extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-public void setController(){
-    
+public void setController(MainMenuController controller){
+    this.controller = controller;
 }
 private void btnOnline_Click(java.awt.event.ActionEvent evt){
-    
+    controller.openOnlineView();
 }
 private void btnOffline_Click(java.awt.event.ActionEvent evt){
     
