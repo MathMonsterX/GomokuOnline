@@ -16,8 +16,6 @@ public class AdminModel {
     RegisterController registerController;
     StatController statController;
     
-<<<<<<< HEAD
-=======
     
     public void openOnlineMenu(){
         if(onlineMenuController==null){
@@ -30,5 +28,5 @@ public class AdminModel {
         
         
     }
->>>>>>> Clarissa
+
 }

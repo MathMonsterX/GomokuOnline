@@ -6,12 +6,9 @@ package gomokuonline;
  * @author clarissapendleton
  */
 public class RegisterView extends javax.swing.JPanel {
-<<<<<<< HEAD
     RegisterController controller; 
     
-=======
-    RegisterController controller;
->>>>>>> Clarissa
+
     /**
      * Creates new form RegisterView
      */
@@ -116,14 +113,10 @@ public void updateLblError(String error){
     lblError.setText(error);
     
 }
-<<<<<<< HEAD
-public void setController(RegisterController control){
-    controller = control;
-=======
+
 public void setController(RegisterController controller){
     this.controller = controller;
     
->>>>>>> Clarissa
 }
 private void btnSignUp_Click(java.awt.event.ActionEvent evt){
     if(!(txtPassword.equals(txtReType))){
