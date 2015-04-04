@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package gomokuonline;
 
 /**
@@ -10,6 +5,7 @@ package gomokuonline;
  * @author clarissapendleton
  */
 public class MainMenuController {
+<<<<<<< HEAD
     MainMenuView view;
     AdminModel model;
     
@@ -19,4 +15,7 @@ public class MainMenuController {
     
     
     
+=======
+ 
+>>>>>>> master
 }
