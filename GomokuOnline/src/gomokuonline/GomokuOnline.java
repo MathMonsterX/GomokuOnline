@@ -11,7 +11,7 @@ import javax.swing.JFrame;
  *
  * @author clarissapendleton
  */
-public class ThreeInARow {
+public class GomokuOnline {
 
     /**
      * @param args the command line arguments
