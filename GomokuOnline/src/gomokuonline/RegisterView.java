@@ -6,7 +6,8 @@ package gomokuonline;
  * @author clarissapendleton
  */
 public class RegisterView extends javax.swing.JPanel {
-
+    RegisterController controller; 
+    
     /**
      * Creates new form RegisterView
      */
@@ -109,8 +110,8 @@ public class RegisterView extends javax.swing.JPanel {
 public void updateLblError(String error){
     
 }
-public void setController(RegisterController controller){
-    
+public void setController(RegisterController control){
+    controller = control;
 }
 private void btnSignUp_Click(java.awt.event.ActionEvent evt){
     
