@@ -25,18 +25,18 @@ public class OnlineMenuView extends javax.swing.JPanel {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        playersList = new javax.swing.JList();
+        listOnlinePlayers = new javax.swing.JList();
         playerLabel = new javax.swing.JLabel();
         btnSendRequest = new javax.swing.JButton();
         cbBoard = new javax.swing.JComboBox();
         requestsLabel = new javax.swing.JLabel();
         listRequests = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList();
+        listReq = new javax.swing.JList();
         btnAccept = new javax.swing.JButton();
         btnDecline = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
 
-        jScrollPane1.setViewportView(playersList);
+        jScrollPane1.setViewportView(listOnlinePlayers);
 
         playerLabel.setText("Online Players");
 
@@ -46,7 +46,7 @@ public class OnlineMenuView extends javax.swing.JPanel {
 
         requestsLabel.setText("Play Requests");
 
-        listRequests.setViewportView(jList1);
+        listRequests.setViewportView(listReq);
 
         btnAccept.setText("Accept");
 
@@ -80,11 +80,13 @@ public class OnlineMenuView extends javax.swing.JPanel {
                                 .addComponent(cbBoard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(listRequests, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(btnAccept)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnDecline)))))
+                                .addComponent(btnDecline))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(listRequests, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(24, 24, 24)))))
                 .addGap(15, 15, 15))
         );
         layout.setVerticalGroup(
@@ -117,11 +119,11 @@ public class OnlineMenuView extends javax.swing.JPanel {
     private javax.swing.JButton btnDecline;
     private javax.swing.JButton btnSendRequest;
     private javax.swing.JComboBox cbBoard;
-    private javax.swing.JList jList1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JList listOnlinePlayers;
+    private javax.swing.JList listReq;
     private javax.swing.JScrollPane listRequests;
     private javax.swing.JLabel playerLabel;
-    private javax.swing.JList playersList;
     private javax.swing.JLabel requestsLabel;
     // End of variables declaration//GEN-END:variables
 
@@ -148,5 +150,9 @@ private void btnBack_Click(java.awt.event.ActionEvent evt){
 }
 public void makeVisible(){
     this.setVisible(true);
+}
+
+public void post(String[] players){
+    listOnlinePlayers.setListData(players);
 }
 }

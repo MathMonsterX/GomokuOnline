@@ -17,10 +17,6 @@ public class MainMenuController {
         view.makeVisible();
     }
     
-    
-    
-    
-    
-
+   
  
 }

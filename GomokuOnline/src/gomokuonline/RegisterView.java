@@ -122,7 +122,7 @@ private void btnSignUp_Click(java.awt.event.ActionEvent evt){
     if(!(txtPassword.equals(txtReType))){
         txtPassword.setText("");
         txtReType.setText("");
-        updateLblError("** Passwords do not match. Please reenter passwords **");
+        updateLblError("** Passwords do not match. Please reenter password fields **");
     }
     else
         controller.createAccount(txtPassword.getText(), txtPassword.getText());
@@ -131,5 +131,8 @@ private void btnSignUp_Click(java.awt.event.ActionEvent evt){
 private void btnBack_Click(java.awt.event.ActionEvent evt){
     this.setVisible(false);
     controller.backClick();
+}
+public void makeVisible(){
+    this.setVisible(true);
 }
 }
