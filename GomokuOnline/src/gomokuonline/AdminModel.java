@@ -16,4 +16,19 @@ public class AdminModel {
     RegisterController registerController;
     StatController statController;
     
+<<<<<<< HEAD
+=======
+    
+    public void openOnlineMenu(){
+        if(onlineMenuController==null){
+            onlineMenuController = new OnlineMenuController();
+            onlineMenuController.createView();
+        }
+        else
+            onlineMenuController.openView();
+            
+        
+        
+    }
+>>>>>>> Clarissa
 }
