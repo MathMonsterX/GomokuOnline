@@ -7,7 +7,7 @@ package gomokuonline;
  * @author clarissapendleton
  */
 public class OnlineMenuView extends javax.swing.JPanel {
-
+    OnlineMenuController controller;
     /**
      * Creates new form LobbyView
      */
@@ -126,7 +126,7 @@ public class OnlineMenuView extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
 public void setController(OnlineMenuController controller){
-    
+    this.controller = controller;
 }
 /*public void updateOnlinePlayers(Player player){
     

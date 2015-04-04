@@ -6,12 +6,13 @@ package gomokuonline;
  * @author clarissapendleton
  */
 public class RegisterView extends javax.swing.JPanel {
-
+    RegisterController controller;
     /**
      * Creates new form RegisterView
      */
     public RegisterView() {
         initComponents();
+        lblError.setVisible(false);
     }
 
     /**
@@ -107,15 +108,25 @@ public class RegisterView extends javax.swing.JPanel {
     private javax.swing.JLabel usernameLabel;
     // End of variables declaration//GEN-END:variables
 public void updateLblError(String error){
+    lblError.setText(error);
     
 }
 public void setController(RegisterController controller){
+    this.controller = controller;
     
 }
 private void btnSignUp_Click(java.awt.event.ActionEvent evt){
+    if(!(txtPassword.equals(txtReType))){
+        txtPassword.setText("");
+        txtReType.setText("");
+        updateLblError("** Passwords do not match. Please reenter passwords **");
+    }
+    else
+        controller.createAccount(txtPassword.getText(), txtPassword.getText());
     
 }
 private void btnBack_Click(java.awt.event.ActionEvent evt){
-    
+    this.setVisible(false);
+    controller.backClick();
 }
 }

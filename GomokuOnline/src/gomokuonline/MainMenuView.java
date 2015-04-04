@@ -1,11 +1,7 @@
 
 package gomokuonline;
 
-/**
- * THIS IS A CHANGEd file
- * This is AlsO a cHangeD file
- * Changin'
- */
+
 
 
 /**
@@ -13,7 +9,8 @@ package gomokuonline;
  * @author clarissapendleton
  */
 public class MainMenuView extends javax.swing.JPanel {
-
+    MainMenuController controller;
+    
     /**
      * Creates new form MainMenuView
      */
@@ -65,11 +62,14 @@ public class MainMenuView extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-public void setController(){
+public void setController(MainMenuController controller){
+    this.controller=controller;
     
 }
 private void btnOnline_Click(java.awt.event.ActionEvent evt){
+    this.setVisible(false);
     
+
 }
 private void btnOffline_Click(java.awt.event.ActionEvent evt){
     
