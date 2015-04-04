@@ -1,12 +1,33 @@
 
-package gomokuonline;
+import java.awt.GridLayout;
+import javax.swing.JButton;
+
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+ 
 
 /**
- *
- * @author clarissapendleton
- */
-public class GameView extends javax.swing.JPanel {
+*Name: Tom Kreamer
+*Assignment: GUI Prototype
+*Title: GameView
+*Course: CSCE 320
+*Semester: Spring 2015
+*Instructor: George Hauser
+*Date: 3/18/2015
+*Sources consulted: None
+*Creativity: None
+*Program Description: Serves as the view for an instance of the game. Current
+* revision is mostly proof of concept, with several features unimplemented.
+*/
+public class GameView extends javax.swing.JFrame {
 
+    private JButton[][] grid;
+    private GameController controller;
+    
+    
     /**
      * Creates new form GameView
      */
@@ -14,6 +35,52 @@ public class GameView extends javax.swing.JPanel {
         initComponents();
     }
 
+    
+    
+    /**
+     * Instantiates a width X length board of buttons.
+     * @param width width of the board
+     * @param length length of the board
+     */
+     public void setupBoard(int width, int length){
+        grid = new JButton[width][length];
+        GameBoardPanel.setLayout(new GridLayout(width, length));
+        for(int y = 0; y<length; y++){
+                for(int x = 0; x <width; x++){
+                        grid[x][y] = new JButton("  ");
+                        GameBoardPanel.add(grid[x][y]);
+
+                }
+        }
+    }
+     
+     /**
+      * Sets the controller associated with this view
+      * @param controller to be used for this view
+      */
+     public void setController(GameController controller){
+         this.controller = controller;
+     }
+    
+     /**
+      * Updates the playerMoveLabel
+      * @param message to be displayed on label
+      */
+     public void updateLblPlayerMove(String message){
+    
+     }
+     
+     /**
+      * Updates the opponentMoveLabel
+      * @param message to be displayed on label
+      */
+     public void updateLblOpponentMove(String message){
+
+     }
+     
+
+
+     
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -23,73 +90,132 @@ public class GameView extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnEndMove = new javax.swing.JButton();
-        lblPlayerMove = new javax.swing.JLabel();
-        lblOpponentMove = new javax.swing.JLabel();
-        lblPlayer = new javax.swing.JLabel();
+        GameBoardPanel = new javax.swing.JPanel();
+        playerNameLabel = new javax.swing.JLabel();
+        opponentMoveLabel = new javax.swing.JLabel();
+        playerMoveLabel = new javax.swing.JLabel();
+        endMoveLabel = new javax.swing.JButton();
 
-        btnEndMove.setText("End Move");
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        lblPlayerMove.setText("Your Name- Your Move! ");
+        javax.swing.GroupLayout GameBoardPanelLayout = new javax.swing.GroupLayout(GameBoardPanel);
+        GameBoardPanel.setLayout(GameBoardPanelLayout);
+        GameBoardPanelLayout.setHorizontalGroup(
+            GameBoardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 175, Short.MAX_VALUE)
+        );
+        GameBoardPanelLayout.setVerticalGroup(
+            GameBoardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 175, Short.MAX_VALUE)
+        );
 
-        lblOpponentMove.setText("Opponent Name- Your Move!");
+        playerNameLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        playerNameLabel.setText("Player");
 
-        lblPlayer.setText("Player");
+        opponentMoveLabel.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        opponentMoveLabel.setText("Opponent Name -- Your Move!");
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
+        playerMoveLabel.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        playerMoveLabel.setText("Your Name -- Your Move!");
+
+        endMoveLabel.setText("End Move");
+        endMoveLabel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                endButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblOpponentMove)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(108, 108, 108)
+                        .addComponent(GameBoardPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblPlayerMove)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 103, Short.MAX_VALUE)
-                        .addComponent(btnEndMove)))
-                .addContainerGap())
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(opponentMoveLabel)
+                            .addComponent(playerNameLabel))))
+                .addContainerGap(117, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(lblPlayer)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(playerMoveLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(endMoveLabel)
+                .addGap(39, 39, 39))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblPlayer)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 221, Short.MAX_VALUE)
-                .addComponent(lblOpponentMove)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnEndMove)
-                    .addComponent(lblPlayerMove))
-                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(endMoveLabel)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(playerNameLabel)
+                        .addGap(18, 18, 18)
+                        .addComponent(GameBoardPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(opponentMoveLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(playerMoveLabel)))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
+
+        pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    
+    /**
+     * Responds to endMove button being pressed
+     * @param evt 
+     */
+    private void endButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_endButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_endButtonActionPerformed
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(GameView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(GameView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(GameView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(GameView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new GameView().setVisible(true);
+            }
+        });
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnEndMove;
-    private javax.swing.JLabel lblOpponentMove;
-    private javax.swing.JLabel lblPlayer;
-    private javax.swing.JLabel lblPlayerMove;
+    private javax.swing.JPanel GameBoardPanel;
+    private javax.swing.JButton endMoveLabel;
+    private javax.swing.JLabel opponentMoveLabel;
+    private javax.swing.JLabel playerMoveLabel;
+    private javax.swing.JLabel playerNameLabel;
     // End of variables declaration//GEN-END:variables
-
-public void setController(GameController controller){
-    
-}
-public void updateLblPlayerMove(String message){
-    
-}
-public void updateLblOpponentMove(String message){
-    
-}
-private void btnEndMove_Click(java.awt.event.ActionEvent evt){
-    
-}
-
 }
