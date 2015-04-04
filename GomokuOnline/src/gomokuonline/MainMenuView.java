@@ -2,7 +2,7 @@
 package gomokuonline;
 
 /**
- * THIS IS A CHANGE
+ * THIS IS A CHANGEd file
  */
 
 
