@@ -8,6 +8,13 @@ public class LogInController {
     AdminModel model;
     LogInView view;
     
+    public void setModel(AdminModel model){
+        this.model = model;
+    }
+    public void setView(LogInView view){
+        this.view = view;
+    }
+    
     public void openRegisterView(){
         model.openRegister();
     }

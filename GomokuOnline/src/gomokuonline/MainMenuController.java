@@ -11,6 +11,7 @@ public class MainMenuController {
     
     public void createView(){
         view = new MainMenuView();
+        model.createMainMenuFrame(view);
         view.makeVisible();
     }
     public void openView(){
