@@ -5,7 +5,21 @@
  */
 package gomokuonline;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Hashtable;
+import java.util.List;
+import java.util.Map;
+import java.util.Scanner;
+import java.util.SortedSet;
+import java.util.TreeSet;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
 *Name: Tom Kreamer
@@ -24,15 +38,70 @@ import java.util.ArrayList;
 * with an EchoServerController to make updates to the view
 */
 public class GomokuServerModel {
-    private ArrayList<Connection> connections;
-    private ArrayList<String> messages;
+    private List<Connection> connections;
+    private List<String> messages;
+    private SortedSet<String> onlineUsers;
+    private Map<String, String> userLogins;
+    private File loginData;
+    
     
     /**
-     * Constructor, creates a new instance of an EchoServerModel
+     * Constructor, creates a new instance of an GomokuServerModel
      */
     public GomokuServerModel(){
-        this.connections = new ArrayList<Connection>();
-        this.messages = new ArrayList<String>();
+        this.connections = Collections.synchronizedList(new ArrayList<Connection>());
+        this.messages = Collections.synchronizedList(new ArrayList<String>());
+        this.onlineUsers = Collections.synchronizedSortedSet(new TreeSet<String>()); 
+        this.userLogins = Collections.synchronizedMap(new HashMap<String, String>());
+        this.loginData = new File("loginData.txt");
+        this.getLoginsFromDatabase();
+    }
+    
+    /**
+     * Gets usernames and passwords from the database file
+     */ 
+    private void getLoginsFromDatabase(){
+        try {
+            Scanner scan = new Scanner(this.loginData);
+            while(scan.hasNext()){
+                String[] login = scan.nextLine().split("\\s+");
+                this.userLogins.put(login[0], login[1]);
+            }
+            scan.close();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(GomokuServerModel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    /**
+     * Updates the database with the given username and password pair
+     * @param uname username to be added
+     * @param pass password to be added
+     */
+    private void updateDatabase(String uname, String pass){
+        try {
+            FileWriter writer = new FileWriter(loginData);
+            writer.append(uname + " " + pass + "\n");
+            writer.close();
+        } catch (IOException ex) {
+            Logger.getLogger(GomokuServerModel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    /**
+     * Attempts to add the given username and password to the database of registered users
+     * @param uname username to be associated with account
+     * @param pass password to be associated with account
+     * @return String response indicating success or failure in account creation
+     */
+    public String createAccount(String uname, String pass){
+        String response = "ACCOUNT_CREATION fail";
+        if(!userLogins.containsKey(uname)){
+            userLogins.put(uname, pass);
+            this.updateDatabase(uname, pass);
+            response = "ACCOUNT_CREATION success";
+        }
+        return response;
     }
     
     /**
@@ -42,7 +111,7 @@ public class GomokuServerModel {
      */
     public void addConnection(Connection con){
         this.connections.add(con);
-        String[] p;
+       
     }
     
     /**
@@ -69,6 +138,30 @@ public class GomokuServerModel {
         this.messages.add(message);
     }
     
+    /**
+     * Attempts to authenticate the given username and password
+     * @param uname username to be authenticated
+     * @param pass password to be authenticated
+     * @return the authentication status represented as a string
+     */
+    public String authenticate(String uname, String pass){
+        String response = "AUTHENTICATION fail";
+        String storedPass;
+        if((storedPass = this.userLogins.get(uname)) != null ){
+            if(storedPass.equals(pass)){
+                response = "AUTHENTICATION success";
+                onlineUsers.add(uname);
+            }
+                
+            
+        }
+        return response;
+    }
+    
+    public String[] getOnlineUsers(){
+        return this.onlineUsers.toArray( new String[onlineUsers.size()] );
+    }
+    
     
     /**
      * Returns an array representation of the list of
@@ -93,6 +186,10 @@ public class GomokuServerModel {
      */
     public void removeConnection(Connection con){
         this.connections.remove(con);
+    }
+    
+    private void addOnlineUser(String user){
+        this.onlineUsers.add(user);
     }
     
 }
