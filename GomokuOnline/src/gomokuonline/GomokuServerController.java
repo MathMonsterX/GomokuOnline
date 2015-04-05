@@ -146,6 +146,37 @@ public class GomokuServerController implements Runnable{
         }
     }
     
+    private String getOnlinePlayers(){
+        String[] players = this.model.getOnlineUsers();
+        
+        StringBuilder userList = new StringBuilder("ONLINE_USERS");
+        for(String user : players){
+            userList.append(" "+user);
+        }
+        return userList.toString();
+    }
+    
+    /**
+     * Checks an input string for command, then returns appropriate response
+     * @param message
+     * @return 
+     */
+    public String processMessage(String message){
+        String[] input = message.split("\\s+");
+        
+        switch(input[0]){
+            case "LOGIN":
+                return this.model.authenticate(input[1], input[2]);
+            case "GET_USERS":
+                return this.getOnlinePlayers();
+            case "CREATE_ACCOUNT":
+                return this.model.createAccount(input[1], input[2]);
+        }
+        
+       
+        
+        return "ERROR: Unexpected Input: " + message;
+    }
     
     /**
      * Updates the view with the current number
