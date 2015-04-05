@@ -151,7 +151,7 @@ public class AdminModel implements Runnable{
         if(onlineMenuController==null){
             onlineMenuController = new OnlineMenuController();
             onlineMenuController.createView();
-            onlineMenuController.setModel(model);
+            onlineMenuController.setModel(this);
         }
         else
             onlineMenuController.openView();
@@ -163,7 +163,7 @@ public class AdminModel implements Runnable{
         if(registerController==null){
             registerController = new RegisterController();
             registerController.createView();
-            registerController.setModel(model);
+            registerController.setModel(this);
         }
         else 
             registerController.openView();
@@ -173,7 +173,7 @@ public class AdminModel implements Runnable{
         if(mainMenuController == null){
             mainMenuController = new MainMenuController();
             mainMenuController.createView();
-            mainMenuController.setModel(model);
+            mainMenuController.setModel(this);
         }
         else
             mainMenuController.openView();
