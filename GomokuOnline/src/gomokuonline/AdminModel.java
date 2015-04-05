@@ -7,6 +7,8 @@ import java.net.InetAddress;
 import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.awt.Container;
+
 
 /**
  * This model is meant to dictate what views appear and disappear
@@ -22,6 +24,7 @@ public class AdminModel implements Runnable{
     OnlineMenuController onlineMenuController;
     RegisterController registerController;
     StatController statController;
+    GomokuOnline game;
     
     private int port = 54321;
     private Socket clientSock;
@@ -101,7 +104,17 @@ public class AdminModel implements Runnable{
         worker.start();
     }
     public void sendUserLogin(String user, String pass){
-        String message = "LOGIN" +  user + " " + pass;
+        String message = "LOGIN "  + user + " " + pass;
+        try{
+            socketOut.write(message);
+            socketOut.flush();
+        }catch(IOException ex){
+            Logger.getLogger(AdminModel.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Error in writing to socket");
+        }
+    }
+    public void createAccount(String user, String pass){
+        String message = "CREATE_ACCOUNT " + user + " " + pass;
         try{
             socketOut.write(message);
             socketOut.flush();
@@ -123,7 +136,7 @@ public class AdminModel implements Runnable{
         }
     }
     public void postList(String[] input){
-        //onlineMenuController.postList(input);
+        onlineMenuController.postList(input);
     }
     public void close(){
         try{
@@ -141,6 +154,7 @@ public class AdminModel implements Runnable{
         }
         else
             onlineMenuController.openView();
+        onlineMenuController.timedRequestList();
               
         
     }
@@ -161,5 +175,31 @@ public class AdminModel implements Runnable{
         else
             mainMenuController.openView();
     }
+    public void setGomoku(GomokuOnline game){
+        this.game = game;
+    }
 
+    public void openLogIn(){
+        logInController.openView();
+    }
+
+    public void createRegisterFrame(Container content){
+	game.openRegister(content);
+    }
+    
+    public void createStatFrame(Container content){
+	game.openStats(content);
+    }
+    public void createMainMenuFrame(Container content){
+	game.openMainMenu(content);
+    }
+    public void createGameFrame(Container content){
+	game.openGame(content);
+    }
+    public void createChooseAIFrame(Container content){
+	game.openChooseAI(content);
+    }
+    public void createOnlineMenuFrame(Container content){
+	game.openOnlineMenu(content);
+    }
 }

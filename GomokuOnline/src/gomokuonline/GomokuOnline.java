@@ -15,6 +15,7 @@ public class GomokuOnline {
     JFrame gameFrame;
     JFrame statsFrame;
     JFrame chooseAIFrame;
+    AdminModel model;
     /**
      * @param args the command line arguments
      */
@@ -25,6 +26,7 @@ public class GomokuOnline {
     }
     
     public void startGame(){
+        model = new AdminModel();
         logInFrame = new JFrame( );
         logInFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         LogInView view = new LogInView();

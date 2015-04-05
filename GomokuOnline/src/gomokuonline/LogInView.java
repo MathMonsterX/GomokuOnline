@@ -156,5 +156,7 @@ private void btnRegister_Click(java.awt.event.ActionEvent evt){
     this.setVisible(false);
     controller.openRegisterView();
 }
-
+public void makeVisible(){
+    this.setVisible(true);
+}
 }

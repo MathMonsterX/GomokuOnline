@@ -21,14 +21,14 @@ public class RegisterController {
         
     }
     public void createAccount(String username, String password){
-        model.createAccount();
+        model.createAccount(username, password);
     }
     public void backClick(){
         model.openLogIn();
     }
     public void createView(){
         view = new RegisterView();
-        model.createRegisterView(view);
+        model.createRegisterFrame(view);
         view.makeVisible();
         
     }
