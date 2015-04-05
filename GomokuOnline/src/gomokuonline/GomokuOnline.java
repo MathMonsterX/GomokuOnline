@@ -26,7 +26,7 @@ public class GomokuOnline {
     }
     
     public void startGame(){
-        model = new AdminModel();
+        model = new AdminModel("152.117.212.120", 8080);
         logInFrame = new JFrame( );
         logInFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         LogInView view = new LogInView();

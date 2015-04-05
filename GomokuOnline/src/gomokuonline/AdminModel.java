@@ -26,7 +26,7 @@ public class AdminModel implements Runnable{
     StatController statController;
     GomokuOnline game;
     
-    private int port = 54321;
+    private int port = 8080;
     private Socket clientSock;
     private InputStream is;
     private OutputStream os;

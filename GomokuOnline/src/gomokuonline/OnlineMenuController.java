@@ -21,6 +21,9 @@ public class OnlineMenuController {
     public void openView(){
         view.makeVisible();
     }
+    public void setModel(AdminModel model){
+        this.model = model;
+    }
     public void postList(String[] players){
         view.post(players);
     }
