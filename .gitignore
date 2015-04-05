@@ -7,3 +7,4 @@ GomokuOnline/build/classes/gomokuonline/MainMenuController.class
 GomokuOnline/build/classes/gomokuonline/AdminModel.class
 *.class
 *.class
+/GomokuOnline/build/
