@@ -27,7 +27,7 @@ public class RegisterController {
         model.openLogIn();
     }
     public void createView(){
-        view = new RegisterView();
+        this.view = new RegisterView();
         model.createRegisterFrame(view);
         view.makeVisible();
         

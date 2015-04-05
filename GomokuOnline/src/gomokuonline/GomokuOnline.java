@@ -27,6 +27,7 @@ public class GomokuOnline {
     
     public void startGame(){
         model = new AdminModel("152.117.212.120", 8080);
+        model.setGomoku(this);
         logInFrame = new JFrame( );
         logInFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         LogInView view = new LogInView();
@@ -43,31 +44,37 @@ public class GomokuOnline {
         registerFrame = new JFrame( );
         registerFrame.setContentPane(content);
         registerFrame.pack();
+         registerFrame.setVisible(true); 
     }
     public void openMainMenu(Container content){
         mainMenuFrame = new JFrame( );
         mainMenuFrame.setContentPane(content);
         mainMenuFrame.pack();
+         mainMenuFrame.setVisible(true); 
     }
     public void openOnlineMenu(Container content){
         onlineMenuFrame = new JFrame( );
         onlineMenuFrame.setContentPane(content);
         onlineMenuFrame.pack();
+         onlineMenuFrame.setVisible(true); 
     }
     public void openGame(Container content){
         gameFrame = new JFrame( );
         gameFrame.setContentPane(content);
         gameFrame.pack();
+         gameFrame.setVisible(true); 
     }
     public void openStats(Container content){
         statsFrame = new JFrame( );
         statsFrame.setContentPane(content);
         statsFrame.pack();
+        statsFrame.setVisible(true);
     }
     public void openChooseAI(Container content){
         chooseAIFrame = new JFrame( );
         chooseAIFrame.setContentPane(content);
         chooseAIFrame.pack();
+         chooseAIFrame.setVisible(true); 
     }
     
 }

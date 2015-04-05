@@ -48,6 +48,11 @@ public class RegisterView extends javax.swing.JPanel {
         reEnterLabel.setText("Re-Type Password");
 
         btnSignUp.setText("Sign Up");
+        btnSignUp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSignUpActionPerformed(evt);
+            }
+        });
 
         lblError.setText("**Passwords do not match**");
 
@@ -98,6 +103,10 @@ public class RegisterView extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnSignUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignUpActionPerformed
+        btnSignUp_Click();
+    }//GEN-LAST:event_btnSignUpActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSignUp;
@@ -118,7 +127,7 @@ public void setController(RegisterController controller){
     this.controller = controller;
     
 }
-private void btnSignUp_Click(java.awt.event.ActionEvent evt){
+private void btnSignUp_Click(){
     if(!(txtPassword.equals(txtReType))){
         txtPassword.setText("");
         txtReType.setText("");
