@@ -42,7 +42,7 @@ public class GomokuServerModel {
     private List<String> messages;
     private SortedSet<String> onlineUsers;
     private Map<String, String> userLogins;
-    private File loginData;
+    private File loginDatabase;
     
     
     /**
@@ -53,17 +53,17 @@ public class GomokuServerModel {
         this.messages = Collections.synchronizedList(new ArrayList<String>());
         this.onlineUsers = Collections.synchronizedSortedSet(new TreeSet<String>()); 
         this.userLogins = Collections.synchronizedMap(new HashMap<String, String>());
-        File database = new File("loginData.txt");
-        this.getLoginsFromDatabase();
-        this.loginData = database;
+        this.loginDatabase = new File("loginData.txt");
+        this.getLoginsFromDatabase(this.loginDatabase);
+        
     }
     
     /**
      * Gets usernames and passwords from the database file
      */ 
-    private void getLoginsFromDatabase(){
+    private void getLoginsFromDatabase(File database){
         try {
-            Scanner scan = new Scanner(this.loginData);
+            Scanner scan = new Scanner(database);
             while(scan.hasNext()){
                 String[] login = scan.nextLine().split("\\s+");
                 this.userLogins.put(login[0], login[1]);
@@ -81,7 +81,7 @@ public class GomokuServerModel {
      */
     private void updateDatabase(String uname, String pass){
         try {
-            FileWriter writer = new FileWriter(loginData);
+            FileWriter writer = new FileWriter(loginDatabase);
             writer.append(uname + " " + pass + "\n");
             writer.close();
         } catch (IOException ex) {
