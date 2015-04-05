@@ -45,12 +45,27 @@ public class LogInView extends javax.swing.JPanel {
         passwordLabel.setText("Password");
 
         btnSignIn.setText("Sign In");
+        btnSignIn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSignInActionPerformed(evt);
+            }
+        });
 
         btnRegister.setText("Register");
+        btnRegister.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegisterActionPerformed(evt);
+            }
+        });
 
         orLabel.setText("-----or-----");
 
         btnAnonymous.setText("Play Anonymously");
+        btnAnonymous.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAnonymousActionPerformed(evt);
+            }
+        });
 
         txtPassword.setColumns(10);
 
@@ -116,6 +131,18 @@ public class LogInView extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtUsernameActionPerformed
 
+    private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
+        btnRegister_Click();
+    }//GEN-LAST:event_btnRegisterActionPerformed
+
+    private void btnSignInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignInActionPerformed
+        btnSignIn_Click();
+    }//GEN-LAST:event_btnSignInActionPerformed
+
+    private void btnAnonymousActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnonymousActionPerformed
+        btnAnonymous_Click();
+    }//GEN-LAST:event_btnAnonymousActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAnonymous;
@@ -136,12 +163,12 @@ public void setController(LogInController controller){
 public void updatelblError(String errors){
     lblError.setText(errors);  
 }
-private void btnAnonymous_Click(java.awt.event.ActionEvent evt){
+private void btnAnonymous_Click(){
     this.setVisible(false);
     controller.openMainMenuView();
     
 }
-private void btnSignIn_Click(java.awt.event.ActionEvent evt){
+private void btnSignIn_Click(){
     String username;
     char[] pass;
     String password="";
@@ -152,7 +179,7 @@ private void btnSignIn_Click(java.awt.event.ActionEvent evt){
     }
     controller.signIn(username, password);
 }
-private void btnRegister_Click(java.awt.event.ActionEvent evt){
+private void btnRegister_Click(){
     this.setVisible(false);
     controller.openRegisterView();
 }
