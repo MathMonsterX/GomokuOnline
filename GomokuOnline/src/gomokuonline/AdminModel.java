@@ -151,6 +151,7 @@ public class AdminModel implements Runnable{
         if(onlineMenuController==null){
             onlineMenuController = new OnlineMenuController();
             onlineMenuController.createView();
+            onlineMenuController.setModel(model);
         }
         else
             onlineMenuController.openView();
@@ -162,6 +163,7 @@ public class AdminModel implements Runnable{
         if(registerController==null){
             registerController = new RegisterController();
             registerController.createView();
+            registerController.setModel(model);
         }
         else 
             registerController.openView();
@@ -171,16 +173,19 @@ public class AdminModel implements Runnable{
         if(mainMenuController == null){
             mainMenuController = new MainMenuController();
             mainMenuController.createView();
+            mainMenuController.setModel(model);
         }
         else
             mainMenuController.openView();
     }
-    public void setGomoku(GomokuOnline game){
-        this.game = game;
-    }
+   
 
     public void openLogIn(){
         logInController.openView();
+    }
+    
+     public void setGomoku(GomokuOnline game){
+        this.game = game;
     }
 
     public void createRegisterFrame(Container content){
