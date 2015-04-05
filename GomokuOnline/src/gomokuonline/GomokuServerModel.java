@@ -53,8 +53,9 @@ public class GomokuServerModel {
         this.messages = Collections.synchronizedList(new ArrayList<String>());
         this.onlineUsers = Collections.synchronizedSortedSet(new TreeSet<String>()); 
         this.userLogins = Collections.synchronizedMap(new HashMap<String, String>());
-        this.loginData = new File("loginData.txt");
+        File database = new File("loginData.txt");
         this.getLoginsFromDatabase();
+        this.loginData = database;
     }
     
     /**
