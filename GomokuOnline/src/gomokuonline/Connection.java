@@ -78,7 +78,8 @@ public class Connection extends Thread implements Comparable<Connection>{
                    msgChar = (char)dataIn.read();
                    message+= msgChar;
                }
-               this.serverController.broadcast(message);
+               String response = this.serverController.processMessage(message);
+               this.sendMessage(response);
             }
             this.sock.close();
             this.serverController.removeConnection(this);
