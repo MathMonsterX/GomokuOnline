@@ -2,11 +2,14 @@
 
 package gomokuonline;
 
+import javax.swing.JFrame;
+
 /**
  *
  * @author clarissapendleton
  */
 public class OnlineMenuView extends javax.swing.JPanel {
+   JFrame frame;
     AdminModel model;
     OnlineMenuController controller;
     /**
@@ -134,6 +137,7 @@ public void setController(OnlineMenuController controller){
 public void setModel(AdminModel model){
     this.model = model;
 }
+
 /*public void updateOnlinePlayers(Player player){
     
 }
@@ -153,10 +157,14 @@ private void btnBack_Click(java.awt.event.ActionEvent evt){
     
 }
 public void makeVisible(){
-    this.setVisible(true);
+    frame.setVisible(true);
 }
 
 public void post(String[] players){
     listOnlinePlayers.setListData(players);
+}
+
+public void setFrame(JFrame frame){
+    this.frame = frame;
 }
 }

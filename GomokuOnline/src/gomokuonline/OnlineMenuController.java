@@ -3,6 +3,7 @@ package gomokuonline;
 import static java.lang.Thread.sleep;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
 
 /**
  *
@@ -23,6 +24,9 @@ public class OnlineMenuController {
     }
     public void setModel(AdminModel model){
         this.model = model;
+    }
+    public void setFrame(JFrame frame){
+        view.setFrame(frame);
     }
     public void postList(String[] players){
         view.post(players);

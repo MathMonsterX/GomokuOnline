@@ -1,11 +1,14 @@
 
 package gomokuonline;
 
+import javax.swing.JFrame;
+
 /**
  *
  * @author clarissapendleton
  */
 public class RegisterView extends javax.swing.JPanel {
+    JFrame frame;
     RegisterController controller; 
     
 
@@ -142,6 +145,9 @@ private void btnBack_Click(java.awt.event.ActionEvent evt){
     controller.backClick();
 }
 public void makeVisible(){
-    this.setVisible(true);
+    frame.setVisible(true);
+}
+public void setFrame(JFrame frame){
+    this.frame = frame;
 }
 }

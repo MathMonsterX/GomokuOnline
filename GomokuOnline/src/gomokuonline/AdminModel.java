@@ -8,6 +8,7 @@ import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.awt.Container;
+import javax.swing.JFrame;
 
 
 /**
@@ -192,22 +193,38 @@ public class AdminModel implements Runnable{
     }
 
     public void createRegisterFrame(Container content){
-	game.openRegister(content);
+	JFrame registerFrame;
+        registerFrame = game.openRegister(content);
+        registerController.setFrame(registerFrame);
+        
     }
     
-    public void createStatFrame(Container content){
-	game.openStats(content);
-    }
+    /*public void createStatFrame(Container content){
+	JFrame statFrame;
+        statFrame = game.openStats(content);
+        statController.setFrame(statFrame);
+    }*/
     public void createMainMenuFrame(Container content){
-	game.openMainMenu(content);
+	JFrame mainMenuFrame;
+        mainMenuFrame = game.openMainMenu(content);
+        mainMenuController.setFrame(mainMenuFrame);
     }
-    public void createGameFrame(Container content){
-	game.openGame(content);
+    /*public void createGameFrame(Container content){
+	JFrame gameFrame;
+        gameFrame=game.openGame(content);
+        gameController.setFrame(gameFrame);
     }
     public void createChooseAIFrame(Container content){
-	game.openChooseAI(content);
-    }
+	JFrame chooseAIFrame;
+        chooseAIFrame=game.openChooseAI(content);
+        chooseAIController.setFrame(chooseAIFrame);
+    }*/
     public void createOnlineMenuFrame(Container content){
-	game.openOnlineMenu(content);
+	JFrame onlineMenuFrame;
+        onlineMenuFrame =game.openOnlineMenu(content);
+        onlineMenuController.setFrame(onlineMenuFrame);
+    }
+    public void setInvisible(Container content){
+        game.setInvisible(content);
     }
 }

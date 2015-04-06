@@ -26,55 +26,65 @@ public class GomokuOnline {
     }
     
     public void startGame(){
-        model = new AdminModel("152.117.212.120", 8080);
+        model = new AdminModel("10.0.0.7", 8080);
         model.setGomoku(this);
-        logInFrame = new JFrame( );
+        logInFrame = new JFrame();
         logInFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         LogInView view = new LogInView();
         LogInController controller = new LogInController();
         controller.setView(view);
         controller.setModel(model);
+        view.setFrame(logInFrame);
         view.setController(controller);
         logInFrame.setContentPane(view);
         logInFrame.pack();
         logInFrame.setVisible(true);    
     }
     
-    public void openRegister(Container content){
-        registerFrame = new JFrame( );
+    public JFrame openRegister(Container content){
+        registerFrame = new JFrame();
         registerFrame.setContentPane(content);
         registerFrame.pack();
-         registerFrame.setVisible(true); 
+        registerFrame.setVisible(true); 
+        return registerFrame;
     }
-    public void openMainMenu(Container content){
+    public JFrame openMainMenu(Container content){
         mainMenuFrame = new JFrame( );
         mainMenuFrame.setContentPane(content);
         mainMenuFrame.pack();
-         mainMenuFrame.setVisible(true); 
+        mainMenuFrame.setVisible(true);
+        return mainMenuFrame;
     }
-    public void openOnlineMenu(Container content){
+    public JFrame openOnlineMenu(Container content){
         onlineMenuFrame = new JFrame( );
         onlineMenuFrame.setContentPane(content);
         onlineMenuFrame.pack();
-         onlineMenuFrame.setVisible(true); 
+        onlineMenuFrame.setVisible(true);
+        return onlineMenuFrame;
     }
-    public void openGame(Container content){
+    public JFrame openGame(Container content){
         gameFrame = new JFrame( );
         gameFrame.setContentPane(content);
         gameFrame.pack();
-         gameFrame.setVisible(true); 
+        gameFrame.setVisible(true); 
+        return gameFrame;
     }
-    public void openStats(Container content){
+    public JFrame openStats(Container content){
         statsFrame = new JFrame( );
         statsFrame.setContentPane(content);
         statsFrame.pack();
         statsFrame.setVisible(true);
+        return statsFrame;
     }
-    public void openChooseAI(Container content){
+    public JFrame openChooseAI(Container content){
         chooseAIFrame = new JFrame( );
         chooseAIFrame.setContentPane(content);
         chooseAIFrame.pack();
-         chooseAIFrame.setVisible(true); 
+        chooseAIFrame.setVisible(true); 
+        return chooseAIFrame;
+    }
+    public void setInvisible(Container content){
+        content.setVisible(false);
     }
     
 }

@@ -1,5 +1,7 @@
 package gomokuonline;
 
+import javax.swing.JFrame;
+
 /**
  *
  * @author clarissapendleton
@@ -29,8 +31,10 @@ public class RegisterController {
     public void createView(){
         this.view = new RegisterView();
         model.createRegisterFrame(view);
-        view.makeVisible();
-        
+        view.makeVisible();  
+    }
+    public void setFrame(JFrame frame){
+        view.setFrame(frame);
     }
     public void openView(){
         view.makeVisible();
