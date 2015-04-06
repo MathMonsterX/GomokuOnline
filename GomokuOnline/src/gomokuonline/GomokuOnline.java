@@ -2,6 +2,10 @@ package gomokuonline;
 
 import javax.swing.JFrame;
 import java.awt.Container;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -26,7 +30,11 @@ public class GomokuOnline {
     }
     
     public void startGame(){
-        model = new AdminModel("10.0.0.7", 8080);
+        try {
+            model = new AdminModel(InetAddress.getLocalHost().getHostAddress(), 8080);//"10.0.0.7", 8080);
+        } catch (UnknownHostException ex) {
+            Logger.getLogger(GomokuOnline.class.getName()).log(Level.SEVERE, null, ex);
+        }
         model.setGomoku(this);
         logInFrame = new JFrame();
         logInFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
