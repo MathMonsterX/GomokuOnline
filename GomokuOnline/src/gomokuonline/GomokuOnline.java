@@ -16,6 +16,7 @@ public class GomokuOnline {
     JFrame statsFrame;
     JFrame chooseAIFrame;
     AdminModel model;
+    private static final String LOCAL_ADDRESS = "127.0.0.1";
     /**
      * @param args the command line arguments
      */
@@ -26,7 +27,7 @@ public class GomokuOnline {
     }
     
     public void startGame(){
-        model = new AdminModel("152.117.212.120", 8080);
+        model = new AdminModel(LOCAL_ADDRESS, 8080);
         model.setGomoku(this);
         logInFrame = new JFrame( );
         logInFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
