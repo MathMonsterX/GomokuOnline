@@ -1,11 +1,14 @@
 
 package gomokuonline;
 
+import javax.swing.JFrame;
+
 /**
  *
  * @author clarissapendleton
  */
 public class LogInView extends javax.swing.JPanel {
+    JFrame frame;
     LogInController controller;
     /**
      * Creates new form LogOn
@@ -164,7 +167,7 @@ public void updatelblError(String errors){
     lblError.setText(errors);  
 }
 private void btnAnonymous_Click(){
-    this.setVisible(false);
+    frame.setVisible(false);
     controller.openMainMenuView();
     
 }
@@ -178,12 +181,18 @@ private void btnSignIn_Click(){
         password = password+pass[i];
     }
     controller.signIn(username, password);
+    frame.setVisible(false);
+    controller.openMainMenuView();
 }
 private void btnRegister_Click(){
-    this.setVisible(false);
     controller.openRegisterView();
+    frame.setVisible(false);
 }
 public void makeVisible(){
-    this.setVisible(true);
+    frame.setVisible(true);
+}
+
+public void setFrame(JFrame frame){
+    this.frame = frame;
 }
 }

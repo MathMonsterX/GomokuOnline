@@ -1,12 +1,14 @@
 
 package gomokuonline;
 
+import javax.swing.JFrame;
+
 /**
  *
  * @author clarissapendleton
  */
 public class MainMenuView extends javax.swing.JPanel {
- 
+    JFrame frame;
     MainMenuController controller;
     
     /**
@@ -90,7 +92,8 @@ public void setController(MainMenuController controller){
 }
 
 private void btnOnline_Click(){
-    this.setVisible(false);
+    frame.setVisible(false);
+    controller.openOnlineMenuView();
     
 }
 
@@ -99,6 +102,9 @@ private void btnOffline_Click(java.awt.event.ActionEvent evt){
 }
 private void btnStats_Click(java.awt.event.ActionEvent evt){
     
+}
+public void setFrame(JFrame frame){
+    this.frame = frame;
 }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnOffline;
