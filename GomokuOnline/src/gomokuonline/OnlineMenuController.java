@@ -15,8 +15,8 @@ public class OnlineMenuController {
     
     public void createView(){
         view = new OnlineMenuView();
-        model = new AdminModel();
         model.createOnlineMenuFrame(view);
+        view.setController(this);
         view.makeVisible();
     }
     public void openView(){

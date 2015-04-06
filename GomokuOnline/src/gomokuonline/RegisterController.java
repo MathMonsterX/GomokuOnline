@@ -31,6 +31,7 @@ public class RegisterController {
     public void createView(){
         this.view = new RegisterView();
         model.createRegisterFrame(view);
+        view.setController(this);
         view.makeVisible();  
     }
     public void setFrame(JFrame frame){
@@ -38,6 +39,9 @@ public class RegisterController {
     }
     public void openView(){
         view.makeVisible();
+    }
+    public void openMainMenuView(){
+        model.openMainMenu();
     }
     
 }

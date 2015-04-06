@@ -30,19 +30,15 @@ public class RegisterView extends javax.swing.JPanel {
     private void initComponents() {
 
         txtUsername = new javax.swing.JTextField();
-        txtPassword = new javax.swing.JTextField();
-        txtReType = new javax.swing.JTextField();
         usernameLabel = new javax.swing.JLabel();
         passwordLabel = new javax.swing.JLabel();
         reEnterLabel = new javax.swing.JLabel();
         btnSignUp = new javax.swing.JButton();
         lblError = new javax.swing.JLabel();
+        txtPassword = new javax.swing.JPasswordField();
+        txtReType = new javax.swing.JPasswordField();
 
         txtUsername.setColumns(10);
-
-        txtPassword.setColumns(10);
-
-        txtReType.setColumns(10);
 
         usernameLabel.setText("Username");
 
@@ -59,12 +55,16 @@ public class RegisterView extends javax.swing.JPanel {
 
         lblError.setText("**Passwords do not match**");
 
+        txtPassword.setColumns(10);
+
+        txtReType.setColumns(10);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(7, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(btnSignUp)
                     .addGroup(layout.createSequentialGroup()
@@ -74,9 +74,9 @@ public class RegisterView extends javax.swing.JPanel {
                             .addComponent(reEnterLabel, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtReType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(txtReType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(125, 125, 125))
             .addGroup(layout.createSequentialGroup()
                 .addGap(61, 61, 61)
@@ -92,12 +92,12 @@ public class RegisterView extends javax.swing.JPanel {
                     .addComponent(usernameLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(passwordLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(passwordLabel)
+                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(6, 6, 6)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtReType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(reEnterLabel))
+                    .addComponent(reEnterLabel)
+                    .addComponent(txtReType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(btnSignUp)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
@@ -116,8 +116,8 @@ public class RegisterView extends javax.swing.JPanel {
     private javax.swing.JLabel lblError;
     private javax.swing.JLabel passwordLabel;
     private javax.swing.JLabel reEnterLabel;
-    private javax.swing.JTextField txtPassword;
-    private javax.swing.JTextField txtReType;
+    private javax.swing.JPasswordField txtPassword;
+    private javax.swing.JPasswordField txtReType;
     private javax.swing.JTextField txtUsername;
     private javax.swing.JLabel usernameLabel;
     // End of variables declaration//GEN-END:variables
@@ -131,17 +131,28 @@ public void setController(RegisterController controller){
     
 }
 private void btnSignUp_Click(){
-    if(!(txtPassword.equals(txtReType))){
+    if(!(txtPassword.getText().equals(txtReType.getText()))){
         txtPassword.setText("");
         txtReType.setText("");
-        updateLblError("** Passwords do not match. Please reenter password fields **");
+        this.updateLblError("** Passwords do not match. Please reenter password fields **");
     }
-    else
-        controller.createAccount(txtPassword.getText(), txtPassword.getText());
+    else{
+        String username, password=""; 
+        char[]pass;
+        username = txtUsername.getText();
+        pass = txtPassword.getPassword();
+        for(int i=0; i<pass.length;i++){
+            password = password+pass[i];
+        }
+        controller.createAccount(username, password);
+        frame.setVisible(false);
+        controller.openMainMenuView();
+    }
+    
     
 }
 private void btnBack_Click(java.awt.event.ActionEvent evt){
-    this.setVisible(false);
+    frame.setVisible(false);
     controller.backClick();
 }
 public void makeVisible(){

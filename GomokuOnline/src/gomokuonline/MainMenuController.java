@@ -14,6 +14,7 @@ public class MainMenuController {
     public void createView(){
         view = new MainMenuView();
         model.createMainMenuFrame(view);
+        view.setController(this);
         view.makeVisible();
     }
     public void setModel(AdminModel model){
@@ -24,6 +25,10 @@ public class MainMenuController {
     }
     public void openView(){
         view.makeVisible();
+    }
+
+    public void openOnlineMenuView() {
+        model.openOnlineMenu();
     }
     
    

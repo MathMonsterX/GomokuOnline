@@ -167,7 +167,7 @@ public void updatelblError(String errors){
     lblError.setText(errors);  
 }
 private void btnAnonymous_Click(){
-    this.setVisible(false);
+    frame.setVisible(false);
     controller.openMainMenuView();
     
 }
@@ -181,10 +181,12 @@ private void btnSignIn_Click(){
         password = password+pass[i];
     }
     controller.signIn(username, password);
+    frame.setVisible(false);
+    controller.openMainMenuView();
 }
 private void btnRegister_Click(){
     controller.openRegisterView();
-    controller.setInvisible(frame);
+    frame.setVisible(false);
 }
 public void makeVisible(){
     frame.setVisible(true);
