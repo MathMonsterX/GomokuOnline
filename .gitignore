@@ -1,10 +1,13 @@
-/ThreeInARow/build/
 *.class
-*.class
-*.class
+*.form
 *.txt
-GomokuOnline/build/classes/gomokuonline/MainMenuController.class
-GomokuOnline/build/classes/gomokuonline/AdminModel.class
-*.class
-*.class
-/GomokuOnline/build/
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+# Package Files #
+*.jar
+*.war
+*.ear
+
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
