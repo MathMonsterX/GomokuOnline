@@ -7,5 +7,4 @@ package gomokuonline;
  */
 public class ChooseAIController {
     
-    
 }

@@ -8,6 +8,7 @@ import javax.swing.JFrame;
  */
 public class RegisterController {
     RegisterView view;
+    JFrame registerFrame;
     AdminModel model;
     
     public RegisterController(){
@@ -28,15 +29,23 @@ public class RegisterController {
     public void backClick(){
         model.openLogIn();
     }
+    public void invalidSignIn(String error){
+        view.updateLblError(error);
+    }
+    public void setInvisible(){
+        view.setInvisible();
+    }
     public void createView(){
         this.view = new RegisterView();
-        model.createRegisterFrame(view);
+        registerFrame = new JFrame();
+        registerFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        registerFrame.setContentPane(view);
+        registerFrame.pack();
+        registerFrame.setVisible(true); 
         view.setController(this);
-        view.makeVisible();  
+        view.setFrame(registerFrame);
     }
-    public void setFrame(JFrame frame){
-        view.setFrame(frame);
-    }
+  
     public void openView(){
         view.makeVisible();
     }

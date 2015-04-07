@@ -9,9 +9,9 @@ import javax.swing.JFrame;
  * @author clarissapendleton
  */
 public class OnlineMenuView extends javax.swing.JPanel {
-   JFrame frame;
     AdminModel model;
     OnlineMenuController controller;
+    JFrame onlineMenuFrame;
     /**
      * Creates new form LobbyView
      */
@@ -137,7 +137,6 @@ public void setController(OnlineMenuController controller){
 public void setModel(AdminModel model){
     this.model = model;
 }
-
 /*public void updateOnlinePlayers(Player player){
     
 }
@@ -157,14 +156,14 @@ private void btnBack_Click(java.awt.event.ActionEvent evt){
     
 }
 public void makeVisible(){
-    frame.setVisible(true);
+    this.setVisible(true);
 }
 
 public void post(String[] players){
     listOnlinePlayers.setListData(players);
 }
 
-public void setFrame(JFrame frame){
-    this.frame = frame;
-}
+    void setFrame(JFrame frame) {
+        this.onlineMenuFrame = frame;
+    }
 }

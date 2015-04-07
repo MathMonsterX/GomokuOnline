@@ -1,7 +1,5 @@
 package gomokuonline;
 
-import javax.swing.JFrame;
-
 /**
  *
  * @author clarissapendleton
@@ -19,10 +17,6 @@ public class LogInController {
     
     public void openRegisterView(){
         model.openRegister();
-        model.setInvisible(view);
-    }
-    public void setInvisible(JFrame frame){
-        model.setInvisible(frame);
     }
     
     public void openMainMenuView(){
@@ -37,5 +31,8 @@ public class LogInController {
     }
     public void openView(){
         view.makeVisible();
+    }
+    public void setInvisible(){
+        view.setInvisible();
     }
 }

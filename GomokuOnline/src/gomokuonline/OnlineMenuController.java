@@ -9,15 +9,21 @@ import javax.swing.JFrame;
  *
  * @author clarissapendleton
  */
-public class OnlineMenuController {
+public class OnlineMenuController implements Runnable{
+    JFrame onlineMenuFrame;
     AdminModel model;
     OnlineMenuView view; 
     
     public void createView(){
         view = new OnlineMenuView();
-        model.createOnlineMenuFrame(view);
+        onlineMenuFrame = new JFrame( );
+        onlineMenuFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        onlineMenuFrame.setContentPane(view);
+        onlineMenuFrame.pack();
+        onlineMenuFrame.setVisible(true);
         view.setController(this);
-        view.makeVisible();
+        view.setFrame(onlineMenuFrame);
+        
     }
     public void openView(){
         view.makeVisible();
@@ -25,22 +31,26 @@ public class OnlineMenuController {
     public void setModel(AdminModel model){
         this.model = model;
     }
-    public void setFrame(JFrame frame){
-        view.setFrame(frame);
-    }
     public void postList(String[] players){
         view.post(players);
     }
-    public void timedRequestList(){
+    @Override
+    public void run(){
+                        System.out.print("STARTED");
+
+        String users;
         while(true){
             try {
-                sleep(15000);
                 model.getLoggedInList();
-                timedRequestList();
+                sleep(15000);
             } catch (InterruptedException ex) {
                 Logger.getLogger(OnlineMenuController.class.getName()).log(Level.SEVERE, null, ex);
                 System.out.println("Timer was interrupted");
             }
         }
+    }
+    public void timedRequestList(){
+        Thread thread = new Thread(this);
+        thread.start();
     }
 }

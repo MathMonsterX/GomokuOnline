@@ -1,3 +1,4 @@
+
 /**
 *Name: Tom Kreamer
 *Assignment: Lab 3
@@ -104,3 +105,4 @@ public class Connection extends Thread implements Comparable<Connection>{
     }
     
 }
+
