@@ -20,17 +20,15 @@ public class MainMenuController {
         mainMenuFrame.setVisible(true);
         view.setController(this);
         view.setFrame(mainMenuFrame);
+        view = new MainMenuView();
+        view.makeVisible();
+
     }
     public void setModel(AdminModel model){
         this.model = model;
     }
-   
     public void openView(){
         view.makeVisible();
-    }
-
-    public void openOnlineMenuView() {
-        model.openOnlineMenu();
     }
     
    

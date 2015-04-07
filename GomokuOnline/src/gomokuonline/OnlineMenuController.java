@@ -23,6 +23,8 @@ public class OnlineMenuController {
         onlineMenuFrame.setVisible(true);
         view.setController(this);
         view.setFrame(onlineMenuFrame);
+        model = new AdminModel();
+        view.makeVisible();
     }
     public void openView(){
         view.makeVisible();

@@ -1,5 +1,5 @@
 
-package gomokuonline;
+package gomokuonlineserver;
 
 /**
 *Name: Tom Kreamer

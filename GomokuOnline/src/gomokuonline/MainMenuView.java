@@ -8,7 +8,7 @@ import javax.swing.JFrame;
  * @author clarissapendleton
  */
 public class MainMenuView extends javax.swing.JPanel {
-    JFrame frame;
+    JFrame mainMenuFrame;
     MainMenuController controller;
     
     /**
@@ -92,8 +92,7 @@ public void setController(MainMenuController controller){
 }
 
 private void btnOnline_Click(){
-    frame.setVisible(false);
-    controller.openOnlineMenuView();
+    this.setVisible(false);
     
 }
 
@@ -103,13 +102,16 @@ private void btnOffline_Click(java.awt.event.ActionEvent evt){
 private void btnStats_Click(java.awt.event.ActionEvent evt){
     
 }
-public void setFrame(JFrame frame){
-    this.frame = frame;
-}
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnOffline;
     private javax.swing.JButton btnOnline;
     private javax.swing.JButton btnStats;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
+
+    void setFrame(JFrame frame) {
+        this.mainMenuFrame = frame;
+    }
+
+   
 }
