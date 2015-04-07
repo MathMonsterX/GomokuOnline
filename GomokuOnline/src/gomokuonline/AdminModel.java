@@ -132,6 +132,8 @@ public class AdminModel implements Runnable{
     
     /**
      * Hashes a string password using the SHA-256 cryptographic hash
+     * SOURCE: Mkyong, open source Java tutorial writer
+     * http://www.mkyong.com/java/java-sha-hashing-example/
      * @param password the password to be hashed
      * @param salt string to be used to salt the password
      * @return A string representation of the hashed password
