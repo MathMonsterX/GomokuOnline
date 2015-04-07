@@ -42,7 +42,7 @@ public class GomokuServerModel {
     private List<String> messages;
     private SortedSet<String> onlineUsers;
     private Map<String, String> userLogins;
-    private final File loginDatabase = new File("loginData.txt");
+    private File loginDatabase = new File("loginData.txt");
     
     
     /**
@@ -78,8 +78,9 @@ public class GomokuServerModel {
      */
     private void updateDatabase(String uname, String pass){
         try {
-            FileWriter writer = new FileWriter(loginDatabase);
+            FileWriter writer = new FileWriter(loginDatabase, true);
             writer.append(uname + " " + pass + "\n");
+            writer.flush();
             writer.close();
         } catch (IOException ex) {
             Logger.getLogger(GomokuServerModel.class.getName()).log(Level.SEVERE, null, ex);
