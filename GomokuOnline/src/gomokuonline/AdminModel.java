@@ -8,6 +8,8 @@ import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.awt.Container;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import javax.swing.JFrame;
 
 
@@ -122,8 +124,34 @@ public class AdminModel implements Runnable{
         worker = new Thread(this);
         worker.start();
     }
+    
+    /**
+     * Hashes a string password using the SHA-256 cryptographic hash
+     * @param password the password to be hashed
+     * @return A string representation of the hashed password
+     */
+    private static String hashPassword(String pass){
+        StringBuilder hashedPassword = new StringBuilder("");
+        try {
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
+            md.update(pass.getBytes());
+            
+            byte[] byteData = md.digest();
+            
+            for (int i=0;i<byteData.length;i++) {
+    		String hex = Integer.toHexString(0xff & byteData[i]);
+   	     	if(hex.length()==1) hashedPassword.append('0');
+   	     	hashedPassword.append(hex);
+    	}
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(AdminModel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return hashedPassword.toString();
+    }
+    
+    
     public void sendUserLogin(String user, String pass){
-        String message = "LOGIN "  + user + " " + pass;
+        String message = "LOGIN "  + user + " " + hashPassword(pass);
         try{
             socketOut.write(message);
             socketOut.flush();
@@ -133,7 +161,7 @@ public class AdminModel implements Runnable{
         }
     }
     public void createAccount(String user, String pass){
-        String message = "CREATE_ACCOUNT " + user + " " + pass;
+        String message = "CREATE_ACCOUNT " + user + " " + hashPassword(pass);
         try{
             socketOut.write(message);
             socketOut.flush();
