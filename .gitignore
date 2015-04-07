@@ -8,3 +8,4 @@ GomokuOnline/build/classes/gomokuonline/AdminModel.class
 *.class
 *.class
 /GomokuOnline/build/
+/GomokuOnlineServer/nbproject/private/
