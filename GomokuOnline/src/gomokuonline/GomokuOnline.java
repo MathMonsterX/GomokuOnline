@@ -27,7 +27,7 @@ public class GomokuOnline {
         logInFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         LogInView view = new LogInView();
         LogInController controller = new LogInController();
-        model.logInController = controller;
+        model.setLogInController(controller);
         controller.setView(view);
         controller.setModel(model);
         view.setFrame(logInFrame);
