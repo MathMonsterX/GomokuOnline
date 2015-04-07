@@ -110,14 +110,25 @@ public class GomokuServerController implements Runnable{
         }
     }
     
+   
+    
     public void clearMessageHistory(){
         this.model.clearMessages();
         this.updateMessages();
     }
     
     /**
-     * Updates the view with the current message history
+     * Adds message to the model
+     * @param newMessage message to be added
+     * @param localPort port over which the message was received/sent
      */
+    public void addMessage(String newMessage, int localPort){
+        
+        this.model.addMessage("PORT: " + localPort + " " + newMessage);
+        this.updateMessages();
+       
+}
+    
     public void updateMessages(){
         String[] messages = this.model.getMessages();
         StringBuilder messageHistory = new StringBuilder();
@@ -125,7 +136,7 @@ public class GomokuServerController implements Runnable{
             messageHistory.append(message + "\n");
         }
         this.view.setMessages(messageHistory.toString().trim());
-}
+    }
     /**
      * Listens for connections over the server socket,
      * then creates a new connection and adds it to the model
