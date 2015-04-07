@@ -132,7 +132,8 @@ public class AdminModel implements Runnable{
     
     /**
      * Hashes a string password using the SHA-256 cryptographic hash
-     * SOURCE: Mkyong, open source Java tutorial writer
+     * SOURCE: Mkyong, open source Java tutorial writer, provided 
+     * the basic outline for using the MessageDigest class
      * http://www.mkyong.com/java/java-sha-hashing-example/
      * @param password the password to be hashed
      * @param salt string to be used to salt the password
