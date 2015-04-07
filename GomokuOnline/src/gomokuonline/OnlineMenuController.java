@@ -9,7 +9,7 @@ import javax.swing.JFrame;
  *
  * @author clarissapendleton
  */
-public class OnlineMenuController {
+public class OnlineMenuController implements Runnable{
     JFrame onlineMenuFrame;
     AdminModel model;
     OnlineMenuView view; 
@@ -23,8 +23,7 @@ public class OnlineMenuController {
         onlineMenuFrame.setVisible(true);
         view.setController(this);
         view.setFrame(onlineMenuFrame);
-        model = new AdminModel();
-        view.makeVisible();
+        
     }
     public void openView(){
         view.makeVisible();
@@ -35,7 +34,10 @@ public class OnlineMenuController {
     public void postList(String[] players){
         view.post(players);
     }
-    public void timedRequestList(){
+    @Override
+    public void run(){
+                        System.out.print("STARTED");
+
         String users;
         while(true){
             try {
@@ -46,5 +48,9 @@ public class OnlineMenuController {
                 System.out.println("Timer was interrupted");
             }
         }
+    }
+    public void timedRequestList(){
+        Thread thread = new Thread(this);
+        thread.start();
     }
 }

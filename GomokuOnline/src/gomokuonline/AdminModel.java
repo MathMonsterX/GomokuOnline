@@ -75,24 +75,42 @@ public class AdminModel implements Runnable{
                 String message = "";
                 char msgChar = (char)socketIn.read();
                 message += msgChar;
-                
                 while(socketIn.ready()){
                     msgChar = (char)socketIn.read();
                     message += msgChar;
                 }
-                String[] input = message.split("//s+");
-                System.out.println(input.toString());
+                String[] input = message.split("\\s+");
+                System.out.println("INPUT" + input[0]);
                 if(input[0].equals("AUTHENTICATION")){
                     if(input[1].equals("success")){
                         System.out.println("login successful");
+                        logInController.setInvisible();
                         openMainMenu();
+                        
                     }
                     else{
                         System.out.println("login failed");
+                        logInController.invalidSignIn("** Login failed. Please reenter fields **");
                     }
                 }else if(input[0].equals("ONLINE_USERS")){
+                    String[] players = new String[input.length-1];
                     System.out.println("Receiving list of players...");
-                    postList(input);
+                    for(int i=1; i<input.length; i++)
+                        players[i-1] = input[i];
+                    
+                    postList(players);
+                }else if(input[0].equals("ACCOUNT_CREATION")){
+                    if(input[1].equals("success")){
+                    System.out.println("account created");
+                    registerController.setInvisible();
+                    openMainMenu();
+                    
+                    }
+                    else{
+                        System.out.println("account not created");
+                        registerController.invalidSignIn("** Account not created. Please enter a different username **");
+                
+                    }
                 }
             }
         }catch(IOException ex){
@@ -154,14 +172,11 @@ public class AdminModel implements Runnable{
             onlineMenuController = new OnlineMenuController();
             onlineMenuController.setModel(this);
             onlineMenuController.createView();
-            
         }
         else
             onlineMenuController.openView();
-        
         onlineMenuController.timedRequestList();
-              
-        
+   
     }
     public void openRegister(){
         if(registerController==null){

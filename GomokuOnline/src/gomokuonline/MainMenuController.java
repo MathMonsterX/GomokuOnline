@@ -26,6 +26,10 @@ public class MainMenuController {
     }
     public void setModel(AdminModel model){
         this.model = model;
+        
+    }
+    public void openOnlineMenuView(){
+        model.openOnlineMenu();
     }
     public void openView(){
         view.makeVisible();

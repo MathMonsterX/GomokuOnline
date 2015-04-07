@@ -92,7 +92,8 @@ public void setController(MainMenuController controller){
 }
 
 private void btnOnline_Click(){
-    this.setVisible(false);
+    mainMenuFrame.setVisible(false);
+    controller.openOnlineMenuView();
     
 }
 

@@ -32,4 +32,7 @@ public class LogInController {
     public void openView(){
         view.makeVisible();
     }
+    public void setInvisible(){
+        view.setInvisible();
+    }
 }

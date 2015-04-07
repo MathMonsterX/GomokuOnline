@@ -29,6 +29,12 @@ public class RegisterController {
     public void backClick(){
         model.openLogIn();
     }
+    public void invalidSignIn(String error){
+        view.updateLblError(error);
+    }
+    public void setInvisible(){
+        view.setInvisible();
+    }
     public void createView(){
         this.view = new RegisterView();
         registerFrame = new JFrame();
