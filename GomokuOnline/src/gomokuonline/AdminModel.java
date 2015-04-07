@@ -133,13 +133,14 @@ public class AdminModel implements Runnable{
     /**
      * Hashes a string password using the SHA-256 cryptographic hash
      * @param password the password to be hashed
+     * @param salt string to be used to salt the password
      * @return A string representation of the hashed password
      */
-    private static String hashPassword(String pass){
+    private static String hashPassword(String password, String salt){
         StringBuilder hashedPassword = new StringBuilder("");
         try {
             MessageDigest md = MessageDigest.getInstance("SHA-256");
-            md.update(pass.getBytes());
+            md.update((salt + password).getBytes());
             
             byte[] byteData = md.digest();
             
@@ -156,7 +157,7 @@ public class AdminModel implements Runnable{
     
     
     public void sendUserLogin(String user, String pass){
-        String message = "LOGIN "  + user + " " + hashPassword(pass);
+        String message = "LOGIN "  + user + " " + hashPassword(pass,user);
         try{
             socketOut.write(message);
             socketOut.flush();
@@ -166,7 +167,7 @@ public class AdminModel implements Runnable{
         }
     }
     public void createAccount(String user, String pass){
-        String message = "CREATE_ACCOUNT " + user + " " + hashPassword(pass);
+        String message = "CREATE_ACCOUNT " + user + " " + hashPassword(pass, user);
         try{
             socketOut.write(message);
             socketOut.flush();
