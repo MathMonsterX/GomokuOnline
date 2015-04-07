@@ -8,6 +8,7 @@ import java.awt.Container;
  * @author clarissapendleton
  */
 public class GomokuOnline {
+    private static final String LOCAL_HOST = "127.0.0.1";
     JFrame logInFrame;
     AdminModel model;
     /**
@@ -20,7 +21,7 @@ public class GomokuOnline {
     }
     
     public void startGame(){
-        model = new AdminModel("10.0.0.7", 8080);
+        model = new AdminModel(LOCAL_HOST, 8080);
         model.beginListening();
         logInFrame = new JFrame();
         logInFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
