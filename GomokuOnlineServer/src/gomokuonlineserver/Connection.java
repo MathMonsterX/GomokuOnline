@@ -79,8 +79,13 @@ public class Connection extends Thread implements Comparable<Connection>{
                    msgChar = (char)dataIn.read();
                    message+= msgChar;
                }
+               String[] splitMessage = message.split("\\s+");
+               this.serverController.addMessage("RECEIVED: " + splitMessage[0], this.sock.getLocalPort());
                String response = this.serverController.processMessage(message);
+               splitMessage = response.split("\\s+");
+               this.serverController.addMessage("RESPONSE: " + splitMessage[0], this.sock.getLocalPort());
                this.sendMessage(response);
+               
             }
             this.sock.close();
             this.serverController.removeConnection(this);
