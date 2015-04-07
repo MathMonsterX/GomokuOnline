@@ -20,13 +20,13 @@ import javax.swing.JFrame;
  * @author Chris
  */
 public class AdminModel implements Runnable{
-    ChooseAIController AIController;
-    GameController gameController;
-    LogInController logInController;
-    MainMenuController mainMenuController;
-    OnlineMenuController onlineMenuController;
-    RegisterController registerController;
-    StatController statController;
+    private ChooseAIController AIController;
+    private GameController gameController;
+    private LogInController logInController;
+    private MainMenuController mainMenuController;
+    private OnlineMenuController onlineMenuController;
+    private RegisterController registerController;
+    private StatController statController;
     
     private int port = 8080;
     private Socket clientSock;
@@ -69,6 +69,7 @@ public class AdminModel implements Runnable{
             System.exit(1);
         }
     }
+    
     
     @Override
     public void run() {
@@ -123,6 +124,10 @@ public class AdminModel implements Runnable{
     public void beginListening(){
         worker = new Thread(this);
         worker.start();
+    }
+    
+    public void setLogInController(LogInController controller){
+        this.logInController = controller;
     }
     
     /**
