@@ -19,10 +19,6 @@ public class LogInController {
     
     public void openRegisterView(){
         model.openRegister();
-        model.setInvisible(view);
-    }
-    public void setInvisible(JFrame frame){
-        model.setInvisible(frame);
     }
     
     public void openMainMenuView(){

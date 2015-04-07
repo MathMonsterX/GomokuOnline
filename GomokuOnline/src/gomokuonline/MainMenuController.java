@@ -7,22 +7,24 @@ import javax.swing.JFrame;
  * @author clarissapendleton
  */
 public class MainMenuController {
-
+    JFrame mainMenuFrame;
     MainMenuView view;
     AdminModel model;
     
     public void createView(){
-        view = new MainMenuView();
-        model.createMainMenuFrame(view);
+        this.view = new MainMenuView();
+        mainMenuFrame = new JFrame( );
+        mainMenuFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        mainMenuFrame.setContentPane(view);
+        mainMenuFrame.pack();
+        mainMenuFrame.setVisible(true);
         view.setController(this);
-        view.makeVisible();
+        view.setFrame(mainMenuFrame);
     }
     public void setModel(AdminModel model){
         this.model = model;
     }
-    public void setFrame(JFrame frame){
-        view.setFrame(frame);
-    }
+   
     public void openView(){
         view.makeVisible();
     }

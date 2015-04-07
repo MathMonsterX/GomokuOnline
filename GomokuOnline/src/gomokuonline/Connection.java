@@ -78,6 +78,7 @@ public class Connection extends Thread implements Comparable<Connection>{
                    msgChar = (char)dataIn.read();
                    message+= msgChar;
                }
+               System.out.println("SERVER: " + message);
                String response = this.serverController.processMessage(message);
                this.sendMessage(response);
             }

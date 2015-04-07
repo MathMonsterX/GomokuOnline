@@ -25,7 +25,6 @@ public class AdminModel implements Runnable{
     OnlineMenuController onlineMenuController;
     RegisterController registerController;
     StatController statController;
-    GomokuOnline game;
     
     private int port = 8080;
     private Socket clientSock;
@@ -82,6 +81,7 @@ public class AdminModel implements Runnable{
                     message += msgChar;
                 }
                 String[] input = message.split("//s+");
+                System.out.println(input.toString());
                 if(input[0].equals("AUTHENTICATION")){
                     if(input[1].equals("success")){
                         System.out.println("login successful");
@@ -131,6 +131,7 @@ public class AdminModel implements Runnable{
         try{
             socketOut.write(message);
             socketOut.flush();
+            System.out.println("Wrote get users");
         }catch (IOException ex){
             Logger.getLogger(AdminModel.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println("Error in sending list request");
@@ -157,6 +158,7 @@ public class AdminModel implements Runnable{
         }
         else
             onlineMenuController.openView();
+        
         onlineMenuController.timedRequestList();
               
         
@@ -188,43 +190,5 @@ public class AdminModel implements Runnable{
         logInController.openView();
     }
     
-     public void setGomoku(GomokuOnline game){
-        this.game = game;
-    }
-
-    public void createRegisterFrame(Container content){
-	JFrame registerFrame;
-        registerFrame = game.openRegister(content);
-        registerController.setFrame(registerFrame);
-        
-    }
-    
-    /*public void createStatFrame(Container content){
-	JFrame statFrame;
-        statFrame = game.openStats(content);
-        statController.setFrame(statFrame);
-    }*/
-    public void createMainMenuFrame(Container content){
-	JFrame mainMenuFrame;
-        mainMenuFrame = game.openMainMenu(content);
-        mainMenuController.setFrame(mainMenuFrame);
-    }
-    /*public void createGameFrame(Container content){
-	JFrame gameFrame;
-        gameFrame=game.openGame(content);
-        gameController.setFrame(gameFrame);
-    }
-    public void createChooseAIFrame(Container content){
-	JFrame chooseAIFrame;
-        chooseAIFrame=game.openChooseAI(content);
-        chooseAIController.setFrame(chooseAIFrame);
-    }*/
-    public void createOnlineMenuFrame(Container content){
-	JFrame onlineMenuFrame;
-        onlineMenuFrame =game.openOnlineMenu(content);
-        onlineMenuController.setFrame(onlineMenuFrame);
-    }
-    public void setInvisible(Container content){
-        game.setInvisible(content);
-    }
+ 
 }
