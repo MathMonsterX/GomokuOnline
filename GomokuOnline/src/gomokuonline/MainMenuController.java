@@ -21,7 +21,6 @@ public class MainMenuController {
         view.setController(this);
         view.setFrame(mainMenuFrame);
         view = new MainMenuView();
-        view.makeVisible();
 
     }
     public void setModel(AdminModel model){

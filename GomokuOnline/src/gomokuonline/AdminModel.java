@@ -37,12 +37,12 @@ public class AdminModel implements Runnable{
     
     private Thread worker;
     
-    //opens default local address
+    /**
+     * Constructor, creates a new instance of AdminModel
+     */
     public AdminModel(){
         try{
-            System.out.println("Attempting to connect socket");
             clientSock = new Socket( InetAddress.getLocalHost().getHostAddress(), port ) ;
-            System.out.println("Local Socket connection successful!");
             is = clientSock.getInputStream() ;
             os = clientSock.getOutputStream() ;
             socketOut = new BufferedWriter(new OutputStreamWriter(os));
@@ -55,11 +55,14 @@ public class AdminModel implements Runnable{
         }
     }
     
-    //connects to specified address
+    /**
+     * Constructor, creates a new instance of AdminModel
+     * @param address IP address
+     * @param port port number
+     */
     public AdminModel(String address, int port){
         try{
             clientSock = new Socket(address, port);
-            System.out.println("Connected: "+clientSock.isConnected());
             is = clientSock.getInputStream();
             os = clientSock.getOutputStream() ;
             socketOut = new BufferedWriter(new OutputStreamWriter(os));
@@ -70,7 +73,9 @@ public class AdminModel implements Runnable{
         }
     }
     
-    
+    /**
+     * Thread that reads in and processes messages from the server.
+     */
     @Override
     public void run() {
         try{
@@ -83,36 +88,29 @@ public class AdminModel implements Runnable{
                     message += msgChar;
                 }
                 String[] input = message.split("\\s+");
-                System.out.println("INPUT" + input[0]);
                 if(input[0].equals("AUTHENTICATION")){
                     if(input[1].equals("success")){
-                        System.out.println("login successful");
                         logInController.setInvisible();
                         openMainMenu();
                         
                     }
                     else{
-                        System.out.println("login failed");
                         logInController.invalidSignIn("** Login failed. Please reenter fields **");
                     }
                 }else if(input[0].equals("ONLINE_USERS")){
                     String[] players = new String[input.length-1];
-                    System.out.println("Receiving list of players...");
-                    for(int i=1; i<input.length; i++)
+                    for(int i=1; i<input.length; i++){
                         players[i-1] = input[i];
-                    
+                    }
                     postList(players);
                 }else if(input[0].equals("ACCOUNT_CREATION")){
                     if(input[1].equals("success")){
-                    System.out.println("account created");
                     registerController.setInvisible();
                     openMainMenu();
-                    
                     }
                     else{
-                        System.out.println("account not created");
                         registerController.invalidSignIn("** Account not created. Please enter a different username **");
-                
+                    
                     }
                 }
             }
@@ -121,11 +119,18 @@ public class AdminModel implements Runnable{
             System.out.println("Failed in receiving message");
         }
     }
+    /**
+     * Instantiates the thread that reads in messages from the server, then
+     * starts the thread.
+     */
     public void beginListening(){
         worker = new Thread(this);
         worker.start();
     }
-    
+    /**
+     * Sets the LogInConroller for this model
+     * @param controller the LogInController used for this model
+     */
     public void setLogInController(LogInController controller){
         this.logInController = controller;
     }
@@ -158,7 +163,11 @@ public class AdminModel implements Runnable{
         return hashedPassword.toString();
     }
     
-    
+    /**
+     * Sends the username and password to be authenticated to the server.
+     * @param user the username to be sent to the server
+     * @param pass the password to be sent to the server
+     */
     public void sendUserLogin(String user, String pass){
         String message = "LOGIN "  + user + " " + hashPassword(pass,user);
         try{
@@ -169,6 +178,11 @@ public class AdminModel implements Runnable{
             System.out.println("Error in writing to socket");
         }
     }
+    /**
+     * Sends the username and password to the server to create a new account
+     * @param user the username to be sent to the server
+     * @param pass the password to be sent to the server
+     */
     public void createAccount(String user, String pass){
         String message = "CREATE_ACCOUNT " + user + " " + hashPassword(pass, user);
         try{
@@ -180,41 +194,39 @@ public class AdminModel implements Runnable{
         }
     }
     
-    //get list of online players from server
+    /**
+     * Writes to the server to request a list of online users
+     */
     public void getLoggedInList(){
         String message = "GET_USERS";
         try{
             socketOut.write(message);
             socketOut.flush();
-            System.out.println("Wrote get users");
         }catch (IOException ex){
             Logger.getLogger(AdminModel.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println("Error in sending list request");
         }
     }
+    /**
+     * Sends the list of online players to the OnlineMenuController to be 
+     * posted in the OnlineMenuView
+     * @param input the list of online players
+     */
     public void postList(String[] input){
         onlineMenuController.postList(input);
     }
-    public void close(){
-        try{
-            this.clientSock.close();
-        }catch(IOException ex){
-            Logger.getLogger(AdminModel.class.getName()).log(Level.SEVERE, null, ex);
-            System.out.println("Error in closing socket");
-
-        }
+    /**
+     * A method in the logInController is called to open the view that logs 
+     * players in.
+     */
+    public void openLogIn(){
+        logInController.openView();
     }
-    public void openOnlineMenu(){
-        if(onlineMenuController==null){
-            onlineMenuController = new OnlineMenuController();
-            onlineMenuController.setModel(this);
-            onlineMenuController.createView();
-        }
-        else
-            onlineMenuController.openView();
-        onlineMenuController.timedRequestList();
-   
-    }
+    /**
+     * Creates an instance of RegisterController if registerController is null,
+     * and calls a method in the controller to create the view. If registerController
+     * is not null, a method in the controller is called to open the view
+     */
     public void openRegister(){
         if(registerController==null){
             registerController = new RegisterController();
@@ -225,7 +237,11 @@ public class AdminModel implements Runnable{
         else 
             registerController.openView();
     }
-
+    /**
+     * Creates an instance of MainMenuController if mainMenuController is null,
+     * and calls a method in the controller to create the view. If mainMenuController
+     * is not null, a method in the controller is called to open the view
+     */
     public void openMainMenu(){
         if(mainMenuController == null){
             mainMenuController = new MainMenuController();
@@ -236,11 +252,34 @@ public class AdminModel implements Runnable{
         else
             mainMenuController.openView();
     }
+  
+    /**
+     * Creates an instance of OnlineMenuController if onlineMenuController is null,
+     * and calls a method in the controller to create the view. If onlineMenuController
+     * is not null, a method in the controller is called to open the view
+     */
+      public void openOnlineMenu(){
+        if(onlineMenuController==null){
+            onlineMenuController = new OnlineMenuController();
+            onlineMenuController.setModel(this);
+            onlineMenuController.createView();
+        }
+        else
+            onlineMenuController.openView();
+        onlineMenuController.timedRequestList();
    
-
-    public void openLogIn(){
-        logInController.openView();
     }
-    
+      /**
+     * Closes the socket
+     */
+    public void close(){
+        try{
+            this.clientSock.close();
+        }catch(IOException ex){
+            Logger.getLogger(AdminModel.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Error in closing socket");
+
+        }
+    }
  
 }

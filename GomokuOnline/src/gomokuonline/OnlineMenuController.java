@@ -36,10 +36,8 @@ public class OnlineMenuController implements Runnable{
     }
     @Override
     public void run(){
-                        System.out.print("STARTED");
-
         String users;
-        while(true){
+        while(onlineMenuFrame!=null){
             try {
                 model.getLoggedInList();
                 sleep(15000);

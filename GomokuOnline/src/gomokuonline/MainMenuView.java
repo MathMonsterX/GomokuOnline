@@ -18,7 +18,7 @@ public class MainMenuView extends javax.swing.JPanel {
         initComponents();
     }
     public void makeVisible(){
-        this.setVisible(true);
+        mainMenuFrame.setVisible(true);
     }
     /**
      * This method is called from within the constructor to initialize the form.

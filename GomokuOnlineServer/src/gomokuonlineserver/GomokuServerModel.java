@@ -99,6 +99,7 @@ public class GomokuServerModel {
             userLogins.put(uname, pass);
             this.updateDatabase(uname, pass);
             response = "ACCOUNT_CREATION success";
+            onlineUsers.add(uname);
         }
         return response;
     }
@@ -158,7 +159,7 @@ public class GomokuServerModel {
     }
     
     public String[] getOnlineUsers(){
-        return this.onlineUsers.toArray( new String[onlineUsers.size()] );
+        return this.onlineUsers.toArray(new String[onlineUsers.size()]);
     }
     
     

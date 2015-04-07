@@ -1,4 +1,3 @@
-
 package gomokuonline;
 
 import javax.swing.JFrame;
@@ -120,55 +119,55 @@ public class RegisterView extends javax.swing.JPanel {
     private javax.swing.JTextField txtUsername;
     private javax.swing.JLabel usernameLabel;
     // End of variables declaration//GEN-END:variables
-public void updateLblError(String error){
-    lblError.setText(error);
-    lblError.setVisible(true);
+    public void updateLblError(String error){
+        lblError.setText(error);
+        lblError.setVisible(true);
     
-}
-
-public void setController(RegisterController controller){
-    this.controller = controller;
-    
-}
-private void btnSignUp_Click(){
-    String username;
-    char[] pass1, pass2;
-    String password1="", password2="";
-    username = txtUsername.getText();
-    pass1 = txtPassword.getPassword();
-    for(int i=0; i<pass1.length;i++){
-        password1 = password1+pass1[i];
     }
 
-    pass2 = txtReType.getPassword();
-    for(int i=0; i<pass2.length;i++){
-        password2 = password2+pass2[i];
+    public void setController(RegisterController controller){
+        this.controller = controller;
+    
     }
+    private void btnSignUp_Click(){
+        String username;
+        char[] pass1, pass2;
+        String password1="", password2="";
+        username = txtUsername.getText();
+        pass1 = txtPassword.getPassword();
+        for(int i=0; i<pass1.length;i++){
+            password1 = password1+pass1[i];
+        }
+
+        pass2 = txtReType.getPassword();
+        for(int i=0; i<pass2.length;i++){
+            password2 = password2+pass2[i];
+        }
         
 
-    if(!(password1.equals(password2))){
-        txtPassword.setText("");
-        txtReType.setText("");
-        updateLblError("** Passwords do not match. Please reenter password fields **");
-    }
-    else{
-        controller.createAccount(username, password1);
-    }
+        if(!(password1.equals(password2))){
+            txtPassword.setText("");
+            txtReType.setText("");
+            updateLblError("** Passwords do not match. Please reenter password fields **");
+        }
+        else{
+            controller.createAccount(username, password1);
+        }
     
-}
-private void btnBack_Click(java.awt.event.ActionEvent evt){
-    this.setVisible(false);
-    controller.backClick();
-}
-public void makeVisible(){
-    this.setVisible(true);
-}
+    }
+    private void btnBack_Click(java.awt.event.ActionEvent evt){
+        this.setVisible(false);
+        controller.backClick();
+    }
+    public void makeVisible(){
+        this.setVisible(true);
+    }
 
-public void setFrame(JFrame frame) {
-    this.registerFrame = frame;
-}
-public void setInvisible() {
-    registerFrame.setVisible(false);
-}
+    public void setFrame(JFrame frame) {
+        this.registerFrame = frame;
+    }
+    public void setInvisible() {
+        registerFrame.setVisible(false);
+    }
 
 }

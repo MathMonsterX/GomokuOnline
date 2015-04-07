@@ -21,7 +21,7 @@ public class GomokuOnline {
     }
     
     public void startGame(){
-        model = new AdminModel(LOCAL_HOST, 8080);
+        model = new AdminModel();
         model.beginListening();
         logInFrame = new JFrame();
         logInFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
