@@ -159,6 +159,10 @@ public class GomokuServerModel {
         return response;
     }
     
+    /**
+     * Returns a string array containing the usernames of online players
+     * @return String array of usernames
+     */
     public String[] getOnlineUsers(){
         return this.onlineUsers.toArray(new String[onlineUsers.size()]);
     }
