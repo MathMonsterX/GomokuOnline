@@ -32,6 +32,7 @@ public class Connection extends Thread implements Comparable<Connection>{
     private BufferedReader dataIn;
     private DataOutputStream dataOut;
     private GomokuServerController serverController;
+    private String uname;
     
     
     /**
@@ -82,7 +83,11 @@ public class Connection extends Thread implements Comparable<Connection>{
                String[] splitMessage = message.split("\\s+");
                this.serverController.addMessage("RECEIVED: " + splitMessage[0], this.sock.getLocalPort());
                String response = this.serverController.processMessage(message);
-               splitMessage = response.split("\\s+");
+               String[] splitResponse = response.split("\\s+");
+               if(splitResponse[0].equals("AUTHENTICATION") || splitResponse[0].equals("ACCOUNT_CREATION")){
+                   if(splitResponse[1].equals("success"))
+                       this.uname = splitMessage[1];
+               }
                this.serverController.addMessage("RESPONSE: " + splitMessage[0], this.sock.getLocalPort());
                this.sendMessage(response);
                
@@ -95,6 +100,14 @@ public class Connection extends Thread implements Comparable<Connection>{
             this.serverController.removeConnection(this);
           
         }
+    }
+    
+    /**
+     * Returns the username associated with this connection
+     * @return the username, or null if this connection is not authenticated
+     */
+    public String getUsername(){
+        return uname;
     }
 
     /**
