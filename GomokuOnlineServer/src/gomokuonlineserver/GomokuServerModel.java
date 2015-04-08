@@ -41,7 +41,7 @@ public class GomokuServerModel {
     private List<String> messages;
     private SortedSet<String> onlineUsers;
     private Map<String, String> userLogins;
-    private File loginDatabase = new File("loginData.txt");
+    private final File loginDatabase = new File("loginData.txt");
     
     
     /**
@@ -59,6 +59,11 @@ public class GomokuServerModel {
      * Gets usernames and passwords from the database file
      */ 
     private void getLoginsFromDatabase(){
+        try{
+            if( !loginDatabase.exists() ){ loginDatabase.createNewFile(); }
+        } catch (IOException ex) {
+            Logger.getLogger(GomokuServerModel.class.getName()).log(Level.SEVERE, null, ex);
+        }
         try {
             Scanner scan = new Scanner(this.loginDatabase);
             while(scan.hasNext()){
