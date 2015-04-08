@@ -12,7 +12,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
@@ -52,7 +51,8 @@ public class GomokuServerModel {
         this.connections = Collections.synchronizedList(new ArrayList<Connection>());
         this.messages = Collections.synchronizedList(new ArrayList<String>());
         this.onlineUsers = Collections.synchronizedSortedSet(new TreeSet<String>()); 
-        this.userLogins = Collections.synchronizedMap(new HashMap<String, String>());             
+        this.userLogins = Collections.synchronizedMap(new HashMap<String, String>());
+        this.getLoginsFromDatabase();
     }
     
     /**
@@ -63,7 +63,8 @@ public class GomokuServerModel {
             Scanner scan = new Scanner(this.loginDatabase);
             while(scan.hasNext()){
                 String[] login = scan.nextLine().split("\\s+");
-                this.userLogins.put(login[0], login[1]);
+                if(login.length > 1)
+                    this.userLogins.put(login[0], login[1]);
             }
             scan.close();
         } catch (FileNotFoundException ex) {
@@ -185,6 +186,9 @@ public class GomokuServerModel {
      * @param con connection to be removed
      */
     public void removeConnection(Connection con){
+        if(con.getUsername() != null){
+            this.onlineUsers.remove(con.getUsername());
+        }
         this.connections.remove(con);
     }
     
