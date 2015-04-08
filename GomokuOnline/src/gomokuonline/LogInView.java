@@ -4,14 +4,14 @@ package gomokuonline;
 import javax.swing.JFrame;
 
 /**
- *
+ * This is the view so the user can log in to their account.
  * @author clarissapendleton
  */
 public class LogInView extends javax.swing.JPanel {
     LogInController controller;
     JFrame logInFrame;
     /**
-     * Creates new form LogOn
+     * Creates new form LogInView
      */
     public LogInView() {
         initComponents();
@@ -156,46 +156,70 @@ public class LogInView extends javax.swing.JPanel {
     private javax.swing.JTextField txtUsername;
     private javax.swing.JLabel userNameLabel;
     // End of variables declaration//GEN-END:variables
-
-public void setController(LogInController controller){
-    this.controller = controller;
     
-}
-public void updatelblError(String errors){
-    txtUsername.setText("");
-    txtPassword.setText("");
-    lblError.setText(errors);  
-    lblError.setVisible(true);
-}
-private void btnAnonymous_Click(){
-    this.setVisible(false);
-    controller.openMainMenuView();
-    
-}
-private void btnSignIn_Click(){
-    String username;
-    char[] pass;
-    String password="";
-    username = txtUsername.getText();
-    pass = txtPassword.getPassword();
-    for(int i=0; i<pass.length;i++){
-        password = password+pass[i];
+    /**
+     * Sets this controller
+     * @param controller the LogInController object
+     */
+    public void setController(LogInController controller){
+        this.controller = controller;
     }
-    controller.signIn(username, password);
-}
-private void btnRegister_Click(){
-    logInFrame.setVisible(false);
-    controller.openRegisterView();
-}
-public void makeVisible(){
-    this.setVisible(true);
-}
-
-public void setFrame(JFrame frame) {
+    /**
+     * Updates the error label message.
+     * @param errors the error message
+     */
+    public void updatelblError(String errors){
+        txtUsername.setText("");
+        txtPassword.setText("");
+        lblError.setText(errors);  
+        lblError.setVisible(true);
+    }
+    /**
+     * Sets the visibility of the logInFrame to false and opens the MainMenuView. 
+     */
+    private void btnAnonymous_Click(){
+        logInFrame.setVisible(false);
+        controller.openMainMenuView();
+    
+    }
+    /**
+     * Sends the username and password to be authenticated.
+     */
+    private void btnSignIn_Click(){
+        String username;
+        char[] pass;
+        String password="";
+        username = txtUsername.getText();
+        pass = txtPassword.getPassword();
+        for(int i=0; i<pass.length;i++){
+            password = password+pass[i];
+        }
+        controller.signIn(username, password);
+    }
+    /**
+     * Sets the visibility of the logInFrame to false and opens the RegisterView. 
+     */
+    private void btnRegister_Click(){
+        logInFrame.setVisible(false);
+        controller.openRegisterView();
+    }
+     /**
+     * Sets the visibility to logInFrame to true.
+     */
+    public void makeVisible(){
+        logInFrame.setVisible(true);
+    }
+    /**
+     * Sets logInFrame
+     * @param frame the JFrame object
+     */
+    public void setFrame(JFrame frame) {
         this.logInFrame = frame;    
     }
-
- public void setInvisible() {
+    /**
+     * Sets the visibility to logInFrame to false.
+     */
+    public void setInvisible() {
         logInFrame.setVisible(false);
- }
+    }
 }

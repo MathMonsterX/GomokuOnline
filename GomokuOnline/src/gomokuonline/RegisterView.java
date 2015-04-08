@@ -3,7 +3,7 @@ package gomokuonline;
 import javax.swing.JFrame;
 
 /**
- *
+ * This is the view for the user to register a new account.
  * @author clarissapendleton
  */
 public class RegisterView extends javax.swing.JPanel {
@@ -35,6 +35,7 @@ public class RegisterView extends javax.swing.JPanel {
         lblError = new javax.swing.JLabel();
         txtPassword = new javax.swing.JPasswordField();
         txtReType = new javax.swing.JPasswordField();
+        btnBack = new javax.swing.JButton();
 
         txtUsername.setColumns(10);
 
@@ -57,29 +58,41 @@ public class RegisterView extends javax.swing.JPanel {
 
         txtReType.setColumns(10);
 
+        btnBack.setText("Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(7, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnSignUp)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(usernameLabel, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(passwordLabel, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(reEnterLabel, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtReType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(125, 125, 125))
             .addGroup(layout.createSequentialGroup()
                 .addGap(61, 61, 61)
                 .addComponent(lblError)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(7, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnSignUp)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(usernameLabel, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(passwordLabel, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(reEnterLabel, javax.swing.GroupLayout.Alignment.TRAILING))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtReType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(125, 125, 125))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btnBack)
+                        .addGap(19, 19, 19))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -100,7 +113,9 @@ public class RegisterView extends javax.swing.JPanel {
                 .addComponent(btnSignUp)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                 .addComponent(lblError)
-                .addGap(56, 56, 56))
+                .addGap(18, 18, 18)
+                .addComponent(btnBack)
+                .addGap(9, 9, 9))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -108,8 +123,13 @@ public class RegisterView extends javax.swing.JPanel {
         btnSignUp_Click();
     }//GEN-LAST:event_btnSignUpActionPerformed
 
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        btnBack_Click();
+    }//GEN-LAST:event_btnBackActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBack;
     private javax.swing.JButton btnSignUp;
     private javax.swing.JLabel lblError;
     private javax.swing.JLabel passwordLabel;
@@ -119,16 +139,27 @@ public class RegisterView extends javax.swing.JPanel {
     private javax.swing.JTextField txtUsername;
     private javax.swing.JLabel usernameLabel;
     // End of variables declaration//GEN-END:variables
+    /**
+     * Displays an error message
+     * @param error the error being displayed
+     */
     public void updateLblError(String error){
         lblError.setText(error);
         lblError.setVisible(true);
     
     }
-
+    /**
+     * Sets this controller
+     * @param controller the RegisterController object
+     */
     public void setController(RegisterController controller){
         this.controller = controller;
     
     }
+    /**
+     * Checks to see if the passwords match, then send the controller
+     * the username and password to create a new account.
+     */
     private void btnSignUp_Click(){
         String username;
         char[] pass1, pass2;
@@ -155,17 +186,30 @@ public class RegisterView extends javax.swing.JPanel {
         }
     
     }
-    private void btnBack_Click(java.awt.event.ActionEvent evt){
-        this.setVisible(false);
+    /**
+     * Goes back to the LogInView
+     * @param evt back click
+     */
+    private void btnBack_Click(){
+        registerFrame.setVisible(false);
         controller.backClick();
     }
+    /**
+     * Sets the frame visibility to true.
+     */
     public void makeVisible(){
         this.setVisible(true);
     }
-
+    /**
+     * Sets this frame
+     * @param frame the JFrame object
+     */
     public void setFrame(JFrame frame) {
         this.registerFrame = frame;
     }
+    /**
+     * Sets the frame visibility to false.
+     */
     public void setInvisible() {
         registerFrame.setVisible(false);
     }

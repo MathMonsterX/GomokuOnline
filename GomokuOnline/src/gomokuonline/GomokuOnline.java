@@ -4,7 +4,7 @@ import javax.swing.JFrame;
 import java.awt.Container;
 
 /**
- *
+ * This is the main class that starts the game
  * @author clarissapendleton
  */
 public class GomokuOnline {
@@ -12,6 +12,7 @@ public class GomokuOnline {
     JFrame logInFrame;
     AdminModel model;
     /**
+     * This creates a new instance of GomokuOnline
      * @param args the command line arguments
      */
     public static void main(String[] args) {
@@ -19,7 +20,10 @@ public class GomokuOnline {
         game.startGame();
         
     }
-    
+    /**
+     * This instantiates new instances of AmdinModel, JFrame, LogInView, and LogInController.
+     * It contains the setters for each object.
+     */
     public void startGame(){
         model = new AdminModel();
         model.beginListening();

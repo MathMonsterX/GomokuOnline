@@ -3,7 +3,7 @@ package gomokuonline;
 import javax.swing.JFrame;
 
 /**
- *
+ * The controller for the MainMenuView
  * @author clarissapendleton
  */
 public class MainMenuController {
@@ -11,6 +11,9 @@ public class MainMenuController {
     MainMenuView view;
     AdminModel model;
     
+    /**
+     * This creates instances of MainMenuView and JFrame.  
+     */
     public void createView(){
         this.view = new MainMenuView();
         mainMenuFrame = new JFrame( );
@@ -23,13 +26,22 @@ public class MainMenuController {
         view = new MainMenuView();
 
     }
+    /**
+     * This sets this model
+     * @param model the AdminModel object
+     */
     public void setModel(AdminModel model){
-        this.model = model;
-        
+        this.model = model;  
     }
+    /**
+     * This opens the OnlineMenuView via the model.
+     */
     public void openOnlineMenuView(){
         model.openOnlineMenu();
     }
+    /**
+     * This makes this view visible.
+     */
     public void openView(){
         view.makeVisible();
     }

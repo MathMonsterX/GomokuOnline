@@ -4,7 +4,8 @@ package gomokuonline;
 import javax.swing.JFrame;
 
 /**
- *
+ * This is the view that the user can choose to play online, play offline, or
+ * view statistics.
  * @author clarissapendleton
  */
 public class MainMenuView extends javax.swing.JPanel {
@@ -17,9 +18,7 @@ public class MainMenuView extends javax.swing.JPanel {
     public MainMenuView() {
         initComponents();
     }
-    public void makeVisible(){
-        mainMenuFrame.setVisible(true);
-    }
+   
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -86,23 +85,41 @@ public class MainMenuView extends javax.swing.JPanel {
     private void btnOnlineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOnlineActionPerformed
         btnOnline_Click();
     }//GEN-LAST:event_btnOnlineActionPerformed
+    /**
+     * Sets this controller.
+     * @param controller the MainMenuController object
+     */
+    public void setController(MainMenuController controller){
+        this.controller = controller;
+    }
+    /**
+     * Sets this mainMenuFrame to false and opens the OnlineMenu view via the model.
+     */
+    private void btnOnline_Click(){
+        mainMenuFrame.setVisible(false);
+        controller.openOnlineMenuView();
+    }
+    /**
+     * Sets the visibility to this mainMenuFrame to true.
+     */
+    public void makeVisible(){
+        mainMenuFrame.setVisible(true);
+    }
+    /**
+     * Sets mainMenuFrame
+     * @param frame the JFrame object
+     */
+    public void setFrame(JFrame frame){
+        this.mainMenuFrame = frame;
+    }
 
-public void setController(MainMenuController controller){
-    this.controller = controller;
-}
 
-private void btnOnline_Click(){
-    mainMenuFrame.setVisible(false);
-    controller.openOnlineMenuView();
+    private void btnOffline_Click(java.awt.event.ActionEvent evt){
     
-}
-
-private void btnOffline_Click(java.awt.event.ActionEvent evt){
+    }
+    private void btnStats_Click(java.awt.event.ActionEvent evt){
     
-}
-private void btnStats_Click(java.awt.event.ActionEvent evt){
-    
-}
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnOffline;
     private javax.swing.JButton btnOnline;
@@ -110,9 +127,6 @@ private void btnStats_Click(java.awt.event.ActionEvent evt){
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 
-    void setFrame(JFrame frame) {
-        this.mainMenuFrame = frame;
-    }
 
    
 }

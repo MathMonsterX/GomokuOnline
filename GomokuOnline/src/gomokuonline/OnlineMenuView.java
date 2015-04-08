@@ -5,7 +5,7 @@ package gomokuonline;
 import javax.swing.JFrame;
 
 /**
- *
+ * This is the view that displays a list of online players and play requests
  * @author clarissapendleton
  */
 public class OnlineMenuView extends javax.swing.JPanel {
@@ -13,7 +13,7 @@ public class OnlineMenuView extends javax.swing.JPanel {
     OnlineMenuController controller;
     JFrame onlineMenuFrame;
     /**
-     * Creates new form LobbyView
+     * Creates new form OnlineMenuView
      */
     public OnlineMenuView() {
         initComponents();
@@ -130,10 +130,17 @@ public class OnlineMenuView extends javax.swing.JPanel {
     private javax.swing.JLabel playerLabel;
     private javax.swing.JLabel requestsLabel;
     // End of variables declaration//GEN-END:variables
-
+/**
+ * Sets this controller
+ * @param controller the OnlineMenuController object
+ */
 public void setController(OnlineMenuController controller){
     this.controller = controller;
 }
+/**
+ * Sets this model
+ * @param model the AdminModel object
+ */
 public void setModel(AdminModel model){
     this.model = model;
 }
@@ -143,27 +150,36 @@ public void setModel(AdminModel model){
 public void updateRequests(Player player, Gomoku board){
     
 }*/
-private void btnSendRequest_Click(java.awt.event.ActionEvent evt){
+    private void btnSendRequest_Click(java.awt.event.ActionEvent evt){
     
-}
-private void btnAccept_Click(java.awt.event.ActionEvent evt){
+    }
+    private void btnAccept_Click(java.awt.event.ActionEvent evt){
     
-}
-private void btnDecline_Click(java.awt.event.ActionEvent evt){
+    }
+    private void btnDecline_Click(java.awt.event.ActionEvent evt){
     
-}
-private void btnBack_Click(java.awt.event.ActionEvent evt){
+    }
+    private void btnBack_Click(java.awt.event.ActionEvent evt){
     
-}
-public void makeVisible(){
-    this.setVisible(true);
-}
-
-public void post(String[] players){
-    listOnlinePlayers.setListData(players);
-}
-
-    void setFrame(JFrame frame) {
+    }
+    /**
+     * Sets the frame visibility to true
+     */
+    public void makeVisible(){
+        this.setVisible(true);
+    }
+    /**
+     * Posts a list of online players on the view
+     * @param players the list of online players
+     */
+    public void post(String[] players){
+        listOnlinePlayers.setListData(players);
+    }
+    /**
+     * Sets this frame 
+     * @param frame the JFrame object 
+     */
+    public void setFrame(JFrame frame) {
         this.onlineMenuFrame = frame;
     }
 }
