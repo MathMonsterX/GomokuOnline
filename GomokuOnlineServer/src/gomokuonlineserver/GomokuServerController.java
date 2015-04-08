@@ -170,6 +170,7 @@ public class GomokuServerController implements Runnable{
     /**
      * Checks an input string for command, then returns appropriate response
      * @param message
+     * @param con the connection over which the message was received
      * @return 
      */
     public String processMessage(String message){
