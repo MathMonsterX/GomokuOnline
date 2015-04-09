@@ -80,9 +80,10 @@ public class Connection extends Thread implements Comparable<Connection>{
                    msgChar = (char)dataIn.read();
                    message+= msgChar;
                }
+               
+               String response = this.serverController.processMessage(message);
                String[] splitMessage = message.split("\\s+");
                this.serverController.addMessage("RECEIVED: " + splitMessage[0], this.sock.getLocalPort());
-               String response = this.serverController.processMessage(message);
                String[] splitResponse = response.split("\\s+");
                if(splitResponse[0].equals("AUTHENTICATION") || splitResponse[0].equals("ACCOUNT_CREATION")){
                    if(splitResponse[1].equals("success"))
