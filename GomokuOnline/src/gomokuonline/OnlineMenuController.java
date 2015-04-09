@@ -10,9 +10,9 @@ import javax.swing.JFrame;
  * @author clarissapendleton
  */
 public class OnlineMenuController implements Runnable{
-    JFrame onlineMenuFrame;
-    AdminModel model;
-    OnlineMenuView view; 
+    private JFrame onlineMenuFrame;
+    private AdminModel model;
+    private OnlineMenuView view; 
     
     /**
      * This creates the view and onlineMenuFrame  
