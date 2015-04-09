@@ -8,6 +8,7 @@ import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.awt.Container;
+import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import javax.swing.JFrame;
@@ -145,22 +146,18 @@ public class AdminModel implements Runnable{
      * @return A string representation of the hashed password
      */
     private static String hashPassword(String password, String salt){
-        StringBuilder hashedPassword = new StringBuilder("");
+        //StringBuilder hashedPassword = new StringBuilder("");
+        String hashedPassword = "";
         try {
             MessageDigest md = MessageDigest.getInstance("SHA-256");
             md.update((salt + password).getBytes());
-            
-            byte[] byteData = md.digest();
-            
-            for (int i=0;i<byteData.length;i++) {
-    		String hex = Integer.toHexString(0xff & byteData[i]);
-   	     	if(hex.length()==1) hashedPassword.append('0');
-   	     	hashedPassword.append(hex);
-    	}
+            byte[] byteData = md.digest();   
+            BigInteger hashVal = new BigInteger(byteData);
+            hashedPassword = hashVal.toString(16);   
         } catch (NoSuchAlgorithmException ex) {
             Logger.getLogger(AdminModel.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return hashedPassword.toString();
+        } 
+        return hashedPassword;
     }
     
     /**
