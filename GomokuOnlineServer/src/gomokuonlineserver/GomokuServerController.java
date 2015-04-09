@@ -144,7 +144,6 @@ public class GomokuServerController implements Runnable{
     public void acceptConnection(){
         while(true){
             try {
-                
                 Socket s = servSock.accept();
                 Connection con = new Connection(s, this);
                 con.start();
