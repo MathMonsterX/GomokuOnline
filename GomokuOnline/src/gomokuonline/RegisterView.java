@@ -7,8 +7,8 @@ import javax.swing.JFrame;
  * @author clarissapendleton
  */
 public class RegisterView extends javax.swing.JPanel {
-    RegisterController controller; 
-    JFrame registerFrame;
+    private RegisterController controller; 
+    private JFrame registerFrame;
 
     /**
      * Creates new form RegisterView

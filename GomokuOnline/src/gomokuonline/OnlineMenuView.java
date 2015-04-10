@@ -9,9 +9,9 @@ import javax.swing.JFrame;
  * @author clarissapendleton
  */
 public class OnlineMenuView extends javax.swing.JPanel {
-    AdminModel model;
-    OnlineMenuController controller;
-    JFrame onlineMenuFrame;
+    private AdminModel model;
+    private OnlineMenuController controller;
+    private JFrame onlineMenuFrame;
     /**
      * Creates new form OnlineMenuView
      */

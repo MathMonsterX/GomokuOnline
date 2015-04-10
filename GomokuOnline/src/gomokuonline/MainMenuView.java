@@ -9,8 +9,8 @@ import javax.swing.JFrame;
  * @author clarissapendleton
  */
 public class MainMenuView extends javax.swing.JPanel {
-    JFrame mainMenuFrame;
-    MainMenuController controller;
+    private JFrame mainMenuFrame;
+    private MainMenuController controller;
     
     /**
      * Creates new form MainMenuView

@@ -9,8 +9,8 @@ import java.awt.Container;
  */
 public class GomokuOnline {
     private static final String LOCAL_HOST = "127.0.0.1";
-    JFrame logInFrame;
-    AdminModel model;
+    private JFrame logInFrame;
+    private AdminModel model;
     /**
      * This creates a new instance of GomokuOnline
      * @param args the command line arguments

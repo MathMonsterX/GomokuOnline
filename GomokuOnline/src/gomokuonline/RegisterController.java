@@ -7,9 +7,9 @@ import javax.swing.JFrame;
  * @author clarissapendleton
  */
 public class RegisterController {
-    RegisterView view;
-    JFrame registerFrame;
-    AdminModel model;
+    private RegisterView view;
+    private JFrame registerFrame;
+    private AdminModel model;
     
     /**
      * Sets this model

@@ -7,9 +7,9 @@ import javax.swing.JFrame;
  * @author clarissapendleton
  */
 public class MainMenuController {
-    JFrame mainMenuFrame;
-    MainMenuView view;
-    AdminModel model;
+    private JFrame mainMenuFrame;
+    private MainMenuView view;
+    private AdminModel model;
     
     /**
      * This creates instances of MainMenuView and JFrame.  

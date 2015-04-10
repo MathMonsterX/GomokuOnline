@@ -5,10 +5,15 @@ package gomokuonline;
  * @author clarissapendleton
  */
 public class LogInController {
+<<<<<<< Updated upstream
     AdminModel model;
     LogInView view;
     int startListen = 0;
     
+=======
+    private AdminModel model;
+    private LogInView view;
+>>>>>>> Stashed changes
     /**
      * Sets this model
      * @param model the AdminModel object

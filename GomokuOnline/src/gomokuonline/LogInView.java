@@ -8,8 +8,8 @@ import javax.swing.JFrame;
  * @author clarissapendleton
  */
 public class LogInView extends javax.swing.JPanel {
-    LogInController controller;
-    JFrame logInFrame;
+    private LogInController controller;
+    private JFrame logInFrame;
     /**
      * Creates new form LogInView
      */
