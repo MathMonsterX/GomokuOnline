@@ -111,6 +111,7 @@ public class MainMenuView extends javax.swing.JPanel {
      */
     public void setFrame(JFrame frame){
         this.mainMenuFrame = frame;
+        mainMenuFrame.setTitle("Main Menu");
     }
 
 

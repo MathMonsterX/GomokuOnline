@@ -214,7 +214,8 @@ public class LogInView extends javax.swing.JPanel {
      * @param frame the JFrame object
      */
     public void setFrame(JFrame frame) {
-        this.logInFrame = frame;    
+        this.logInFrame = frame; 
+        logInFrame.setTitle("Log In");
     }
     /**
      * Sets the visibility to logInFrame to false.

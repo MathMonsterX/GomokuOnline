@@ -181,5 +181,6 @@ public void updateRequests(Player player, Gomoku board){
      */
     public void setFrame(JFrame frame) {
         this.onlineMenuFrame = frame;
+        onlineMenuFrame.setTitle("Choose Game");
     }
 }
