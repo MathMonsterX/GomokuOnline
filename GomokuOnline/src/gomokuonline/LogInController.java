@@ -7,6 +7,8 @@ package gomokuonline;
 public class LogInController {
     AdminModel model;
     LogInView view;
+    int startListen = 0;
+    
     /**
      * Sets this model
      * @param model the AdminModel object
@@ -25,6 +27,7 @@ public class LogInController {
      * This opens the RegisterView via the model.
      */
     public void openRegisterView(){
+        if( startListen == 0 ){ model.beginListening(); startListen++;}
         model.openRegister();
     }
     /**
@@ -39,6 +42,7 @@ public class LogInController {
      * @param password the password to send to the model
      */
     public void signIn(String username, String password){
+        if( startListen == 0 ){ model.beginListening(); startListen++;}
         model.sendUserLogin(username, password);
     }
     /**

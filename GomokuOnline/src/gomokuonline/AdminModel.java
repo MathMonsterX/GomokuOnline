@@ -52,7 +52,7 @@ public class AdminModel implements Runnable{
             
         } catch (IOException ex) {
             Logger.getLogger(AdminModel.class.getName()).log(Level.SEVERE, null, ex);
-            System.exit(1);
+            //System.exit(1);
         }
     }
     
