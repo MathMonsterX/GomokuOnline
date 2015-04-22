@@ -5,8 +5,8 @@ package gomokuonline;
  * @author clarissapendleton
  */
 public class LogInController {
-    AdminModel model;
-    LogInView view;
+    private AdminModel model;
+    private LogInView view;
     int startListen = 0;
     
 
