@@ -28,6 +28,7 @@ public class AdminModel implements Runnable{
     private OnlineMenuController onlineMenuController;
     private RegisterController registerController;
     private StatController statController;
+    private GameModel gameModel;
     
     private int port = 8080;
     private Socket clientSock;
@@ -264,6 +265,34 @@ public class AdminModel implements Runnable{
    
     }
       /**
+     * Creates an instance of gameController and gameModel if gameController is null,
+     * and calls a method in the controller to create the view. If gameController
+     * is not null, a method in the controller is called to open the view
+     */
+      public void openGame(){
+          if(gameController==null){
+              gameModel = new GameModel();
+              gameController = new GameController();
+              //gameModel.setController();
+              gameController.createView();
+          } 
+              
+      }
+      /**
+     * Creates an instance of gameController and gameModel if gameController is null,
+     * and calls a method in the controller to create the view. If gameController
+     * is not null, a method in the controller is called to open the view
+     * @param ip the ip address this user will connect to
+     */
+      public void openGame(String ip){
+          if(gameController==null){
+              gameModel = new GameModel(ip);
+              gameController = new GameController();
+              //gameModel.setController();
+              gameController.createView();
+          }
+      }
+      /**
      * Closes the socket
      */
     public void close(){
@@ -273,6 +302,20 @@ public class AdminModel implements Runnable{
             Logger.getLogger(AdminModel.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println("Error in closing socket");
 
+        }
+    }
+    /**
+     * Writes a request to invite a player to the server
+     * @param player the username of the player being invited
+     */
+    public void invite(String player){
+        String message = "INVITE " + player.toUpperCase();
+        try{
+            socketOut.write(message);
+            socketOut.flush();
+        }catch (IOException ex){
+            Logger.getLogger(AdminModel.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Error in sending invite");
         }
     }
  

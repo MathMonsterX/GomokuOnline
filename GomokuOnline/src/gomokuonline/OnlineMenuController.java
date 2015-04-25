@@ -73,5 +73,12 @@ public class OnlineMenuController implements Runnable{
         Thread thread = new Thread(this);
         thread.start();
     }
+    /**
+     * This invites player to play a game
+     * @param player the username of the player receiving an invitation
+     */
+    public void invite(String player){
+        model.invite(player);
+    }
 }
 

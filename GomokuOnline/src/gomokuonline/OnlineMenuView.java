@@ -45,6 +45,11 @@ public class OnlineMenuView extends javax.swing.JPanel {
         playerLabel.setText("Online Players");
 
         btnSendRequest.setText("Ask Player");
+        btnSendRequest.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSendRequestActionPerformed(evt);
+            }
+        });
 
         cbBoard.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "30x30", "40x40", "50x50" }));
 
@@ -116,6 +121,12 @@ public class OnlineMenuView extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnSendRequestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSendRequestActionPerformed
+        String player;
+        player = (String)listOnlinePlayers.getSelectedValue();
+        btnSendRequest_Click(player);
+    }//GEN-LAST:event_btnSendRequestActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAccept;
@@ -150,8 +161,12 @@ public void setModel(AdminModel model){
 public void updateRequests(Player player, Gomoku board){
     
 }*/
-    private void btnSendRequest_Click(java.awt.event.ActionEvent evt){
-    
+/**
+ * This invites player to play a game
+ * @param player the username of the player getting an invitation
+ */
+    private void btnSendRequest_Click(String player){
+        controller.invite(player);
     }
     private void btnAccept_Click(java.awt.event.ActionEvent evt){
     

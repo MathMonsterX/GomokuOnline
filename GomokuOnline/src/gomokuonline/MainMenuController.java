@@ -23,7 +23,6 @@ public class MainMenuController {
         mainMenuFrame.setVisible(true);
         view.setController(this);
         view.setFrame(mainMenuFrame);
-        view = new MainMenuView();
 
     }
     /**

@@ -112,6 +112,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Ask Player"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSendRequestActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JComboBox" name="cbBoard">
       <Properties>

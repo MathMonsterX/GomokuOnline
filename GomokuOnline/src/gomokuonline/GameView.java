@@ -1,12 +1,15 @@
 
 package gomokuonline;
 
+import javax.swing.JFrame;
+
 /**
  *
  * @author clarissapendleton
  */
 public class GameView extends javax.swing.JPanel {
-
+    private GameController controller;
+    private JFrame gameViewFrame;
     /**
      * Creates new form GameView
      */
@@ -80,7 +83,10 @@ public class GameView extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
 public void setController(GameController controller){
-    
+    this.controller = controller;
+}
+public void setFrame(JFrame frame){
+    this.gameViewFrame = frame;
 }
 public void updateLblPlayerMove(String message){
     
