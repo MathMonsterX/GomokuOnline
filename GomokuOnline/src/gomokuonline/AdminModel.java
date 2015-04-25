@@ -117,6 +117,8 @@ public class AdminModel implements Runnable{
                     }
                 }else if(input[0].equals("INVITED_BY")){
                     onlineMenuController.updateRequests(input[1]);
+                }else if(input[0].equals("IP")){
+                    this.connect(input[1]);
                 }
             }
         }catch(IOException ex){
@@ -329,6 +331,13 @@ public class AdminModel implements Runnable{
      */
     public void accept(){
         this.openGame();
+    }
+    
+    /**
+     * The user connects to the socket created by another user
+     */
+    public void connect(String ip){
+        
     }
  
 }

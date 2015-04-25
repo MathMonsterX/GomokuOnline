@@ -221,6 +221,22 @@ public class GomokuServerModel {
         }
         return response;
     }
-    
+    /**
+     * Sends the IP address to the specified user
+     * @param username the user receiving the IP address
+     * @return the sent status represented as a String
+     */
+   public String sendIP(String ip, String username){
+        String message = "IP " + ip;
+        String response = "IP NOT SENT TO " + username.toUpperCase();
+        for(int i=0; i< connections.size();i++){
+            if(this.connections.get(i).uname.equals(username)){
+                connections.get(i).sendMessage(message);
+                response = "IP SENT TO " + username.toUpperCase();
+            }
+        }
+        return response;
+        
+    } 
     
 }

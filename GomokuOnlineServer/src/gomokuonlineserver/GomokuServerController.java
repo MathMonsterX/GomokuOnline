@@ -184,6 +184,8 @@ public class GomokuServerController implements Runnable{
                 return this.model.createAccount(input[1], input[2]);
             case "INVITE":
                 return this.model.sendInvite(input[1], input[2]);
+            case "IP":
+                return this.model.sendIP(input[1], input[2]);
         }
         
        
@@ -215,5 +217,7 @@ public class GomokuServerController implements Runnable{
         listenWorker = new Thread(this);
         listenWorker.start();
     }
+    
+    
     
 }
