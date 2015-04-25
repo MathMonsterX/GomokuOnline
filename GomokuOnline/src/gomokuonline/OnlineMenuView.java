@@ -2,6 +2,8 @@
 
 package gomokuonline;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JFrame;
 
 /**
@@ -58,6 +60,11 @@ public class OnlineMenuView extends javax.swing.JPanel {
         listRequests.setViewportView(listReq);
 
         btnAccept.setText("Accept");
+        btnAccept.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAcceptActionPerformed(evt);
+            }
+        });
 
         btnDecline.setText("Reject");
 
@@ -127,6 +134,10 @@ public class OnlineMenuView extends javax.swing.JPanel {
         btnSendRequest_Click(player);
     }//GEN-LAST:event_btnSendRequestActionPerformed
 
+    private void btnAcceptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcceptActionPerformed
+        this.btnAccept_Click();
+    }//GEN-LAST:event_btnAcceptActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAccept;
@@ -168,8 +179,12 @@ public void updateRequests(Player player, Gomoku board){
     private void btnSendRequest_Click(String player){
         controller.invite(player);
     }
-    private void btnAccept_Click(java.awt.event.ActionEvent evt){
-    
+    /**
+     * When the user accepts an invitation, this method calls the accept method
+     * in the controller
+     */
+    private void btnAccept_Click(){
+        controller.accept();
     }
     private void btnDecline_Click(java.awt.event.ActionEvent evt){
     
@@ -197,5 +212,19 @@ public void updateRequests(Player player, Gomoku board){
     public void setFrame(JFrame frame) {
         this.onlineMenuFrame = frame;
         onlineMenuFrame.setTitle("Choose Game");
+    }
+    /**
+     * This updates the list of players on the view
+     * @param player the username of the player that sent an invitation
+     */
+    public void updateRequests(String player){
+        List requests = new ArrayList();
+        requests = listReq.getSelectedValuesList();
+        String[] req=new String[requests.size()];
+        requests.add(player);
+        for(int i=0; i<requests.size();i++){
+            req[i] = (String)requests.get(i);
+        }
+        listReq.setListData(req);
     }
 }

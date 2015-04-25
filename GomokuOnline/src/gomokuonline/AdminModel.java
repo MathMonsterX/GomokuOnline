@@ -38,6 +38,7 @@ public class AdminModel implements Runnable{
     private BufferedReader socketIn;
     
     private Thread worker;
+    public String username;
     
     /**
      * Constructor, creates a new instance of AdminModel
@@ -114,6 +115,8 @@ public class AdminModel implements Runnable{
                         registerController.invalidSignIn("** Account not created. Please enter a different username **");
                     
                     }
+                }else if(input[0].equals("INVITED_BY")){
+                    onlineMenuController.updateRequests(input[1]);
                 }
             }
         }catch(IOException ex){
@@ -166,6 +169,7 @@ public class AdminModel implements Runnable{
     public void sendUserLogin(String user, String pass){
         String message = "LOGIN "  + user + " " + hashPassword(pass,user);
         try{
+            this.username=user;
             socketOut.write(message);
             socketOut.flush();
         }catch(IOException ex){
@@ -181,6 +185,7 @@ public class AdminModel implements Runnable{
     public void createAccount(String user, String pass){
         String message = "CREATE_ACCOUNT " + user + " " + hashPassword(pass, user);
         try{
+            this.username = user;
             socketOut.write(message);
             socketOut.flush();
         }catch(IOException ex){
@@ -309,7 +314,7 @@ public class AdminModel implements Runnable{
      * @param player the username of the player being invited
      */
     public void invite(String player){
-        String message = "INVITE " + player.toUpperCase();
+        String message = "INVITE " + player.toUpperCase() + " " + this.username;
         try{
             socketOut.write(message);
             socketOut.flush();
@@ -317,6 +322,13 @@ public class AdminModel implements Runnable{
             Logger.getLogger(AdminModel.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println("Error in sending invite");
         }
+    }
+    /**
+     * When the user accepts an invitation, this method calls openGame() to create
+     * the gameModel, gameController, and gameView
+     */
+    public void accept(){
+        this.openGame();
     }
  
 }

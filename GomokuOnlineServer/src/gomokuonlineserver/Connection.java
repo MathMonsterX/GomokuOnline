@@ -32,7 +32,7 @@ public class Connection extends Thread implements Comparable<Connection>{
     private BufferedReader dataIn;
     private DataOutputStream dataOut;
     private GomokuServerController serverController;
-    private String uname;
+    public String uname;
     
     
     /**

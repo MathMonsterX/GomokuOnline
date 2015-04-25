@@ -204,5 +204,23 @@ public class GomokuServerModel {
     private void addOnlineUser(String user){
         this.onlineUsers.add(user);
     }
+    /**
+     * Sends the invite to the specified player
+     * @param player the username that receives an invitation
+     * @param invitedBy the username that sent the invitation
+     * @return the invitation status represented as a String
+     */
+    public String sendInvite(String player, String invitedBy){
+        String message = "INVITED_BY " + invitedBy;
+        String response = "NOT INVITED";
+        for(int i=0; i< connections.size();i++){
+            if(this.connections.get(i).uname.equals(player)){
+                connections.get(i).sendMessage(message);
+                response = "INVTIED";
+            }
+        }
+        return response;
+    }
+    
     
 }

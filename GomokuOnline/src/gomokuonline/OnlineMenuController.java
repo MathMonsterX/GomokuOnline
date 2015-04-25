@@ -80,5 +80,20 @@ public class OnlineMenuController implements Runnable{
     public void invite(String player){
         model.invite(player);
     }
+    /**
+     * This method updates the requests list in the view
+     * @param player the username of the player that send an invitation
+     */
+    public void updateRequests(String player){
+        view.updateRequests(player);
+        
+    }
+    /**
+     * When the user accepts an invitation, this method calls the accept method
+     * in the model
+     */
+    public void accept(){
+        model.accept();
+    }
 }
 
