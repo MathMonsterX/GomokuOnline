@@ -116,4 +116,14 @@ public class GameModel implements Runnable{
     public void run(){
         this.receiveMessage();
     }
+    
+    
+    /**
+     * Starts the thread that listens for
+     * messages over the socket
+     */
+    public void listen(){
+        listenWorker = new Thread(this);
+        listenWorker.start();
+    }
 }
