@@ -27,7 +27,7 @@ public class GameModel implements Runnable{
      * using the DEFAULT_HOSTPORT 8080 for the server socket
      */
     GameModel(){
-        this.hostGame(DEFAULT_HOSTPORT);
+        this.hostGame(0);
     }
     
     /**
@@ -125,5 +125,20 @@ public class GameModel implements Runnable{
     public void listen(){
         listenWorker = new Thread(this);
         listenWorker.start();
+    }
+    
+    /**
+     * Gets the port on which the server socket is listening
+     * @return the port number of the server socket
+     */
+    public int getServerPort(){
+        return this.hostSocket.getLocalPort();
+    }
+    
+    /**
+     * Get's the IP address associated with the server socket
+     */
+    public String getServerIP(){
+        return this.hostSocket.getInetAddress().getHostAddress();
     }
 }
