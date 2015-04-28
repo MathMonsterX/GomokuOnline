@@ -32,7 +32,6 @@ public class Player {
     {
         return playerState;
     }
-    
     public void addGameStats( int time, int gameResult, Player opponent, Date dateTimePlayed )
     {
         stats.addGameStats( time, gameResult, opponent, dateTimePlayed );
@@ -52,19 +51,23 @@ public class Player {
             games.add( new Game( time, gameResult, opponent, dateTimePlayed ) );
         }
         
-        public Game getGame( int i )
+        public ArrayList getGames()
+        {
+            return games;
+        }
+        public Game getGameAt( int i )
         {
             return games.get(i);
         }
         
         public Player getGameOpponent( int i )
         {
-            Game g = getGame(i);
+            Game g = getGameAt(i);
             return g.getOpponent();
         }
         public Date getGameDate( int i )
         {
-            Game g = getGame(i);
+            Game g = getGameAt(i);
             return g.getDateTimePlayed();
         }
         
@@ -123,19 +126,19 @@ public class Player {
                 this.dateTimePlayed = dateTimePlayed;
             }
             
-            private long getTime()
+            public long getTime()
             {
                 return time;
             }
-            private int getGameResult()
+            public int getGameResult()
             {
                 return gameResult;
             }
-            private Player getOpponent()
+            public Player getOpponent()
             {
                 return opponent;
             }
-            private Date getDateTimePlayed()
+            public Date getDateTimePlayed()
             {
                 return dateTimePlayed;
             }
