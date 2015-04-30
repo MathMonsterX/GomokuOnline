@@ -118,7 +118,7 @@ public class AdminModel implements Runnable{
                 }else if(input[0].equals("INVITED_BY")){
                     onlineMenuController.updateRequests(input[1]);
                 }else if(input[0].equals("IP")){
-                    this.connect(input[1]);
+                    this.openGame(input[1], input[2]);
                 }
             }
         }catch(IOException ex){
@@ -289,11 +289,12 @@ public class AdminModel implements Runnable{
      * Creates an instance of gameController and gameModel if gameController is null,
      * and calls a method in the controller to create the view. If gameController
      * is not null, a method in the controller is called to open the view
-     * @param ip the ip address this user will connect to
+     * @param ip the IP address this user will connect to
      */
-      public void openGame(String ip){
+      public void openGame(String ip, String port){
+          int connectPort = Integer.parseInt(port);
           if(gameController==null){
-              gameModel = new GameModel(ip);
+              gameModel = new GameModel(ip, connectPort);
               gameController = new GameController();
               //gameModel.setController();
               gameController.createView();
@@ -316,7 +317,7 @@ public class AdminModel implements Runnable{
      * @param player the username of the player being invited
      */
     public void invite(String player){
-        String message = "INVITE " + player.toUpperCase() + " " + this.username;
+        String message = "INVITE " + player + " " + this.username;
         try{
             socketOut.write(message);
             socketOut.flush();
@@ -333,11 +334,6 @@ public class AdminModel implements Runnable{
         this.openGame();
     }
     
-    /**
-     * The user connects to the socket created by another user
-     */
-    public void connect(String ip){
-        
-    }
+
  
 }

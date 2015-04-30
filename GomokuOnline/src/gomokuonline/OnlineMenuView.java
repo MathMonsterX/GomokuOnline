@@ -4,7 +4,9 @@ package gomokuonline;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.accessibility.AccessibleContext;
 import javax.swing.JFrame;
+import javax.swing.ListModel;
 
 /**
  * This is the view that displays a list of online players and play requests
@@ -67,8 +69,18 @@ public class OnlineMenuView extends javax.swing.JPanel {
         });
 
         btnDecline.setText("Reject");
+        btnDecline.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeclineActionPerformed(evt);
+            }
+        });
 
         btnBack.setText("Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -135,8 +147,21 @@ public class OnlineMenuView extends javax.swing.JPanel {
     }//GEN-LAST:event_btnSendRequestActionPerformed
 
     private void btnAcceptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcceptActionPerformed
-        this.btnAccept_Click();
+        String player;
+        player = (String)listOnlinePlayers.getSelectedValue();
+        this.btnAccept_Click(player);
     }//GEN-LAST:event_btnAcceptActionPerformed
+
+    private void btnDeclineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeclineActionPerformed
+        String player;
+        player = (String)listOnlinePlayers.getSelectedValue();
+        btnDecline_Click(player);
+        
+    }//GEN-LAST:event_btnDeclineActionPerformed
+
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        btnBack_Click();
+    }//GEN-LAST:event_btnBackActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -183,14 +208,16 @@ public void updateRequests(Player player, Gomoku board){
      * When the user accepts an invitation, this method calls the accept method
      * in the controller
      */
-    private void btnAccept_Click(){
+    private void btnAccept_Click(String player){
+        this.removePlayer(player);
         controller.accept();
     }
-    private void btnDecline_Click(java.awt.event.ActionEvent evt){
-    
+    private void btnDecline_Click(String player){
+        this.removePlayer(player);
     }
-    private void btnBack_Click(java.awt.event.ActionEvent evt){
-    
+    private void btnBack_Click(){
+        onlineMenuFrame.setVisible(false);
+        controller.back();
     }
     /**
      * Sets the frame visibility to true
@@ -211,20 +238,37 @@ public void updateRequests(Player player, Gomoku board){
      */
     public void setFrame(JFrame frame) {
         this.onlineMenuFrame = frame;
-        onlineMenuFrame.setTitle("Choose Game");
+        onlineMenuFrame.setTitle(controller.getUname() + ", Choose Your Game!");
     }
     /**
      * This updates the list of players on the view
      * @param player the username of the player that sent an invitation
      */
     public void updateRequests(String player){
-        List requests = new ArrayList();
-        requests = listReq.getSelectedValuesList();
-        String[] req=new String[requests.size()];
-        requests.add(player);
-        for(int i=0; i<requests.size();i++){
-            req[i] = (String)requests.get(i);
-        }
+        String[] req=this.getModel();
+        req[req.length-1] = player;
         listReq.setListData(req);
+    }
+    
+    public String[] getModel(){
+        ListModel modelList = listReq.getModel();
+        String[] req=new String[modelList.getSize()+1];
+        for(int i=0; i < modelList.getSize(); i++){
+            req[i] =  (String)modelList.getElementAt(i);  
+        }
+        return req;
+    }
+    
+    public String[] removePlayer(String player){
+        ListModel modelList = listReq.getModel();
+        String[] req=new String[modelList.getSize()];
+        for(int i=0; i < modelList.getSize(); i++){
+            if(!(((String)modelList.getElementAt(i)).equals(player))){
+                req[i] =(String)modelList.getElementAt(i); 
+            }
+             
+        }
+        return req;
+        
     }
 }

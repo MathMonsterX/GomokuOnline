@@ -65,9 +65,12 @@ public class GameModel implements Runnable{
     private void hostGame(int hostPort){
         try {
             hostSocket = new ServerSocket(hostPort);
+            System.out.println(hostSocket.getLocalPort());
             this.sock = hostSocket.accept();
+            System.out.println("ACCEPT");
             dataOut = new DataOutputStream(sock.getOutputStream());
             dataIn  = new BufferedReader(new InputStreamReader(sock.getInputStream()));
+            System.out.println("BEFORE CLOSE");
             hostSocket.close();
         } catch (IOException ex) {
             Logger.getLogger(GameModel.class.getName()).log(Level.SEVERE, null, ex);
@@ -136,7 +139,7 @@ public class GameModel implements Runnable{
     }
     
     /**
-     * Get's the IP address associated with the server socket
+     * Gets the IP address associated with the server socket
      */
     public String getServerIP(){
         return this.hostSocket.getInetAddress().getHostAddress();

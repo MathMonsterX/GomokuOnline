@@ -95,5 +95,13 @@ public class OnlineMenuController implements Runnable{
     public void accept(){
         model.accept();
     }
+
+    public String getUname() {
+        return model.username;
+    }
+    
+    public void back(){
+        model.openMainMenu();
+    }
 }
 

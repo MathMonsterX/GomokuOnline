@@ -186,6 +186,7 @@ public class GomokuServerController implements Runnable{
                 return this.model.sendInvite(input[1], input[2]);
             case "IP":
                 return this.model.sendIP(input[1], input[2]);
+                
         }
         
        
