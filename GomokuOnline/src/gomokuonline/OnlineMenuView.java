@@ -148,7 +148,7 @@ public class OnlineMenuView extends javax.swing.JPanel {
 
     private void btnAcceptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcceptActionPerformed
         String player;
-        player = (String)listOnlinePlayers.getSelectedValue();
+        player = (String)listReq.getSelectedValue();
         this.btnAccept_Click(player);
     }//GEN-LAST:event_btnAcceptActionPerformed
 
@@ -209,8 +209,8 @@ public void updateRequests(Player player, Gomoku board){
      * in the controller
      */
     private void btnAccept_Click(String player){
+        controller.accept(player);
         this.removePlayer(player);
-        controller.accept();
     }
     private void btnDecline_Click(String player){
         this.removePlayer(player);
