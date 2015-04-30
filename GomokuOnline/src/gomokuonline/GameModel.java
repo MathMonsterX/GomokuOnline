@@ -4,8 +4,11 @@ import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.InetAddress;
+import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.UnknownHostException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -14,7 +17,6 @@ import java.util.logging.Logger;
  * @author clarissapendleton
  */
 public class GameModel implements Runnable{
-    private static final int DEFAULT_HOSTPORT = 8080;
     private GameController controller ;
     private Thread listenWorker;
     private BufferedReader dataIn;
@@ -24,20 +26,19 @@ public class GameModel implements Runnable{
     
     /**
      * Default constructor. Assumes this GameModel will  host the connection,
-     * using the DEFAULT_HOSTPORT 8080 for the server socket
+     * using an arbitrary available port
      */
     GameModel(){
-        this.hostGame(0);
+        try {
+            hostSocket = new ServerSocket(0);
+        } catch (IOException ex) {
+            Logger.getLogger(GameModel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
     }
     
-    /**
-     * Host Constructor. Allows this GameModel to host the peer-to-peer connection, using
-     * hostPort as the port for the server socket
-     * @param hostPort port that the ServerSocket is bound to
-     */
-    GameModel(int hostPort){
-        this.hostGame(hostPort);
-    }
+    
     
     
     /**
@@ -62,15 +63,11 @@ public class GameModel implements Runnable{
      * @param hostPort the port on which this GameModel will listen for
      * requests.
      */
-    private void hostGame(int hostPort){
+    public void hostGame(){
         try {
-            hostSocket = new ServerSocket(hostPort);
-            System.out.println(hostSocket.getLocalPort());
             this.sock = hostSocket.accept();
-            System.out.println("ACCEPT");
             dataOut = new DataOutputStream(sock.getOutputStream());
             dataIn  = new BufferedReader(new InputStreamReader(sock.getInputStream()));
-            System.out.println("BEFORE CLOSE");
             hostSocket.close();
         } catch (IOException ex) {
             Logger.getLogger(GameModel.class.getName()).log(Level.SEVERE, null, ex);
@@ -142,6 +139,11 @@ public class GameModel implements Runnable{
      * Gets the IP address associated with the server socket
      */
     public String getServerIP(){
-        return this.hostSocket.getInetAddress().getHostAddress();
+        try {
+            return InetAddress.getLocalHost().getHostAddress();
+        } catch (UnknownHostException ex) {
+            Logger.getLogger(GameModel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 }
