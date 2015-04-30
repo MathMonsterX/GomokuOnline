@@ -154,7 +154,7 @@ public class OnlineMenuView extends javax.swing.JPanel {
 
     private void btnDeclineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeclineActionPerformed
         String player;
-        player = (String)listOnlinePlayers.getSelectedValue();
+        player = (String)listReq.getSelectedValue();
         btnDecline_Click(player);
         
     }//GEN-LAST:event_btnDeclineActionPerformed
@@ -223,7 +223,7 @@ public void updateRequests(Player player, Gomoku board){
      * Sets the frame visibility to true
      */
     public void makeVisible(){
-        this.setVisible(true);
+        onlineMenuFrame.setVisible(true);
     }
     /**
      * Posts a list of online players on the view
@@ -250,7 +250,7 @@ public void updateRequests(Player player, Gomoku board){
         listReq.setListData(req);
     }
     
-    public String[] getModel(){
+    private String[] getModel(){
         ListModel modelList = listReq.getModel();
         String[] req=new String[modelList.getSize()+1];
         for(int i=0; i < modelList.getSize(); i++){
@@ -259,16 +259,17 @@ public void updateRequests(Player player, Gomoku board){
         return req;
     }
     
-    public String[] removePlayer(String player){
-        ListModel modelList = listReq.getModel();
-        String[] req=new String[modelList.getSize()];
-        for(int i=0; i < modelList.getSize(); i++){
-            if(!(((String)modelList.getElementAt(i)).equals(player))){
-                req[i] =(String)modelList.getElementAt(i); 
-            }
-             
+    private void removePlayer(String player){
+        String[] req=this.getModel();
+        List requests = new ArrayList();
+        for(int i = 0; i<req.length;i++){
+            requests.add(req[i]);
         }
-        return req;
+        requests.remove(player);
+        for(int i = 0; i<req.length-1;i++){
+            req[i] = (String)requests.get(i);
+        }
+        listReq.setListData(req);
         
     }
 }
