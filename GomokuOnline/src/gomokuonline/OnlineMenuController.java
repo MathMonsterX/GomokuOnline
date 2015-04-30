@@ -92,8 +92,8 @@ public class OnlineMenuController implements Runnable{
      * When the user accepts an invitation, this method calls the accept method
      * in the model
      */
-    public void accept(){
-        model.accept();
+    public void accept(String player){
+        model.accept(player);
     }
 
     public String getUname() {
