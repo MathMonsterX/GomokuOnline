@@ -63,7 +63,7 @@ public class GameModel implements Runnable{
      * @param hostPort the port on which this GameModel will listen for
      * requests.
      */
-    public void hostGame(){
+    private void hostGame(){
         try {
             this.sock = hostSocket.accept();
             dataOut = new DataOutputStream(sock.getOutputStream());
@@ -87,6 +87,10 @@ public class GameModel implements Runnable{
      * Receives messages over the peer to peer connection
      */
     private void receiveMessage(){
+        if(hostSocket != null){
+            this.hostGame();
+        }
+        
         try {
             int input;
             while((input = dataIn.read()) != -1 ){
