@@ -117,7 +117,7 @@ public class AdminModel implements Runnable{
                     }
                 }else if(input[0].equals("INVITED_BY")){
                     onlineMenuController.updateRequests(input[1]);
-                }else if(input[0].equals("IP")){
+                }else if(input[0].equals("P2P")){
                     this.openGame(input[1], input[2]);
                 }
             }
@@ -276,12 +276,21 @@ public class AdminModel implements Runnable{
      * and calls a method in the controller to create the view. If gameController
      * is not null, a method in the controller is called to open the view
      */
-      public void openGame(){
+      public void openGame(String player){
           if(gameController==null){
-              gameModel = new GameModel();
-              gameController = new GameController();
-              //gameModel.setController();
-              gameController.createView();
+              try {
+                  gameModel = new GameModel();
+                  gameController = new GameController();
+                  //gameModel.setController();
+                  gameController.createView();
+                  String hostIP = gameModel.getServerIP();
+                  int portNum = gameModel.getServerPort();
+                  socketOut.write("CREATE_P2P "  + hostIP + " " + portNum + " " + player + " " ); //masks synchronisity issue by adding trailing space
+                  gameModel.hostGame();
+                  
+              } catch (IOException ex) {
+                  Logger.getLogger(AdminModel.class.getName()).log(Level.SEVERE, null, ex);
+              }
           } 
               
       }
@@ -293,6 +302,7 @@ public class AdminModel implements Runnable{
      */
       public void openGame(String ip, String port){
           int connectPort = Integer.parseInt(port);
+          
           if(gameController==null){
               gameModel = new GameModel(ip, connectPort);
               gameController = new GameController();
@@ -330,8 +340,8 @@ public class AdminModel implements Runnable{
      * When the user accepts an invitation, this method calls openGame() to create
      * the gameModel, gameController, and gameView
      */
-    public void accept(){
-        this.openGame();
+    public void accept(String player){
+        this.openGame(player);
     }
     
 
