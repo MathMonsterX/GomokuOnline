@@ -15,6 +15,9 @@ public class GameView extends javax.swing.JPanel {
      */
     public GameView() {
         initComponents();
+        lblPlayer.setText("");
+        lblPlayerMove.setVisible(false);
+        lblOpponentMove.setVisible(false);
     }
 
     /**
@@ -87,6 +90,8 @@ public void setController(GameController controller){
 }
 public void setFrame(JFrame frame){
     this.gameViewFrame = frame;
+    gameViewFrame.setTitle("Gomoku");
+
 }
 public void updateLblPlayerMove(String message){
     
