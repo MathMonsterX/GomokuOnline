@@ -286,7 +286,7 @@ public class AdminModel implements Runnable{
                   String hostIP = gameModel.getServerIP();
                   int portNum = gameModel.getServerPort();
                   socketOut.write("CREATE_P2P "  + hostIP + " " + portNum + " " + player + " " ); //masks synchronisity issue by adding trailing space
-                  gameModel.hostGame();
+                  gameModel.listen();
                   
               } catch (IOException ex) {
                   Logger.getLogger(AdminModel.class.getName()).log(Level.SEVERE, null, ex);
