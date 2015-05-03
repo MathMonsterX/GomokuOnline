@@ -17,6 +17,10 @@ public class GomokuOnline {
      */
     public static void main(String[] args) {
         GomokuOnline game = new GomokuOnline();
+        if(args.length > 1)
+            game.model = new AdminModel(args[0], Integer.parseInt(args[1]));
+        else
+            game.model = new AdminModel();
         game.startGame();
         
     }
@@ -25,7 +29,6 @@ public class GomokuOnline {
      * It contains the setters for each object.
      */
     public void startGame(){
-        model = new AdminModel();
         
         logInFrame = new JFrame();
         logInFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
