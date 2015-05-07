@@ -194,7 +194,32 @@ public class GameModel implements Runnable{
     private String updateMatrix(int row, int column){
         String condition = "false";
         this.matrix[row][column]=playerChar;
-        //need to search through and see if player won
+       
+        //search through to see if player won
+         for(int i=0; i<size; i++){
+             for(int j=0; j<size; j++){
+                 if(matrix[i][j]==playerChar){
+                     if(i+4<=size && matrix[i][j+1]==playerChar && matrix[i][j+2]==playerChar
+                             && matrix[i][j+3]==playerChar&&matrix[i][j+4]==playerChar)
+                         condition="true";
+                     
+                     if(i+4<=size && j+4<=size && matrix[i+1][j+1]==playerChar && matrix[i+2][j+2]==playerChar
+                             && matrix[i+3][j+3]==playerChar&&matrix[i+4][j+4]==playerChar)
+                         condition="true";
+                     
+                     if(j+4<=size && matrix[i+1][j]==playerChar && matrix[i+2][j]==playerChar
+                             && matrix[i+3][j]==playerChar&&matrix[i+4][j]==playerChar)
+                         condition="true";
+                     
+                     if(i-4>=0 && j-4>=0 && matrix[i-1][j-1]==playerChar && matrix[i-2][j-2]==playerChar
+                             && matrix[i-3][j-3]==playerChar&&matrix[i-4][j-4]==playerChar)
+                         condition="true";
+                         
+                 }
+                     
+             }
+            
+        }
         return condition;
     }
     
@@ -204,4 +229,6 @@ public class GameModel implements Runnable{
         this.sendMessage(message);
         
     }
+    
+    
 }
