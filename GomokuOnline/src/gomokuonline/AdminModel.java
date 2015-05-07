@@ -294,6 +294,7 @@ public class AdminModel implements Runnable{
                   gameModel.setController(gameController);
                   gameController.setModel(gameModel);
                   gameController.createView();
+                  gameController.setEndMoveEnabled(true);
                   String hostIP = gameModel.getServerIP();
                   int portNum = gameModel.getServerPort();
                   socketOut.write("CREATE_P2P "  + hostIP + " " + portNum + " " + player + " " + size+" "); //masks synchronisity issue by adding trailing space
@@ -320,6 +321,7 @@ public class AdminModel implements Runnable{
               gameModel.setController(gameController);
               gameController.setModel(gameModel);
               gameController.createView();
+              gameController.setEndMoveEnabled(false);
           }
       }
       /**
