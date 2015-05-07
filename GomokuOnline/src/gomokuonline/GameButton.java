@@ -13,24 +13,24 @@ import javax.swing.JButton;
  */
 public class GameButton extends JButton {
     private int row, col;
-    private int selected;
+    private boolean selected;
     
     public GameButton()
     {
-        this.selected = 0;
+        this.selected = false;
     }
     public GameButton( int row, int col )
     {
         this.row = row;
         this.col = col;
-        this.selected = 0;
+        this.selected = false;
     }
     
     public GameButton(int row, int col, String text){
         super(text);
         this.row = row;
         this.col = col; 
-        this.selected = 0;
+        this.selected = false;
         
     
     }
@@ -42,11 +42,24 @@ public class GameButton extends JButton {
     {
         return col;
     }
-    public int getSelected()
+    
+    /**
+     * Returns the status of the selected condition of the button.
+     * @return true if selected, false if not
+     */
+    @Override
+    public boolean isSelected()
     {
         return selected;
     }
-    public void setSelected( int selected )
+    
+    
+    /**
+     * Sets the state of the selected condition of the button
+     * @param selected status of button
+     */
+    @Override
+    public void setSelected( boolean selected )
     {
         this.selected = selected;
     }

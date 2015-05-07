@@ -28,6 +28,10 @@ public class GameController {
 
     }
     
+    public void setEndMoveEnabled(boolean enabled){
+        this.view.setbtnEndMOveEnabled(enabled);
+    }
+    
     public void updateBoard(int row, int column){
         view.updateBoard(row, column);
     }
@@ -38,5 +42,9 @@ public class GameController {
     
     public void makeMove(int row, int col){
         model.makeMove(row, col);
+    }
+    
+    public char getPlayerChar(){
+        return this.model.getPlayerChar();
     }
 }

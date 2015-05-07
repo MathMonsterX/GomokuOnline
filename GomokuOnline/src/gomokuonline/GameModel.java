@@ -95,7 +95,7 @@ public class GameModel implements Runnable{
         if(input[5].equalsIgnoreCase("false")){
             this.updateMatrix(row, col);
             controller.updateBoard(row, col);
-            
+            controller.setEndMoveEnabled(true);
         }
         else{
             controller.endGame(row, col);
@@ -232,5 +232,8 @@ public class GameModel implements Runnable{
         return this.size;
     }
     
+    public char getPlayerChar(){
+        return this.playerChar;
+    }
     
 }
