@@ -215,7 +215,7 @@ public class GomokuServerModel {
         String response = "NOT INVITED";
         for(int i=0; i< connections.size();i++){
             if(this.connections.get(i).uname.equals(player)){
-                response = "INVTIED";
+                response = "INVITED";
                 connections.get(i).sendMessage(message);
                 
             }
