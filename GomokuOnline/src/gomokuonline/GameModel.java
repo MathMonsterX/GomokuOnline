@@ -23,14 +23,21 @@ public class GameModel implements Runnable{
     private DataOutputStream dataOut;
     private ServerSocket hostSocket;
     private Socket sock;
+    private char[][] matrix;
+    private int size;
+    private char playerChar;
     
     /**
      * Default constructor. Assumes this GameModel will  host the connection,
      * using an arbitrary available port
      */
-    GameModel(){
+    GameModel(int size, char pChar){
         try {
+            this.size = size;
+            this.matrix = new char[size][size];
+            this.playerChar = pChar;
             hostSocket = new ServerSocket(0);
+           
         } catch (IOException ex) {
             Logger.getLogger(GameModel.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -47,8 +54,11 @@ public class GameModel implements Runnable{
      * @param ip network address of the Game's host
      * @param portNum port that the Host is receiving messages on
      */
-    GameModel(String ip, int portNum){
+    GameModel(String ip, int portNum, int size, char pChar){
         try {
+            this.size = size;
+            this.matrix = new char[size][size];
+            this.playerChar=pChar;
             sock = new Socket(ip, portNum);
             dataOut = new DataOutputStream(sock.getOutputStream());
             dataIn  = new BufferedReader(new InputStreamReader(sock.getInputStream()));
@@ -75,14 +85,39 @@ public class GameModel implements Runnable{
     }
     
     /**
-     * Processes a message received from another player
-     * @return 
+     * Processes a message received from another player 
      */
-    private String processMessage(){
-        //do something
-        return "";
+    public void processMessage(String message){
+        String[] input = message.split("\\s+");
+        int row = Integer.parseInt(input[1]);
+        int col = Integer.parseInt(input[3]);
+        
+        if(input[5].equalsIgnoreCase("false")){
+            this.updateMatrix(row, col);
+            controller.updateBoard(row, col);
+            
+        }
+        else{
+            controller.endGame(row, col);
+        }
+        
+    }
+    /**
+     * Sends a string over the socket
+     * @param message string to be sent over the network
+     */
+    public void sendMessage(String message){
+        try {
+            dataOut.writeBytes(message);
+        } catch (IOException ex) {
+            Logger.getLogger(GameModel.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Error in sending message over server");
+        }
     }
     
+    public void setController(GameController control){
+        this.controller = control;
+    }
     /**
      * Receives messages over the peer to peer connection
      */
@@ -101,7 +136,7 @@ public class GameModel implements Runnable{
                    message+= msgChar;
                }
                
-               this.processMessage();
+               this.processMessage(message);
                
             }
             this.sock.close();
@@ -149,5 +184,21 @@ public class GameModel implements Runnable{
             Logger.getLogger(GameModel.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
+    }
+    /**
+     * Updates the matrix and checks to see if this player won
+     * @param row the row
+     * @param column the column
+     */
+    private void updateMatrix(int row, int column){
+        this.matrix[row][column]=playerChar;
+        //need to search through and see if player won
+    }
+    
+    public void makeMove(int row, int column){
+        String message = "";
+        updateMatrix(row, column);
+        //sendMessage();
+        
     }
 }

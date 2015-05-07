@@ -77,15 +77,16 @@ public class OnlineMenuController implements Runnable{
      * This invites player to play a game
      * @param player the username of the player receiving an invitation
      */
-    public void invite(String player){
-        model.invite(player);
+    public void invite(String player, String size){
+        model.invite(player, size);
     }
     /**
      * This method updates the requests list in the view
      * @param player the username of the player that send an invitation
      */
-    public void updateRequests(String player){
-        view.updateRequests(player);
+    public void updateRequests(String player, String size){
+        
+        view.updateRequests(player, size);
         
     }
     /**

@@ -116,9 +116,10 @@ public class AdminModel implements Runnable{
                     
                     }
                 }else if(input[0].equals("INVITED_BY")){
-                    onlineMenuController.updateRequests(input[1]);
+                    onlineMenuController.updateRequests(input[1],input[2]);
                 }else if(input[0].equals("P2P")){
-                    this.openGame(input[1], input[2]);
+                    int size = Integer.parseInt(input[3]);
+                    this.openGame(input[1], input[2], size);
                 }
             }
         }catch(IOException ex){
@@ -276,16 +277,16 @@ public class AdminModel implements Runnable{
      * and calls a method in the controller to create the view. If gameController
      * is not null, a method in the controller is called to open the view
      */
-      public void openGame(String player){
+      public void openGame(String player, int size){
           if(gameController==null){
               try {
-                  gameModel = new GameModel();
+                  gameModel = new GameModel(size,'o');
                   gameController = new GameController();
-                  //gameModel.setController();
+                  gameModel.setController(gameController);
                   gameController.createView();
                   String hostIP = gameModel.getServerIP();
                   int portNum = gameModel.getServerPort();
-                  socketOut.write("CREATE_P2P "  + hostIP + " " + portNum + " " + player + " " ); //masks synchronisity issue by adding trailing space
+                  socketOut.write("CREATE_P2P "  + hostIP + " " + portNum + " " + player + " " + size); //masks synchronisity issue by adding trailing space
                   gameModel.listen();
                   
               } catch (IOException ex) {
@@ -300,13 +301,13 @@ public class AdminModel implements Runnable{
      * is not null, a method in the controller is called to open the view
      * @param ip the IP address this user will connect to
      */
-      public void openGame(String ip, String port){
+      public void openGame(String ip, String port, int size){
           int connectPort = Integer.parseInt(port);
           
           if(gameController==null){
-              gameModel = new GameModel(ip, connectPort);
+              gameModel = new GameModel(ip, connectPort, size, 'x');
               gameController = new GameController();
-              //gameModel.setController();
+              gameModel.setController(gameController);
               gameController.createView();
           }
       }
@@ -326,8 +327,8 @@ public class AdminModel implements Runnable{
      * Writes a request to invite a player to the server
      * @param player the username of the player being invited
      */
-    public void invite(String player){
-        String message = "INVITE " + player + " " + this.username;
+    public void invite(String player, String size){
+        String message = "INVITE " + player + " " + this.username +" " +size;
         try{
             socketOut.write(message);
             socketOut.flush();
@@ -341,7 +342,9 @@ public class AdminModel implements Runnable{
      * the gameModel, gameController, and gameView
      */
     public void accept(String player){
-        this.openGame(player);
+        String[] input = player.split("\\s+");
+        int size = Integer.parseInt(input[1]);
+        this.openGame(input[0], size);
     }
     
 

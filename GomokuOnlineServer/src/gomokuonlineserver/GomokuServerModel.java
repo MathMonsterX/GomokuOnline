@@ -210,8 +210,8 @@ public class GomokuServerModel {
      * @param invitedBy the username that sent the invitation
      * @return the invitation status represented as a String
      */
-    public String sendInvite(String player, String invitedBy){
-        String message = "INVITED_BY " + invitedBy;
+    public String sendInvite(String player, String invitedBy, String size){
+        String message = "INVITED_BY " + invitedBy + " " + size;
         String response = "NOT INVITED";
         for(int i=0; i< connections.size();i++){
             if(this.connections.get(i).uname.equals(player)){
@@ -227,8 +227,8 @@ public class GomokuServerModel {
      * @param username the user receiving the IP address
      * @return the sent status represented as a String
      */
-   public String sendIP(String ip, String portNum, String username){
-        String message = "P2P " + ip + " " + portNum;
+   public String sendIP(String ip, String portNum, String username, String size){
+        String message = "P2P " + ip + " " + portNum + " " + size;
         String response = "IP NOT SENT TO " + username.toUpperCase();
         for(int i=0; i< connections.size();i++){
             if(this.connections.get(i).uname.equals(username)){

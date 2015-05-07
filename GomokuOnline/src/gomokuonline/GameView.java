@@ -102,5 +102,11 @@ public void updateLblOpponentMove(String message){
 private void btnEndMove_Click(java.awt.event.ActionEvent evt){
     
 }
+public void updateBoard(int row, int column){
+    
+}
 
+public void endGame(int row, int column){
+    
+}
 }

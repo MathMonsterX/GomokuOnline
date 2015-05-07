@@ -25,4 +25,12 @@ public class GameController {
         view.setController(this);
         view.setFrame(gameViewFrame);
     }
+    
+    public void updateBoard(int row, int column){
+        view.updateBoard(row, column);
+    }
+    
+    public void endGame(int row, int column){
+        view.endGame(row, column);
+    }
 }

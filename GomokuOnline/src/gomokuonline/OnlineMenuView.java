@@ -56,6 +56,11 @@ public class OnlineMenuView extends javax.swing.JPanel {
         });
 
         cbBoard.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "30x30", "40x40", "50x50" }));
+        cbBoard.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbBoardActionPerformed(evt);
+            }
+        });
 
         requestsLabel.setText("Play Requests");
 
@@ -163,6 +168,10 @@ public class OnlineMenuView extends javax.swing.JPanel {
         btnBack_Click();
     }//GEN-LAST:event_btnBackActionPerformed
 
+    private void cbBoardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbBoardActionPerformed
+        
+    }//GEN-LAST:event_cbBoardActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAccept;
@@ -202,7 +211,10 @@ public void updateRequests(Player player, Gomoku board){
  * @param player the username of the player getting an invitation
  */
     private void btnSendRequest_Click(String player){
-        controller.invite(player);
+        String gameSize = (String)cbBoard.getSelectedItem();
+ 
+        controller.invite(player, gameSize);
+        
     }
     /**
      * When the user accepts an invitation, this method calls the accept method
@@ -244,9 +256,9 @@ public void updateRequests(Player player, Gomoku board){
      * This updates the list of players on the view
      * @param player the username of the player that sent an invitation
      */
-    public void updateRequests(String player){
+    public void updateRequests(String player, String size){
         String[] req=this.getModel();
-        req[req.length-1] = player;
+        req[req.length-1] = player + " " + size;
         listReq.setListData(req);
     }
     
@@ -254,7 +266,7 @@ public void updateRequests(Player player, Gomoku board){
         ListModel modelList = listReq.getModel();
         String[] req=new String[modelList.getSize()+1];
         for(int i=0; i < modelList.getSize(); i++){
-            req[i] =  (String)modelList.getElementAt(i);  
+            req[i] = (String)modelList.getElementAt(i);  
         }
         return req;
     }
