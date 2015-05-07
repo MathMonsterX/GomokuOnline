@@ -2,9 +2,12 @@
 
 package gomokuonline;
 
+import java.awt.Color;
 import java.awt.GridLayout;
+import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JRadioButton;
 
 /**
  *
@@ -32,15 +35,38 @@ public class GameView extends javax.swing.JPanel {
      * @param length length of the board
      */
      public void setupBoard(int width, int length){
+        ActionListener buttonListener = new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                gameButtonActionPerformed(evt);
+            }
+        };
+         
+         
         this.buttonGrid = new GameButton[width][length];
         gameBoardPanel.setLayout(new GridLayout(width, length));
         for(int y = 0; y<length; y++){
                 for(int x = 0; x <width; x++){
-                        this.buttonGrid[x][y] = new GameButton(x,y," ");
+                        GameButton button = new GameButton(x, y, " ");
+                        button.addActionListener(buttonListener);
+                        buttonGrid[x][y] = button;
                         gameBoardPanel.add(buttonGrid[x][y]);
 
                 }
         }
+        
+    }
+     
+    private void gameButtonActionPerformed(java.awt.event.ActionEvent evt){
+        for(GameButton[] buttons : buttonGrid){
+            for(GameButton button : buttons){
+                button.setSelected(false);
+                button.setBackground(new JButton().getBackground());
+            }
+            
+        }
+        GameButton button = (GameButton)evt.getSource();
+        button.setSelected(true);
+        button.setBackground(Color.blue);
         
     }
 
@@ -130,8 +156,18 @@ public class GameView extends javax.swing.JPanel {
         int row, col = 0;
         for(int i = 0; i < buttonGrid.length; i++){
             for(int j = 0; j < buttonGrid.length; j++){
-                row = i;
-                col = j;
+                GameButton button = buttonGrid[i][j];
+                if(button.isSelected()){
+                    
+                    this.controller.makeMove(i, j);
+                    button.setText(this.controller.getPlayerChar() + "");
+                    button.setEnabled(false);
+                    button.setSelected(false);
+                    button.setBackground(new JButton().getBackground());
+                    this.btnEndMove.setEnabled(false);
+                    
+                }
+                
                 
                 
                         
@@ -140,6 +176,9 @@ public class GameView extends javax.swing.JPanel {
         }
     }                                          
 
+    public void setbtnEndMOveEnabled(boolean enabled){
+        this.btnEndMove.setEnabled(enabled);
+    }
 
     // Variables declaration - do not modify                     
     private javax.swing.JButton btnEndMove;
