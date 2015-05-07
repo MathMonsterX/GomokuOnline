@@ -25,6 +25,15 @@ public class GameButton extends JButton {
         this.col = col;
         this.selected = 0;
     }
+    
+    public GameButton(int row, int col, String text){
+        super(text);
+        this.row = row;
+        this.col = col; 
+        this.selected = 0;
+        
+    
+    }
     public int getRow()
     {
         return row;
