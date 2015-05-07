@@ -45,6 +45,10 @@ public class MainMenuController {
         view.makeVisible();
     }
     
+    public void openChooseAIView(){
+        model.openChooseAI();
+    }
+    
    
  
 }

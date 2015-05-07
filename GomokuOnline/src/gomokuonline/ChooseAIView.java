@@ -1,12 +1,16 @@
 
 package gomokuonline;
 
+import javax.swing.JFrame;
+
 /**
  *
  * @author clarissapendleton
  */
 public class ChooseAIView extends javax.swing.JPanel {
-
+    private ChooseAIController controller;
+    private JFrame chooseAIFrame;
+    private String difficultyLevel;
     /**
      * Creates new form AIOptionsView
      */
@@ -50,6 +54,12 @@ public class ChooseAIView extends javax.swing.JPanel {
         org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, levelGroup, org.jdesktop.beansbinding.ObjectProperty.create(), rbEasy, org.jdesktop.beansbinding.BeanProperty.create("selected"));
         bindingGroup.addBinding(binding);
 
+        rbEasy.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbEasyActionPerformed(evt);
+            }
+        });
+
         rbIntermediate.setText("Intermediate");
 
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, levelGroup, org.jdesktop.beansbinding.ObjectProperty.create(), rbIntermediate, org.jdesktop.beansbinding.BeanProperty.create("selected"));
@@ -65,6 +75,12 @@ public class ChooseAIView extends javax.swing.JPanel {
 
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, levelGroup, org.jdesktop.beansbinding.ObjectProperty.create(), rbHard, org.jdesktop.beansbinding.BeanProperty.create("selected"));
         bindingGroup.addBinding(binding);
+
+        rbHard.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbHardActionPerformed(evt);
+            }
+        });
 
         cbBoard.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "30x30", "40x40", "50x50" }));
         cbBoard.addActionListener(new java.awt.event.ActionListener() {
@@ -133,16 +149,27 @@ public class ChooseAIView extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnPlayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlayActionPerformed
-        // TODO add your handling code here:
+        if(difficultyLevel.equals(null))
+            this.difficultyLevel="Easy";
+        String gameSize = (String)cbBoard.getSelectedItem();
+        controller.play(difficultyLevel, gameSize);
     }//GEN-LAST:event_btnPlayActionPerformed
 
     private void rbIntermediateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbIntermediateActionPerformed
-        // TODO add your handling code here:
+        this.difficultyLevel="Intermediate";
     }//GEN-LAST:event_rbIntermediateActionPerformed
 
     private void cbBoardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbBoardActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cbBoardActionPerformed
+
+    private void rbEasyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbEasyActionPerformed
+        this.difficultyLevel="Easy";
+    }//GEN-LAST:event_rbEasyActionPerformed
+
+    private void rbHardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbHardActionPerformed
+        this.difficultyLevel="Hard";
+    }//GEN-LAST:event_rbHardActionPerformed
 
    
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -157,16 +184,17 @@ public class ChooseAIView extends javax.swing.JPanel {
     private javax.swing.JLabel sizeLabel;
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
-
-    /**public void setController(ChooseAIController controller){
-        
+    
+    public void setController(ChooseAIController control){
+        this.controller=control;
     }
-    private void btnPlay_Click(java.awt.event.ActionEvent evt){
-        
+    
+    public void setFrame(JFrame frame){
+        this.chooseAIFrame = frame;
     }
-    private void btnBack_Click(java.awt.event.ActionEvent evt){
-        
-    }**/
+    public void makeVisible(){
+        chooseAIFrame.setVisible(true);
+    }
     
 }
 

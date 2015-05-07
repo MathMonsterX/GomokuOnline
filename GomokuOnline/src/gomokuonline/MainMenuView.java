@@ -41,6 +41,11 @@ public class MainMenuView extends javax.swing.JPanel {
         });
 
         btnOffline.setText("Play Offline");
+        btnOffline.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnOfflineActionPerformed(evt);
+            }
+        });
 
         btnStats.setText("View Stats");
 
@@ -85,6 +90,10 @@ public class MainMenuView extends javax.swing.JPanel {
     private void btnOnlineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOnlineActionPerformed
         btnOnline_Click();
     }//GEN-LAST:event_btnOnlineActionPerformed
+
+    private void btnOfflineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOfflineActionPerformed
+        btnOffline_Click();
+    }//GEN-LAST:event_btnOfflineActionPerformed
     /**
      * Sets this controller.
      * @param controller the MainMenuController object
@@ -115,8 +124,9 @@ public class MainMenuView extends javax.swing.JPanel {
     }
 
 
-    private void btnOffline_Click(java.awt.event.ActionEvent evt){
-    
+    private void btnOffline_Click(){
+        mainMenuFrame.setVisible(false);
+        controller.openChooseAIView();
     }
     private void btnStats_Click(java.awt.event.ActionEvent evt){
     

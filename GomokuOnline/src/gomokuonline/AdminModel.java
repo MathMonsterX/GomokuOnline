@@ -272,6 +272,15 @@ public class AdminModel implements Runnable{
         onlineMenuController.timedRequestList();
    
     }
+    public void openChooseAI() {
+        if(AIController==null){
+            AIController = new ChooseAIController();
+            AIController.setModel(this);
+            AIController.createView();
+        }
+        else
+            AIController.openView();
+    }
       /**
      * Creates an instance of gameController and gameModel if gameController is null,
      * and calls a method in the controller to create the view. If gameController
@@ -349,6 +358,25 @@ public class AdminModel implements Runnable{
         int size = Integer.parseInt(gameSize);
         this.openGame(input[0], size);
     }
+
+   public void playAI(String diffLevel, String gameSize){
+       int size=30;//default board size
+       switch(gameSize){
+           case "30x30":
+             size=30;
+           case "40x40":
+               size=40;
+           case "50x50":
+               size=50;
+        }
+       switch(diffLevel){
+           case "Easy":
+               EasyAI easy = new EasyAI(size);
+               
+       }
+       
+       
+   }
     
 
  

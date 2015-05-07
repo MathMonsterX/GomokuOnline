@@ -212,7 +212,6 @@ public void updateRequests(Player player, Gomoku board){
  */
     private void btnSendRequest_Click(String player){
         String gameSize = (String)cbBoard.getSelectedItem();
- 
         controller.invite(player, gameSize);
         
     }

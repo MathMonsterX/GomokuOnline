@@ -111,6 +111,9 @@
       <BindingProperties>
         <BindingProperty name="selected" source="levelGroup" target="rbEasy" targetPath="selected" updateStrategy="0" immediately="false"/>
       </BindingProperties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rbEasyActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JRadioButton" name="rbIntermediate">
       <Properties>
@@ -130,6 +133,9 @@
       <BindingProperties>
         <BindingProperty name="selected" source="levelGroup" target="rbHard" targetPath="selected" updateStrategy="0" immediately="false"/>
       </BindingProperties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rbHardActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JComboBox" name="cbBoard">
       <Properties>
