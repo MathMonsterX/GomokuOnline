@@ -189,16 +189,19 @@ public class GameModel implements Runnable{
      * Updates the matrix and checks to see if this player won
      * @param row the row
      * @param column the column
+     * @return the String true if the player won and false otherwise
      */
-    private void updateMatrix(int row, int column){
+    private String updateMatrix(int row, int column){
+        String condition = "false";
         this.matrix[row][column]=playerChar;
         //need to search through and see if player won
+        return condition;
     }
     
     public void makeMove(int row, int column){
-        String message = "";
-        updateMatrix(row, column);
-        //sendMessage();
+        String condition = updateMatrix(row, column);
+        String message = "ROW " + row + " COLUMN " + column + " GAMEOVER "+ condition;
+        this.sendMessage(message);
         
     }
 }

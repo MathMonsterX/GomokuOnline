@@ -33,4 +33,8 @@ public class GameController {
     public void endGame(int row, int column){
         view.endGame(row, column);
     }
+    
+    public void makeMove(int row, int col){
+        model.makeMove(row, col);
+    }
 }
