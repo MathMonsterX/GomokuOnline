@@ -162,6 +162,13 @@ public void updateLblPlayerMove(String message){
 public void updateLblOpponentMove(String message){
     
 }
+public void updateBoard(int row, int column){
+        
+    }
+    
+    public void endGame(int row, int column){
+        
+    }
 }
 
 
