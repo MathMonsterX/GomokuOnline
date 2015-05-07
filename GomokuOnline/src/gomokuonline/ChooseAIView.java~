@@ -26,6 +26,7 @@ public class ChooseAIView extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
         diffucultyLabel = new javax.swing.JLabel();
         sizeLabel = new javax.swing.JLabel();
@@ -49,6 +50,8 @@ public class ChooseAIView extends javax.swing.JPanel {
 
         rbEasy.setText("Easy");
 
+        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, new javax.swing.ButtonGroup(), org.jdesktop.beansbinding.ObjectProperty.create(), rbEasy, org.jdesktop.beansbinding.BeanProperty.create("selected"));
+        bindingGroup.addBinding(binding);
 
         rbEasy.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -58,6 +61,8 @@ public class ChooseAIView extends javax.swing.JPanel {
 
         rbIntermediate.setText("Intermediate");
 
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, new javax.swing.ButtonGroup(), org.jdesktop.beansbinding.ObjectProperty.create(), rbIntermediate, org.jdesktop.beansbinding.BeanProperty.create("selected"));
+        bindingGroup.addBinding(binding);
 
         rbIntermediate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -67,6 +72,8 @@ public class ChooseAIView extends javax.swing.JPanel {
 
         rbHard.setText("Difficult");
 
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, new javax.swing.ButtonGroup(), org.jdesktop.beansbinding.ObjectProperty.create(), rbHard, org.jdesktop.beansbinding.BeanProperty.create("selected"));
+        bindingGroup.addBinding(binding);
 
         rbHard.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -137,9 +144,12 @@ public class ChooseAIView extends javax.swing.JPanel {
                         .addContainerGap())))
         );
 
+        bindingGroup.bind();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnPlayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlayActionPerformed
+        if(difficultyLevel.equals(null))
+            this.difficultyLevel="Easy";
         String gameSize = (String)cbBoard.getSelectedItem();
         controller.play(difficultyLevel, gameSize);
     }//GEN-LAST:event_btnPlayActionPerformed

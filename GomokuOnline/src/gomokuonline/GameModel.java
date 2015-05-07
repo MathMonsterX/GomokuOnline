@@ -36,6 +36,9 @@ public class GameModel implements Runnable{
     GameModel(int size){
         this.size = size;
         this.matrix = new char[size][size];
+        controller = new GameController();
+        controller.setModel(this);
+        controller.createView();
     }
     /**
      * Default constructor. Assumes this GameModel will  host the connection,
@@ -261,7 +264,7 @@ public class GameModel implements Runnable{
             if(pChar=='x')
                 controller.updateBoard(row, col);
             else
-                easyAI.generateMove();
+                easyAI.generateMove(matrix);
         }
     }
     /**

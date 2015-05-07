@@ -23,10 +23,19 @@ public class EasyAI {
         
     }
     
-    public void generateMove(){
+    public void generateMove(char[][] matrix){
         Random rand = new Random();
+        boolean condition = true;
         int row = rand.nextInt(gameSize);
         int col = rand.nextInt(gameSize);
+        while(condition){
+            if(matrix[row][col]=='x'|| matrix[row][col]=='o'){
+                row = rand.nextInt(gameSize);
+                col = rand.nextInt(gameSize);
+            }
+            else
+                condition=false;
+        }
         model.AIGamePlay(row, col, AIChar);
       
     }
