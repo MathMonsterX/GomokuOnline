@@ -215,10 +215,8 @@ public class GameModel implements Runnable{
                              && matrix[i-3][j-3]==playerChar&&matrix[i-4][j-4]==playerChar)
                          condition="true";
                          
-                 }
-                     
-             }
-            
+                 }       
+             }  
         }
         return condition;
     }
@@ -228,6 +226,10 @@ public class GameModel implements Runnable{
         String message = "ROW " + row + " COLUMN " + column + " GAMEOVER "+ condition;
         this.sendMessage(message);
         
+    }
+    
+    public int getSize(){
+        return this.size;
     }
     
     

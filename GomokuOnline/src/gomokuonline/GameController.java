@@ -11,8 +11,8 @@ public class GameController {
     private GameView view;
     private JFrame gameViewFrame;
     
-    public void setModel(){
-        
+    public void setModel(GameModel model){
+        this.model=model;
     }
     
     public void createView(){
@@ -20,10 +20,12 @@ public class GameController {
         gameViewFrame = new JFrame();
         //gameViewFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         gameViewFrame.setContentPane(view);
-        gameViewFrame.pack();
         gameViewFrame.setVisible(true);
         view.setController(this);
         view.setFrame(gameViewFrame);
+        view.setupBoard(model.getSize(), model.getSize());
+        gameViewFrame.pack();
+
     }
     
     public void updateBoard(int row, int column){

@@ -283,10 +283,11 @@ public class AdminModel implements Runnable{
                   gameModel = new GameModel(size,'o');
                   gameController = new GameController();
                   gameModel.setController(gameController);
+                  gameController.setModel(gameModel);
                   gameController.createView();
                   String hostIP = gameModel.getServerIP();
                   int portNum = gameModel.getServerPort();
-                  socketOut.write("CREATE_P2P "  + hostIP + " " + portNum + " " + player + " " + size); //masks synchronisity issue by adding trailing space
+                  socketOut.write("CREATE_P2P "  + hostIP + " " + portNum + " " + player + " " + size+" "); //masks synchronisity issue by adding trailing space
                   gameModel.listen();
                   
               } catch (IOException ex) {
@@ -308,6 +309,7 @@ public class AdminModel implements Runnable{
               gameModel = new GameModel(ip, connectPort, size, 'x');
               gameController = new GameController();
               gameModel.setController(gameController);
+              gameController.setModel(gameModel);
               gameController.createView();
           }
       }
@@ -328,7 +330,7 @@ public class AdminModel implements Runnable{
      * @param player the username of the player being invited
      */
     public void invite(String player, String size){
-        String message = "INVITE " + player + " " + this.username +" " +size;
+        String message = "INVITE " + player + " " + this.username +" " +size+ " ";
         try{
             socketOut.write(message);
             socketOut.flush();
@@ -343,7 +345,8 @@ public class AdminModel implements Runnable{
      */
     public void accept(String player){
         String[] input = player.split("\\s+");
-        int size = Integer.parseInt(input[1]);
+        String gameSize = input[1].charAt(0) + ""+input[1].charAt(1);
+        int size = Integer.parseInt(gameSize);
         this.openGame(input[0], size);
     }
     

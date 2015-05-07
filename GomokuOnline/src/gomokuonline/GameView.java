@@ -41,6 +41,7 @@ public class GameView extends javax.swing.JPanel {
 
                 }
         }
+        
     }
 
     /**
@@ -164,11 +165,12 @@ public void updateLblOpponentMove(String message){
 }
 public void updateBoard(int row, int column){
         
-    }
+}
     
-    public void endGame(int row, int column){
+public void endGame(int row, int column){
         
-    }
+}
+
 }
 
 
