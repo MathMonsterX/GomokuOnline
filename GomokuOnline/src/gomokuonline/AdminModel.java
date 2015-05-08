@@ -374,6 +374,7 @@ public class AdminModel implements Runnable{
        switch(diffLevel){
            case "Easy":
                EasyAI easy = new EasyAI(size);
+               easy.createModel();
                
        }
        

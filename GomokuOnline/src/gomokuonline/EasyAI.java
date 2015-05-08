@@ -19,11 +19,7 @@ public class EasyAI {
     
     public EasyAI(int size){
         gameSize = size;
-        model = new GameModel(size);
-        model.setEasyAI(this);
-        controller = new GameController();
-        controller.setModel(model);
-        controller.createView();
+        
         
     }
     
@@ -42,6 +38,14 @@ public class EasyAI {
         }
         model.AIGamePlay(row, col, AIChar);
       
+    }
+
+    public void createModel() {
+        model = new GameModel(gameSize);
+        model.setEasyAI(this);
+        controller = new GameController();
+        controller.setModel(model);
+        controller.createView();
     }
     
 }
