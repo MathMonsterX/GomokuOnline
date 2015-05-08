@@ -14,12 +14,16 @@ import java.util.Random;
 public class EasyAI {
     private int gameSize;
     private GameModel model;
+    private GameController controller;
     private final char AIChar = 'x';
     
     public EasyAI(int size){
         gameSize = size;
         model = new GameModel(size);
         model.setEasyAI(this);
+        controller = new GameController();
+        controller.setModel(model);
+        controller.createView();
         
     }
     
