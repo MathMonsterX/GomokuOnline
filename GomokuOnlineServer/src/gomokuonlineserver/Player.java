@@ -13,8 +13,8 @@ import java.util.Date;
  * @author Sheyla
  */
 public class Player {
-    private String userName;
-    private String password;
+    private final String userName;
+    private final String password;
     private int playerState;
     private Stats stats;
 
@@ -32,12 +32,17 @@ public class Player {
     {
         return playerState;
     }
-    public void addGameStats( int time, int gameResult, Player opponent, Date dateTimePlayed )
+    public void addGameStats( int time, int gameResult, Player opponent, Date datePlayed )
     {
-        stats.addGameStats( time, gameResult, opponent, dateTimePlayed );
+        stats.addGameStats( time, gameResult, opponent, datePlayed );
     }
     
-    
+    @Override
+    public String toString()
+    {
+        return userName + ":" + password + ":" 
+                + stats.toString();
+    }
     
     private class Stats {
         private ArrayList<Game> games;
@@ -46,11 +51,14 @@ public class Player {
         {
             games = new ArrayList();
         }
-        public void addGameStats( int time, int gameResult, Player opponent, Date dateTimePlayed )
+        public void addGameStats( int time, int gameResult, Player opponent, Date datePlayed )
         {
-            games.add( new Game( time, gameResult, opponent, dateTimePlayed ) );
+            games.add( new Game( time, gameResult, opponent, datePlayed ) );
         }
-        
+        public int numGames()
+        {
+            return games.size();
+        }
         public ArrayList getGames()
         {
             return games;
@@ -68,7 +76,7 @@ public class Player {
         public Date getGameDate( int i )
         {
             Game g = getGameAt(i);
-            return g.getDateTimePlayed();
+            return g.getDatePlayed();
         }
         
         public long getAvgGameTime()
@@ -111,19 +119,32 @@ public class Player {
             return totTied;
         }
         
+        @Override
+        public String toString()
+        {
+            StringBuilder str = new StringBuilder();
+            str.append("[");
+            for( Game g:games )
+            {
+                str.append( g.toString() );
+            }
+            str.append("]");
+            return str.toString();
+        }
+        
         
         private class Game{
             long time;
             int gameResult;
             Player opponent;
-            Date dateTimePlayed;
+            Date datePlayed;
             
-            public Game( int time, int gameResult, Player opponent, Date dateTimePlayed )
+            public Game( int time, int gameResult, Player opponent, Date datePlayed )
             {
                 this.time = time;
                 this.gameResult = gameResult;
                 this.opponent = opponent;
-                this.dateTimePlayed = dateTimePlayed;
+                this.datePlayed = datePlayed;
             }
             
             public long getTime()
@@ -138,9 +159,15 @@ public class Player {
             {
                 return opponent;
             }
-            public Date getDateTimePlayed()
+            public Date getDatePlayed()
             {
-                return dateTimePlayed;
+                return datePlayed;
+            }
+            
+            @Override
+            public String toString()
+            {
+                return datePlayed + " " + time + " " + opponent + " " + gameResult;
             }
         }
         
