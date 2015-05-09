@@ -59,7 +59,8 @@ public class Connection extends Thread implements Comparable<Connection>{
      */
     public void sendMessage(String message){
         try {
-            dataOut.writeBytes(message);
+            dataOut.writeBytes(message + "\n");
+            dataOut.flush();
         } catch (IOException ex) {
             Logger.getLogger(Connection.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println("Error in sending message over server");
@@ -72,14 +73,9 @@ public class Connection extends Thread implements Comparable<Connection>{
      */
     public void run(){
         try {
-            int input;
-            while((input = dataIn.read()) != -1 ){
-                char msgChar = (char)input;
-                String message = msgChar + "";
-               while(dataIn.ready()){
-                   msgChar = (char)dataIn.read();
-                   message+= msgChar;
-               }
+            
+            String message;
+            while((message = dataIn.readLine()) != null){
                
                String response = this.serverController.processMessage(message);
                String[] splitMessage = message.split("\\s+");
