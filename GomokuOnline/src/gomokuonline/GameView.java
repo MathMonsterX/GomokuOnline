@@ -157,13 +157,9 @@ public class GameView extends javax.swing.JPanel {
         for(int i = 0; i < buttonGrid.length; i++){
             for(int j = 0; j < buttonGrid.length; j++){
                 GameButton button = buttonGrid[i][j];
-                if(button.isSelected()){
-                    
+                if(button.isSelected()){ 
                     this.controller.makeMove(i, j);
-                    button.setText(this.controller.getPlayerChar() + "");
-                    button.setEnabled(false);
-                    button.setSelected(false);
-                    button.setBackground(new JButton().getBackground());
+                    this.updateBoard(i, j, this.controller.getPlayerChar());
                     this.btnEndMove.setEnabled(false);
                     
                 }
@@ -198,7 +194,13 @@ public void updateLblPlayerMove(String message){
 public void updateLblOpponentMove(String message){
     
 }
-public void updateBoard(int row, int column){
+public void updateBoard(int row, int column, char playerChar){
+     GameButton button = buttonGrid[row][column];
+     button.setText(playerChar + "");
+     button.setEnabled(false);
+     button.setSelected(false);
+     button.setBackground(new JButton().getBackground());
+    
         
 }
     

@@ -29,8 +29,8 @@ public class GameController {
 
     }
     
-    public void updateBoard(int row, int column){
-        view.updateBoard(row, column);
+    public void updateBoard(int row, int column, char playerChar){
+        view.updateBoard(row, column, playerChar);
     }
     
     public void endGame(int row, int column, String status){

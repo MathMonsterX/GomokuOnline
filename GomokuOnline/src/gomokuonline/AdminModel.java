@@ -82,14 +82,8 @@ public class AdminModel implements Runnable{
     @Override
     public void run() {
         try{
-            while(true){
-                String message = "";
-                char msgChar = (char)socketIn.read();
-                message += msgChar;
-                while(socketIn.ready()){
-                    msgChar = (char)socketIn.read();
-                    message += msgChar;
-                }
+            String message;
+            while((message = socketIn.readLine()) != null){
                 String[] input = message.split("\\s+");
                 if(input[0].equals("AUTHENTICATION")){
                     if(input[1].equals("success")){
@@ -173,7 +167,7 @@ public class AdminModel implements Runnable{
         String message = "LOGIN "  + user + " " + hashPassword(pass,user);
         try{
             this.username=user;
-            socketOut.write(message);
+            socketOut.write(message + "\n");
             socketOut.flush();
         }catch(IOException ex){
             Logger.getLogger(AdminModel.class.getName()).log(Level.SEVERE, null, ex);
@@ -189,7 +183,7 @@ public class AdminModel implements Runnable{
         String message = "CREATE_ACCOUNT " + user + " " + hashPassword(pass, user);
         try{
             this.username = user;
-            socketOut.write(message);
+            socketOut.write(message + "\n");
             socketOut.flush();
         }catch(IOException ex){
             Logger.getLogger(AdminModel.class.getName()).log(Level.SEVERE, null, ex);
@@ -203,7 +197,7 @@ public class AdminModel implements Runnable{
     public void getLoggedInList(){
         String message = "GET_USERS";
         try{
-            socketOut.write(message);
+            socketOut.write(message + "\n");
             socketOut.flush();
         }catch (IOException ex){
             Logger.getLogger(AdminModel.class.getName()).log(Level.SEVERE, null, ex);
@@ -289,7 +283,7 @@ public class AdminModel implements Runnable{
       public void openGame(String player, int size){
           if(gameController==null){
               try {
-                  gameModel = new GameModel(size,'o');
+                  gameModel = new GameModel(size,'O');
                   gameController = new GameController();
                   gameModel.setController(gameController);
                   gameController.setModel(gameModel);
@@ -297,7 +291,7 @@ public class AdminModel implements Runnable{
                   gameController.setEndMoveEnabled(true);
                   String hostIP = gameModel.getServerIP();
                   int portNum = gameModel.getServerPort();
-                  socketOut.write("CREATE_P2P "  + hostIP + " " + portNum + " " + player + " " + size+" "); //masks synchronisity issue by adding trailing space
+                  socketOut.write("CREATE_P2P "  + hostIP + " " + portNum + " " + player + " " + size+"\n"); 
                   gameModel.listen();
                   
               } catch (IOException ex) {
@@ -316,12 +310,13 @@ public class AdminModel implements Runnable{
           int connectPort = Integer.parseInt(port);
           
           if(gameController==null){
-              gameModel = new GameModel(ip, connectPort, size, 'x');
+              gameModel = new GameModel(ip, connectPort, size, 'X');
               gameController = new GameController();
               gameModel.setController(gameController);
               gameController.setModel(gameModel);
               gameController.createView();
               gameController.setEndMoveEnabled(false);
+              gameModel.listen();
           }
       }
       /**
@@ -343,7 +338,7 @@ public class AdminModel implements Runnable{
     public void invite(String player, String size){
         String message = "INVITE " + player + " " + this.username +" " +size+ " ";
         try{
-            socketOut.write(message);
+            socketOut.write(message + "\n");
             socketOut.flush();
         }catch (IOException ex){
             Logger.getLogger(AdminModel.class.getName()).log(Level.SEVERE, null, ex);

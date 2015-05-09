@@ -104,7 +104,10 @@ public class GameModel implements Runnable{
         
         if(input[5].equalsIgnoreCase("false")){
             this.updateMatrix(row, col);
-            controller.updateBoard(row, col);
+            if(this.playerChar == 'X')
+                controller.updateBoard(row, col, 'O');
+            else
+                controller.updateBoard(row, col, 'X');
             controller.setEndMoveEnabled(true);
         }
         else{
@@ -118,7 +121,9 @@ public class GameModel implements Runnable{
      */
     public void sendMessage(String message){
         try {
-            dataOut.writeBytes(message);
+            dataOut.writeBytes(message + "\n");
+            dataOut.flush();
+            System.out.println("Just sent " + message);
         } catch (IOException ex) {
             Logger.getLogger(GameModel.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println("Error in sending message over server");
@@ -132,23 +137,20 @@ public class GameModel implements Runnable{
      * Receives messages over the peer to peer connection
      */
     private void receiveMessage(){
-        if(hostSocket != null){
+        if(hostSocket != null){//facilitates the creation of the connection
             this.hostGame();
         }
         
         try {
-            int input;
-            while((input = dataIn.read()) != -1 ){
-                char msgChar = (char)input;
-                String message = msgChar + "";
-               while(dataIn.ready()){
-                   msgChar = (char)dataIn.read();
-                   message+= msgChar;
-               }
-               
-               this.processMessage(message);
-               
+            
+            String message;
+           
+            while((message = dataIn.readLine()) != null){
+                System.out.println("Just received " + message);
+                this.processMessage(message);
+                
             }
+            
             this.sock.close();
             
                 
@@ -252,14 +254,14 @@ public class GameModel implements Runnable{
     public void AIGamePlay(int row, int col, char pChar){
         String condition = updateMatrixAI(row, col, pChar);
         if(condition.equals("true")){
-            if(pChar=='x')
+            if(pChar=='X')
                 controller.endGame(row, col, "Loser");
             else
                 controller.endGame(row, col, "Winner");
         }
         else{
-            if(pChar=='x')
-                controller.updateBoard(row, col);
+            if(pChar=='X')
+                controller.updateBoard(row, col, 'X');
             else
                 easyAI.generateMove(matrix);
         }
