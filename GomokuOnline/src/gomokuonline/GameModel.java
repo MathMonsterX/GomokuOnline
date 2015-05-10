@@ -206,12 +206,13 @@ public class GameModel implements Runnable{
     private String updateMatrix(int row, int column){
         String condition = "false";
         this.matrix[row][column]=playerChar;
-       
+        System.out.println("Matrix: " +"n = "+this.matrix.length + " m = " + this.matrix[0].length);
         //search through to see if player won
          for(int i=0; i<size; i++){
              for(int j=0; j<size; j++){
+                 System.out.println("i = "+i + "j= "+j);
                  if(matrix[i][j]==playerChar){
-                     if(i+4<=size && matrix[i][j+1]==playerChar && matrix[i][j+2]==playerChar
+                     if(j+4<=size && matrix[i][j+1]==playerChar && matrix[i][j+2]==playerChar //changed i+4<=size to j+4<=size
                              && matrix[i][j+3]==playerChar&&matrix[i][j+4]==playerChar)
                          condition="true";
                      
@@ -219,7 +220,7 @@ public class GameModel implements Runnable{
                              && matrix[i+3][j+3]==playerChar&&matrix[i+4][j+4]==playerChar)
                          condition="true";
                      
-                     if(j+4<=size && matrix[i+1][j]==playerChar && matrix[i+2][j]==playerChar
+                     if(i+4<=size && matrix[i+1][j]==playerChar && matrix[i+2][j]==playerChar //changed j+4<=size to i+4<=size
                              && matrix[i+3][j]==playerChar&&matrix[i+4][j]==playerChar)
                          condition="true";
                      
