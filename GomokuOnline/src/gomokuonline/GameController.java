@@ -42,7 +42,7 @@ public class GameController {
     }
     
     public void makeMoveToAI(int row, int col){
-        model.AIGamePlay(row, col, 'o');
+        model.AIGamePlay(row, col, 'O');
     }
     public void setEndMoveEnabled(boolean enabled){
         this.view.setbtnEndMOveEnabled(enabled);

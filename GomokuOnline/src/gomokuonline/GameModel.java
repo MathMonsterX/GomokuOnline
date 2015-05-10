@@ -103,11 +103,15 @@ public class GameModel implements Runnable{
         int col = Integer.parseInt(input[3]);
         
         if(input[5].equalsIgnoreCase("false")){
-            this.updateMatrix(row, col);
-            if(this.playerChar == 'X')
+            
+            if(this.playerChar == 'X'){
                 controller.updateBoard(row, col, 'O');
-            else
+                this.updateMatrix(row, col, 'O');
+            }
+            else{
                 controller.updateBoard(row, col, 'X');
+                this.updateMatrix(row, col, 'X');
+            }
             controller.setEndMoveEnabled(true);
         }
         else{
@@ -203,9 +207,9 @@ public class GameModel implements Runnable{
      * @param column the column
      * @return the String true if the player won and false otherwise
      */
-    private String updateMatrix(int row, int column){
+    private String updateMatrix(int row, int column, char moveChar){
         String condition = "false";
-        this.matrix[row][column]=playerChar;
+        this.matrix[row][column]= moveChar;
         System.out.println("Matrix: " +"n = "+this.matrix.length + " m = " + this.matrix[0].length);
         //search through to see if player won
          for(int i=0; i<size; i++){
@@ -235,7 +239,7 @@ public class GameModel implements Runnable{
     }
     
     public void makeMove(int row, int column){
-        String condition = updateMatrix(row, column);
+        String condition = updateMatrix(row, column, this.playerChar);
         String message = "ROW " + row + " COLUMN " + column + " GAMEOVER "+ condition;
         this.sendMessage(message);
         
