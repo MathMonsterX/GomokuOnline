@@ -61,6 +61,8 @@ public class GameView extends javax.swing.JPanel {
             for(GameButton button : buttons){
                 button.setSelected(false);
                 button.setBackground(new JButton().getBackground());
+                button.setOpaque(false);
+                button.setBorderPainted(true);
             }
             
         }
@@ -68,6 +70,7 @@ public class GameView extends javax.swing.JPanel {
         button.setSelected(true);
         button.setBackground(Color.blue);
         button.setOpaque(true);
+        button.setBorderPainted(false);
         
     }
 
