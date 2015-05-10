@@ -67,6 +67,7 @@ public class GameView extends javax.swing.JPanel {
         GameButton button = (GameButton)evt.getSource();
         button.setSelected(true);
         button.setBackground(Color.blue);
+        button.setOpaque(true);
         
     }
 
