@@ -24,6 +24,9 @@ public class Player {
         this.password = password;
         this.stats = new Stats();
     }
+    public String getUserName() {
+        return userName;
+    }
     public void setPlayerState( int playerState )
     {
         this.playerState = playerState;
@@ -43,6 +46,8 @@ public class Player {
         return userName + ":" + password + ":" 
                 + stats.toString();
     }
+
+    
     
     private class Stats {
         private ArrayList<Game> games;
@@ -167,7 +172,7 @@ public class Player {
             @Override
             public String toString()
             {
-                return datePlayed + " " + time + " " + opponent + " " + gameResult;
+                return datePlayed + " " + time + " " + opponent.getUserName() + " " + gameResult;
             }
         }
         
