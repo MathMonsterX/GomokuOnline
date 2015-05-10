@@ -120,11 +120,11 @@ public class GomokuServerController implements Runnable{
     /**
      * Adds message to the model
      * @param newMessage message to be added
-     * @param localPort port over which the message was received/sent
+     * @param username the name of the user for which the message was received
      */
-    public void addMessage(String newMessage, int localPort){
+    public void addMessage(String newMessage, String username){
         
-        this.model.addMessage("PORT: " + localPort + " " + newMessage);
+        this.model.addMessage("USER: " + username + " " + newMessage);
         this.updateMessages();
        
 }
