@@ -4,7 +4,7 @@ package gomokuonline;
 import javax.swing.JFrame;
 
 /**
- *
+     *
  * @author clarissapendleton
  */
 public class ChooseAIView extends javax.swing.JPanel {

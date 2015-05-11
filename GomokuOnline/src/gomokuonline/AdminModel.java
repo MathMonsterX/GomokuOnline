@@ -358,16 +358,18 @@ public class AdminModel implements Runnable{
 
    public void playAI(String diffLevel, String gameSize){
        int size=30;//default board size
-       switch(gameSize){
-           case "30x30":
-             size=30;
-           case "40x40":
-               size=40;
-           case "50x50":
-               size=50;
-        }
-       switch(diffLevel){
-           case "Easy":
+       if(gameSize.equals("30x30")){
+          size=30; 
+       }
+       else if(gameSize.equals("30x30")){
+           size=40;
+       }
+       else if(gameSize.equals("30x30")){
+           size=50;
+       }
+       else
+           size=30;
+       if(diffLevel.equals("Easy")){
                EasyAI easy = new EasyAI(size);
                easy.createModel();
                

@@ -3,13 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Developer/GitHub/GomokuOnline/GomokuOnline/src/gomokuonline/AdminModel.java</file>
-            <file>file:/C:/Developer/GitHub/GomokuOnline/GomokuOnline/src/gomokuonline/GameView.java</file>
-            <file>file:/C:/Developer/GitHub/GomokuOnline/GomokuOnline/src/gomokuonline/GameButton.java</file>
-            <file>file:/C:/Developer/GitHub/GomokuOnline/GomokuOnline/src/gomokuonline/GameController.java</file>
-            <file>file:/C:/Developer/GitHub/GomokuOnline/GomokuOnline/src/gomokuonline/EasyAI.java</file>
-            <file>file:/C:/Developer/GitHub/GomokuOnline/GomokuOnline/src/gomokuonline/GameModel.java</file>
-            <file>file:/C:/Developer/GitHub/GomokuOnline/GomokuOnline/src/gomokuonline/ChooseAIController.java</file>
+            <file>file:/Users/clarissapendleton/Documents/GomokuOnline/GomokuOnline/src/gomokuonline/ChooseAIView.java</file>
+            <file>file:/Users/clarissapendleton/Documents/GomokuOnline/GomokuOnline/src/gomokuonline/EasyAI.java</file>
+            <file>file:/Users/clarissapendleton/Documents/GomokuOnline/GomokuOnline/src/gomokuonline/GameController.java</file>
+            <file>file:/Users/clarissapendleton/Documents/GomokuOnline/GomokuOnline/src/gomokuonline/ChooseAIController.java</file>
+            <file>file:/Users/clarissapendleton/Documents/GomokuOnline/GomokuOnline/src/gomokuonline/AdminModel.java</file>
+            <file>file:/Users/clarissapendleton/Documents/GomokuOnline/GomokuOnline/src/gomokuonline/GameModel.java</file>
+            <file>file:/Users/clarissapendleton/Documents/GomokuOnline/GomokuOnline/src/gomokuonline/GameView.java</file>
         </group>
     </open-files>
 </project-private>

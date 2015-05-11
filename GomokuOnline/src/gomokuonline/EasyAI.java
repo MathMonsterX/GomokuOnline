@@ -46,6 +46,7 @@ public class EasyAI {
         controller = new GameController();
         controller.setModel(model);
         controller.createView();
+
     }
     
 }
