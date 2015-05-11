@@ -15,7 +15,7 @@ public class EasyAI {
     private int gameSize;
     private GameModel model;
     private GameController controller;
-    private final char AIChar = 'x';
+    private final char AIChar = 'X';
     
     public EasyAI(int size){
         gameSize = size;
@@ -29,7 +29,7 @@ public class EasyAI {
         int row = rand.nextInt(gameSize);
         int col = rand.nextInt(gameSize);
         while(condition){
-            if(matrix[row][col]=='x'|| matrix[row][col]=='o'){
+            if(matrix[row][col]=='X'|| matrix[row][col]=='O'){
                 row = rand.nextInt(gameSize);
                 col = rand.nextInt(gameSize);
             }
