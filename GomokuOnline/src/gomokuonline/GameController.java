@@ -38,8 +38,9 @@ public class GameController {
     }
     
     public void makeMove(int row, int col){
-        if(this.model.isAIGame())
+        if(this.model.isAIGame()){
             model.AIGamePlay(row, col, 'O');
+        }
         else
             model.makeMove(row, col);
     }
@@ -52,6 +53,10 @@ public class GameController {
     }
      public char getPlayerChar(){
         return this.model.getPlayerChar();
+    }
+
+    public void setPlayerChar(char x) {
+        this.model.setPlayerChar(x);    
     }
 }
 

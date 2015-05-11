@@ -166,9 +166,10 @@ public class GameView extends javax.swing.JPanel {
             for(int j = 0; j < buttonGrid.length; j++){
                 GameButton button = buttonGrid[i][j];
                 if(button.isSelected()){ 
-                    this.controller.makeMove(i, j);
-                    this.updateBoard(i, j, this.controller.getPlayerChar());
                     this.btnEndMove.setEnabled(false);
+                    this.controller.makeMove(i, j);
+                    this.controller.setPlayerChar('O');
+                    this.updateBoard(i, j, this.controller.getPlayerChar());
                     
                 }
    

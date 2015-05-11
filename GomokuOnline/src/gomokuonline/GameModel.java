@@ -259,6 +259,10 @@ public class GameModel implements Runnable{
         return this.playerChar;
     }
     
+    public void setPlayerChar(char x){
+        this.playerChar=x;
+    }
+    
         public void setEasyAI(EasyAI ai){
         this.easyAI = ai;
     }
@@ -271,8 +275,10 @@ public class GameModel implements Runnable{
                 controller.endGame(row, col, "Winner");
         }
         else{
-            if(pChar=='X')
+            if(pChar=='X'){
+                controller.setEndMoveEnabled(true);
                 controller.updateBoard(row, col, 'X');
+            }
             else
                 easyAI.generateMove(matrix);
         }
