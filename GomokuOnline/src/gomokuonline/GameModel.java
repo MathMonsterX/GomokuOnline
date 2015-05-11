@@ -214,7 +214,7 @@ public class GameModel implements Runnable{
         //search through to see if player won
          for(int i=0; i<size; i++){
              for(int j=0; j<size; j++){
-                 System.out.println("i = "+i + "j= "+j);
+                 
                  if(matrix[i][j]==playerChar){
                      if(j+4<=size && matrix[i][j+1]==playerChar && matrix[i][j+2]==playerChar //changed i+4<=size to j+4<=size
                              && matrix[i][j+3]==playerChar&&matrix[i][j+4]==playerChar)
