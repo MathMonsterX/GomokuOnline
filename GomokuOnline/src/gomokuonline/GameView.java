@@ -2,6 +2,7 @@
 
 package gomokuonline;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
@@ -53,6 +54,9 @@ public class GameView extends javax.swing.JPanel {
 
                 }
         }
+        this.setLayout(new BorderLayout());
+        this.add(gameBoardPanel, BorderLayout.CENTER);
+        this.add(this.btnEndMove, BorderLayout.PAGE_END);
         
     }
      
