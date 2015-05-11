@@ -38,7 +38,10 @@ public class GameController {
     }
     
     public void makeMove(int row, int col){
-        model.makeMove(row, col);
+        if(this.model.isAIGame())
+            model.AIGamePlay(row, col, 'O');
+        else
+            model.makeMove(row, col);
     }
     
     public void makeMoveToAI(int row, int col){

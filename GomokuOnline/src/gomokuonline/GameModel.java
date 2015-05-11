@@ -55,6 +55,10 @@ public class GameModel implements Runnable{
         
     }
     
+    public boolean isAIGame(){
+        return this.easyAI != null;
+    }
+    
     
     
     
@@ -212,19 +216,21 @@ public class GameModel implements Runnable{
         this.matrix[row][column]= moveChar;
         System.out.println("Matrix: " +"n = "+this.matrix.length + " m = " + this.matrix[0].length);
         //search through to see if player won
+        System.out.println("Matrix size: "+matrix.length);
          for(int i=0; i<size; i++){
              for(int j=0; j<size; j++){
+                 System.out.println("(i,j) = (" + i + "," + j+")") ;
                  
                  if(matrix[i][j]==playerChar){
-                     if(j+4<=size && matrix[i][j+1]==playerChar && matrix[i][j+2]==playerChar //changed i+4<=size to j+4<=size
+                     if(j+4<size && matrix[i][j+1]==playerChar && matrix[i][j+2]==playerChar //changed i+4<=size to j+4<=size
                              && matrix[i][j+3]==playerChar&&matrix[i][j+4]==playerChar)
                          condition="true";
                      
-                     if(i+4<=size && j+4<=size && matrix[i+1][j+1]==playerChar && matrix[i+2][j+2]==playerChar
+                     if(i+4<size && j+4<size && matrix[i+1][j+1]==playerChar && matrix[i+2][j+2]==playerChar
                              && matrix[i+3][j+3]==playerChar&&matrix[i+4][j+4]==playerChar)
                          condition="true";
                      
-                     if(i+4<=size && matrix[i+1][j]==playerChar && matrix[i+2][j]==playerChar //changed j+4<=size to i+4<=size
+                     if(i+4<size && matrix[i+1][j]==playerChar && matrix[i+2][j]==playerChar //changed j+4<=size to i+4<=size
                              && matrix[i+3][j]==playerChar&&matrix[i+4][j]==playerChar)
                          condition="true";
                      
@@ -285,15 +291,15 @@ public class GameModel implements Runnable{
          for(int i=0; i<size; i++){
              for(int j=0; j<size; j++){
                  if(matrix[i][j]==pChar){
-                     if(i+4<=size && matrix[i][j+1]==pChar && matrix[i][j+2]==pChar
+                     if(j+4<size && matrix[i][j+1]==pChar && matrix[i][j+2]==pChar
                              && matrix[i][j+3]==pChar&&matrix[i][j+4]==pChar)
                          condition="true";
                      
-                     if(i+4<=size && j+4<=size && matrix[i+1][j+1]==pChar && matrix[i+2][j+2]==pChar
+                     if(i+4<size && j+4<size && matrix[i+1][j+1]==pChar && matrix[i+2][j+2]==pChar
                              && matrix[i+3][j+3]==pChar&&matrix[i+4][j+4]==pChar)
                          condition="true";
                      
-                     if(j+4<=size && matrix[i+1][j]==pChar && matrix[i+2][j]==pChar
+                     if(i+4<size && matrix[i+1][j]==pChar && matrix[i+2][j]==pChar
                              && matrix[i+3][j]==pChar&&matrix[i+4][j]==pChar)
                          condition="true";
                      
