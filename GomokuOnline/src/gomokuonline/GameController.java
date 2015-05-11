@@ -33,8 +33,8 @@ public class GameController {
         view.updateBoard(row, column, playerChar);
     }
     
-    public void endGame(int row, int column, String status){
-        view.endGame(row, column, status);
+    public void endGame(int row, int column, String status, char playerChar){
+        view.endGame(row, column, status, playerChar);
     }
     
     public void makeMove(int row, int col){

@@ -105,7 +105,7 @@ public class GameModel implements Runnable{
         String[] input = message.split("\\s+");
         int row = Integer.parseInt(input[1]);
         int col = Integer.parseInt(input[3]);
-        
+        char letter;
         if(input[5].equalsIgnoreCase("false")){
             
             if(this.playerChar == 'X'){
@@ -119,7 +119,11 @@ public class GameModel implements Runnable{
             controller.setEndMoveEnabled(true);
         }
         else{
-            controller.endGame(row, col,"Loser");
+            if(this.playerChar=='X')
+              letter = 'O';
+            else
+                letter = 'X';
+            controller.endGame(row, col,"Loser", letter);
         }
         
     }
@@ -247,6 +251,8 @@ public class GameModel implements Runnable{
     public void makeMove(int row, int column){
         String condition = updateMatrix(row, column, this.playerChar);
         String message = "ROW " + row + " COLUMN " + column + " GAMEOVER "+ condition;
+        if(condition.equals("true"))
+            controller.endGame(row,column, "Winner", this.playerChar);
         this.sendMessage(message);
         
     }
@@ -270,9 +276,9 @@ public class GameModel implements Runnable{
         String condition = updateMatrixAI(row, col, pChar);
         if(condition.equals("true")){
             if(pChar=='X')
-                controller.endGame(row, col, "Loser");
+                controller.endGame(row, col, "Loser", pChar);
             else
-                controller.endGame(row, col, "Winner");
+                controller.endGame(row, col, "Winner", pChar);
         }
         else{
             if(pChar=='X'){

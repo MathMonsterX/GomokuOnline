@@ -168,7 +168,6 @@ public class GameView extends javax.swing.JPanel {
                 if(button.isSelected()){ 
                     this.btnEndMove.setEnabled(false);
                     this.controller.makeMove(i, j);
-                    this.controller.setPlayerChar('O');
                     this.updateBoard(i, j, this.controller.getPlayerChar());
                     
                 }
@@ -213,8 +212,9 @@ public void updateBoard(int row, int column, char playerChar){
         
 }
     
-public void endGame(int row, int column, String status){
-        
+public void endGame(int row, int column, String status, char playerChar){
+       btnEndMove.setText(status);
+       btnEndMove.setEnabled(false);
 }
 
 }

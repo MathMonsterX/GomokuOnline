@@ -47,6 +47,7 @@ public class EasyAI {
         controller.setModel(model);
         model.setController(controller);
         controller.createView();
+        model.setPlayerChar('O');
 
     }
     
