@@ -47,7 +47,7 @@ public class GameView extends javax.swing.JPanel {
         gameBoardPanel.setLayout(new GridLayout(width, length));
         for(int y = 0; y<length; y++){
                 for(int x = 0; x <width; x++){
-                        GameButton button = new GameButton(x, y, " ");
+                        GameButton button = new GameButton(x, y, "");
                         button.addActionListener(buttonListener);
                         buttonGrid[x][y] = button;
                         gameBoardPanel.add(buttonGrid[x][y]);
@@ -64,9 +64,11 @@ public class GameView extends javax.swing.JPanel {
         for(GameButton[] buttons : buttonGrid){
             for(GameButton button : buttons){
                 button.setSelected(false);
-                button.setBackground(new JButton().getBackground());
-                button.setOpaque(false);
-                button.setBorderPainted(true);
+                if(button.getBackground().equals(Color.blue)){
+                    button.setBackground(new JButton().getBackground());
+                    button.setOpaque(false);
+                   // button.setBorderPainted(true);
+                }
             }
             
         }
@@ -74,7 +76,7 @@ public class GameView extends javax.swing.JPanel {
         button.setSelected(true);
         button.setBackground(Color.blue);
         button.setOpaque(true);
-        button.setBorderPainted(false);
+      //  button.setBorderPainted(false);
         
     }
 
@@ -204,10 +206,15 @@ public void updateLblOpponentMove(String message){
 }
 public void updateBoard(int row, int column, char playerChar){
      GameButton button = buttonGrid[row][column];
-     button.setText(playerChar + "");
-     button.setEnabled(false);
+     if(playerChar == 'X')
+        button.setBackground(Color.black);
+     else
+         button.setBackground(Color.yellow);
+     button.setOpaque(true);
+    // button.setBorderPainted(false);
+     button.removeActionListener(button.getActionListeners()[0]);
+    // button.setEnabled(false);
      button.setSelected(false);
-     button.setBackground(new JButton().getBackground());
     
         
 }
