@@ -14,7 +14,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
+ * This class is the model that controls the game. It is the model implemented
+ * using the MVC design.
  * @author clarissapendleton
  */
 public class GameModel implements Runnable{
@@ -55,12 +56,13 @@ public class GameModel implements Runnable{
         
     }
     
+    /**
+     * Checks to see if the current game is being played with by an AI
+     * @return if the opponent is an AI
+     */
     public boolean isAIGame(){
         return this.AI != null;
     }
-    
-    
-    
     
     /**
      * Client constructor. Connects this GameModel to the host GameModel
@@ -247,7 +249,12 @@ public class GameModel implements Runnable{
         }
         return condition;
     }
-    
+    /**
+     * This calls update matrix, checks to see if this player won. If they did,
+     * the game is ended. sendMessage is always called.
+     * @param row the row of the current move
+     * @param column the column of the current move
+     */
     public void makeMove(int row, int column){
         String condition = updateMatrix(row, column, this.playerChar);
         String message = "ROW " + row + " COLUMN " + column + " GAMEOVER "+ condition;
@@ -256,22 +263,45 @@ public class GameModel implements Runnable{
         this.sendMessage(message);
         
     }
-    
+    /**
+     * This gets the size of the game board 
+     * @return the size of the board
+     */
     public int getSize(){
         return this.size;
     }
-    
+    /**
+     * This gets this player's character-either X or O
+     * @return the player's character
+     */
     public char getPlayerChar(){
         return this.playerChar;
     }
-    
+    /**
+     * This sets this player's character-either X or O
+     * @param x the player's character
+     */
     public void setPlayerChar(char x){
         this.playerChar=x;
     }
     
-        public void setAI(AI ai){
+    /**
+     * This sets the AI instance
+     * @param ai the AI
+     */
+    public void setAI(AI ai){
         this.AI = ai;
     }
+        
+    /**
+     * This is where the game with the AI occurs. It checks to see if anyone has won.
+     * If someone has won, it checks to see who made the last move, decided if the
+     * AI or player was the winner and ends the game. If someone has not won, 
+     * the game continues. 
+     * @param row the row of the current move
+     * @param col the column of the current move
+     * @param pChar the player's character
+     */    
     public void AIGamePlay(int row, int col, char pChar){
         String condition = updateMatrixAI(row, col, pChar);
         if(condition.equals("true")){
