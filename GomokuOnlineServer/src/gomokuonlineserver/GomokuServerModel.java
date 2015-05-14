@@ -9,12 +9,15 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -41,7 +44,7 @@ public class GomokuServerModel {
     private List<Connection> connections;
     private List<String> messages;
     private SortedSet<String> onlineUsers;
-    private Map<String, String> userLogins;
+    //private Map<String, String> userLogins;
     private List<Player> players;
     private final File loginDatabase = new File("loginData.txt");
     private AtomicBoolean fileKey;
@@ -54,16 +57,17 @@ public class GomokuServerModel {
         this.connections = Collections.synchronizedList(new ArrayList<Connection>());
         this.messages = Collections.synchronizedList(new ArrayList<String>());
         this.onlineUsers = Collections.synchronizedSortedSet(new TreeSet<String>()); 
-        this.userLogins = Collections.synchronizedMap(new HashMap<String, String>());
+       // this.userLogins = Collections.synchronizedMap(new HashMap<String, String>());
         this.players = Collections.synchronizedList(new ArrayList<Player>());
+        this.fileKey = new AtomicBoolean(true);
 
-        this.getLoginsFromDatabase();
+        this.readFromDatabase();
     }
     
     /**
      * Gets usernames and passwords from the database file
      */ 
-    private void getLoginsFromDatabase(){
+   /* private void getLoginsFromDatabase(){
         try{
             if( !loginDatabase.exists() ){ loginDatabase.createNewFile(); }
         } catch (IOException ex) {
@@ -80,14 +84,15 @@ public class GomokuServerModel {
         } catch (FileNotFoundException ex) {
             Logger.getLogger(GomokuServerModel.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
+    }*/
     
     /**
+     * 
      * Updates the database with the given username and password pair
      * @param uname username to be added
      * @param pass password to be added
      */
-    private void updateDatabase(String uname, String pass){
+    /*private void updateDatabase(String uname, String pass){
         try {
             FileWriter writer = new FileWriter(loginDatabase, true);
             writer.append(uname + " " + pass + "\n");
@@ -96,7 +101,7 @@ public class GomokuServerModel {
         } catch (IOException ex) {
             Logger.getLogger(GomokuServerModel.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
+    }*/
     
     private void updateDatabase(){
         try {
@@ -106,11 +111,39 @@ public class GomokuServerModel {
             for(Player player : players){
                 writer.append(player.toString());
             }
-            fileKey.set(true);
+            writer.flush();
+            writer.close();
+            fileKey.compareAndSet(false, true);
         } catch (IOException ex) {
             Logger.getLogger(GomokuServerModel.class.getName()).log(Level.SEVERE, null, ex);
         }
         
+    }
+    
+    private void readFromDatabase(){
+        try{
+            if( !loginDatabase.exists() ){ loginDatabase.createNewFile(); }
+        } catch (IOException ex) {
+            Logger.getLogger(GomokuServerModel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            Scanner scan = new Scanner(this.loginDatabase);
+            while(scan.hasNext()){
+                String[] login = scan.nextLine().split("\\s+");
+                if(login.length > 1){
+                    Player player = new Player(login[0], login[1]);
+                    int numGames = scan.nextInt();
+                    for(int i = 0; i < numGames; i++){
+                        String[] gameData = scan.nextLine().split("\\s+");
+                        player.addGameStats(DateFormat.getDateInstance().parse(gameData[0]), 
+                                Integer.parseInt(gameData[1]), new Player(gameData[2], null), Integer.parseInt(gameData[3]));
+                    }
+                }
+            }
+            scan.close();
+        } catch (FileNotFoundException | ParseException ex) {
+            Logger.getLogger(GomokuServerModel.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     /**
@@ -121,12 +154,16 @@ public class GomokuServerModel {
      */
     public String createAccount(String uname, String pass){
         String response = "ACCOUNT_CREATION fail";
-        if(!userLogins.containsKey(uname)){
-            userLogins.put(uname, pass);
-            this.updateDatabase(uname, pass);
+        
+        if(!players.contains(new Player(uname, null))){
+            Player player = new Player(uname, pass);
+            players.add(player);
+            this.updateDatabase();
             response = "ACCOUNT_CREATION success";
-            onlineUsers.add(uname);
+            onlineUsers.add(uname); 
         }
+        
+        
         return response;
     }
     
@@ -171,16 +208,16 @@ public class GomokuServerModel {
      * @return the authentication status represented as a string
      */
     public String authenticate(String uname, String pass){
-        String response = "AUTHENTICATION fail";
-        String storedPass;
-        if((storedPass = this.userLogins.get(uname)) != null ){
+        String response = "AUTHENTICATION fail";       
+        int playerIndex;
+        if(( playerIndex = this.players.indexOf(new Player(uname, null))) >= 0){
+            String storedPass = this.players.get(playerIndex).getPassword();
             if(storedPass.equals(pass)){
-                response = "AUTHENTICATION success";
-                onlineUsers.add(uname);
+               response = "AUTHENTICATION success";
+               onlineUsers.add(uname); 
             }
-                
-            
         }
+        
         return response;
     }
     

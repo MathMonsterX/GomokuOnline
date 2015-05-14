@@ -12,7 +12,7 @@ import java.util.Date;
  *
  * @author Sheyla
  */
-public class Player {
+public class Player implements Comparable<Player> {
     private final String userName;
     private final String password;
     private boolean playerState;
@@ -28,6 +28,9 @@ public class Player {
         return userName;
     }
     
+    public String getPassword(){
+        return this.password;
+    }
     public void setPlayerState( boolean playerState )
     {
         this.playerState = playerState;
@@ -38,7 +41,7 @@ public class Player {
         return playerState;
     }
     
-    public void addGameStats( int time, int gameResult, Player opponent, Date datePlayed )
+    public void addGameStats( Date datePlayed, int time, Player opponent, int gameResult )
     {
         stats.addGameStats( time, gameResult, opponent, datePlayed );
     }
@@ -48,6 +51,11 @@ public class Player {
     {
         return userName + " " + password + "\n" 
                 + stats.toString();
+    }
+
+    @Override
+    public int compareTo(Player o) {
+        return this.userName.compareTo(o.getUserName());
     }
 
     
@@ -174,7 +182,7 @@ public class Player {
             @Override
             public String toString()
             {
-                return datePlayed + " " + time + " " + opponent.getUserName() + " " + gameResult;
+                return datePlayed.toString() + " " + time + " " + opponent.getUserName() + " " + gameResult;
             }
         }
         
