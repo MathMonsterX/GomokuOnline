@@ -130,6 +130,7 @@ public class GomokuServerModel {
             Scanner scan = new Scanner(this.loginDatabase);
             while(scan.hasNext()){
                 String[] login = scan.nextLine().split("\\s+");
+                System.out.println("loginsize " +login.length);
                 if(login.length > 1){
                     Player player = new Player(login[0], login[1]);
                     int numGames = scan.nextInt();
@@ -138,6 +139,7 @@ public class GomokuServerModel {
                         player.addGameStats(DateFormat.getDateInstance().parse(gameData[0]), 
                                 Integer.parseInt(gameData[1]), new Player(gameData[2], null), Integer.parseInt(gameData[3]));
                     }
+                   this.players.add(player);
                 }
             }
             scan.close();

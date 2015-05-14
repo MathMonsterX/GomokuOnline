@@ -13,8 +13,8 @@ import java.util.Date;
  * @author Sheyla
  */
 public class Player implements Comparable<Player> {
-    private final String userName;
-    private final String password;
+    private  String userName;
+    private  String password;
     private boolean playerState;
     private Stats stats;
 
@@ -54,8 +54,18 @@ public class Player implements Comparable<Player> {
     }
 
     @Override
-    public int compareTo(Player o) {
-        return this.userName.compareTo(o.getUserName());
+    public int compareTo(Player other) {
+        return this.userName.compareTo(other.getUserName());
+    }
+    
+    @Override
+    public boolean equals(Object o){
+        if(o == null)
+            return false;
+        if(o instanceof Player){
+            return this.compareTo((Player)o) == 0;
+        }
+        return false;
     }
 
     
