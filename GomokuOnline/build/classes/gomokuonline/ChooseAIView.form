@@ -104,9 +104,6 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Easy"/>
       </Properties>
-      <BindingProperties>
-        <BindingProperty name="selected" source="levelGroup" target="rbEasy" targetPath="selected" updateStrategy="0" immediately="false"/>
-      </BindingProperties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rbEasyActionPerformed"/>
       </Events>
@@ -115,9 +112,6 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Intermediate"/>
       </Properties>
-      <BindingProperties>
-        <BindingProperty name="selected" source="levelGroup" target="rbIntermediate" targetPath="selected" updateStrategy="0" immediately="false"/>
-      </BindingProperties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rbIntermediateActionPerformed"/>
       </Events>
@@ -126,9 +120,6 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Difficult"/>
       </Properties>
-      <BindingProperties>
-        <BindingProperty name="selected" source="levelGroup" target="rbHard" targetPath="selected" updateStrategy="0" immediately="false"/>
-      </BindingProperties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rbHardActionPerformed"/>
       </Events>

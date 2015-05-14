@@ -281,7 +281,7 @@ public class AdminModel implements Runnable{
      * is not null, a method in the controller is called to open the view
      */
       public void openGame(String player, int size){
-          if(gameController==null){
+          
               try {
                   gameModel = new GameModel(size,'O');
                   gameController = new GameController();
@@ -297,7 +297,7 @@ public class AdminModel implements Runnable{
               } catch (IOException ex) {
                   Logger.getLogger(AdminModel.class.getName()).log(Level.SEVERE, null, ex);
               }
-          } 
+          
               
       }
       /**
@@ -366,16 +366,21 @@ public class AdminModel implements Runnable{
        }
        else if(gameSize.equals("30x30")){
            size=50;
-       }
-       else
-           size=30;
+       }   
+       
        if(diffLevel.equals("Easy")){
-               EasyAI easy = new EasyAI(size);
-               easy.createModel();
-               
+               AI easy = new AI(size,0);
+               easy.createModel();  
        }
-       
-       
+       else if(diffLevel.equals("Intermediate")){
+            AI medium = new AI(size,1);
+               medium.createModel();
+       }
+       else{
+           AI hard = new AI(size,2);
+           hard.createModel();
+       }
+
    }
     
 
