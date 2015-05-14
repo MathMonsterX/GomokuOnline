@@ -67,7 +67,7 @@ public class GameView extends javax.swing.JPanel {
                 if(button.getBackground().equals(Color.blue)){
                     button.setBackground(new JButton().getBackground());
                     button.setOpaque(false);
-                   // button.setBorderPainted(true);
+                    button.setBorderPainted(true);
                 }
             }
             
@@ -76,7 +76,7 @@ public class GameView extends javax.swing.JPanel {
         button.setSelected(true);
         button.setBackground(Color.blue);
         button.setOpaque(true);
-      //  button.setBorderPainted(false);
+        button.setBorderPainted(false);
         
     }
 
@@ -211,9 +211,9 @@ public void updateBoard(int row, int column, char playerChar){
      else
          button.setBackground(Color.yellow);
      button.setOpaque(true);
-    // button.setBorderPainted(false);
+     button.setBorderPainted(false);
      button.removeActionListener(button.getActionListeners()[0]);
-    // button.setEnabled(false);
+     button.setEnabled(false);
      button.setSelected(false);
     
         
