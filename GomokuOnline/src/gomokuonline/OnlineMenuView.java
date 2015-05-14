@@ -220,6 +220,7 @@ public void updateRequests(Player player, Gomoku board){
      * in the controller
      */
     private void btnAccept_Click(String player){
+        System.out.println("Player: " + player);
         controller.accept(player);
         this.removePlayer(player);
     }
@@ -241,7 +242,14 @@ public void updateRequests(Player player, Gomoku board){
      * @param players the list of online players
      */
     public void post(String[] players){
-        listOnlinePlayers.setListData(players);
+        String[] onlinePlayers = new String[players.length];
+        int count=0;
+        for(int i=0;i<players.length;i++){
+            if(!players[i].equals(controller.getUname()))
+                onlinePlayers[count]=players[i];
+            count++;
+        }
+        listOnlinePlayers.setListData(onlinePlayers);
     }
     /**
      * Sets this frame 
