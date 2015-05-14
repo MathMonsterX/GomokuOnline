@@ -206,14 +206,14 @@ public void updateLblOpponentMove(String message){
 }
 public void updateBoard(int row, int column, char playerChar){
      GameButton button = buttonGrid[row][column];
+     button.setEnabled(false);
      if(playerChar == 'X')
         button.setBackground(Color.black);
      else
          button.setBackground(Color.yellow);
      button.setOpaque(true);
      button.setBorderPainted(false);
-     button.removeActionListener(button.getActionListeners()[0]);
-     button.setEnabled(false);
+     //button.removeActionListener(button.getActionListeners()[0]);
      button.setSelected(false);
     
         
