@@ -1,6 +1,7 @@
 
 package gomokuonline;
 
+import javax.swing.ButtonGroup;
 import javax.swing.JFrame;
 
 /**
@@ -16,6 +17,10 @@ public class ChooseAIView extends javax.swing.JPanel {
      */
     public ChooseAIView() {
         initComponents();
+        ButtonGroup group = new ButtonGroup();
+        group.add(rbEasy);
+        group.add(rbHard);
+        group.add(rbIntermediate);
     }
 
     /**

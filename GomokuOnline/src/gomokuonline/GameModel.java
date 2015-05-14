@@ -27,7 +27,7 @@ public class GameModel implements Runnable{
     private char[][] matrix;
     private int size;
     private char playerChar;
-    private EasyAI easyAI;
+    private AI AI;
 
     /**
      * Constructor for AI Game Play
@@ -56,7 +56,7 @@ public class GameModel implements Runnable{
     }
     
     public boolean isAIGame(){
-        return this.easyAI != null;
+        return this.AI != null;
     }
     
     
@@ -269,8 +269,8 @@ public class GameModel implements Runnable{
         this.playerChar=x;
     }
     
-        public void setEasyAI(EasyAI ai){
-        this.easyAI = ai;
+        public void setAI(AI ai){
+        this.AI = ai;
     }
     public void AIGamePlay(int row, int col, char pChar){
         String condition = updateMatrixAI(row, col, pChar);
@@ -286,7 +286,7 @@ public class GameModel implements Runnable{
                 controller.updateBoard(row, col, 'X');
             }
             else
-                easyAI.generateMove(matrix);
+                AI.generateMove(matrix);
         }
     }
     /**
