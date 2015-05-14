@@ -17,6 +17,7 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.SortedSet;
 import java.util.TreeSet;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -41,7 +42,9 @@ public class GomokuServerModel {
     private List<String> messages;
     private SortedSet<String> onlineUsers;
     private Map<String, String> userLogins;
+    private List<Player> players;
     private final File loginDatabase = new File("loginData.txt");
+    private AtomicBoolean fileKey;
     
     
     /**
@@ -52,6 +55,8 @@ public class GomokuServerModel {
         this.messages = Collections.synchronizedList(new ArrayList<String>());
         this.onlineUsers = Collections.synchronizedSortedSet(new TreeSet<String>()); 
         this.userLogins = Collections.synchronizedMap(new HashMap<String, String>());
+        this.players = Collections.synchronizedList(new ArrayList<Player>());
+
         this.getLoginsFromDatabase();
     }
     
@@ -91,6 +96,21 @@ public class GomokuServerModel {
         } catch (IOException ex) {
             Logger.getLogger(GomokuServerModel.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    private void updateDatabase(){
+        try {
+            while(!fileKey.compareAndSet(true, false));
+            FileWriter writer = new FileWriter(loginDatabase);
+            writer.write("");
+            for(Player player : players){
+                writer.append(player.toString());
+            }
+            fileKey.set(true);
+        } catch (IOException ex) {
+            Logger.getLogger(GomokuServerModel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
     
     /**

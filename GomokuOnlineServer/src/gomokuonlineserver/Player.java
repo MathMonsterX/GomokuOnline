@@ -15,7 +15,7 @@ import java.util.Date;
 public class Player {
     private final String userName;
     private final String password;
-    private int playerState;
+    private boolean playerState;
     private Stats stats;
 
     public Player( String userName, String password )
@@ -27,14 +27,17 @@ public class Player {
     public String getUserName() {
         return userName;
     }
-    public void setPlayerState( int playerState )
+    
+    public void setPlayerState( boolean playerState )
     {
         this.playerState = playerState;
     }
-    public int getPlayerState()
+    
+    public boolean getPlayerState()
     {
         return playerState;
     }
+    
     public void addGameStats( int time, int gameResult, Player opponent, Date datePlayed )
     {
         stats.addGameStats( time, gameResult, opponent, datePlayed );
@@ -43,7 +46,7 @@ public class Player {
     @Override
     public String toString()
     {
-        return userName + ":" + password + ":" 
+        return userName + " " + password + "\n" 
                 + stats.toString();
     }
 
@@ -128,12 +131,11 @@ public class Player {
         public String toString()
         {
             StringBuilder str = new StringBuilder();
-            str.append("[");
+            str.append(games.size() + "\n");
             for( Game g:games )
             {
-                str.append( g.toString() );
+                str.append( g.toString() + "\n" );
             }
-            str.append("]");
             return str.toString();
         }
         
