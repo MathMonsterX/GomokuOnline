@@ -266,6 +266,7 @@ public class AdminModel implements Runnable{
         onlineMenuController.timedRequestList();
    
     }
+      
     public void openChooseAI() {
         if(AIController==null){
             AIController = new ChooseAIController();
@@ -274,6 +275,16 @@ public class AdminModel implements Runnable{
         }
         else
             AIController.openView();
+    }
+    
+    public void openStats(){
+        if(statController==null){
+            statController = new StatController();
+            statController.setModel(this);
+            statController.createView();
+        }
+        else
+            statController.openView();
     }
       /**
      * Creates an instance of gameController and gameModel if gameController is null,

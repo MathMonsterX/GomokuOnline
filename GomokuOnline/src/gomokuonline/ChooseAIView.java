@@ -53,8 +53,6 @@ public class ChooseAIView extends javax.swing.JPanel {
         });
 
         rbEasy.setText("Easy");
-
-
         rbEasy.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rbEasyActionPerformed(evt);
@@ -62,8 +60,6 @@ public class ChooseAIView extends javax.swing.JPanel {
         });
 
         rbIntermediate.setText("Intermediate");
-
-
         rbIntermediate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rbIntermediateActionPerformed(evt);
@@ -71,8 +67,6 @@ public class ChooseAIView extends javax.swing.JPanel {
         });
 
         rbHard.setText("Difficult");
-
-
         rbHard.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rbHardActionPerformed(evt);
@@ -87,6 +81,11 @@ public class ChooseAIView extends javax.swing.JPanel {
         });
 
         btnBack.setText("Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -141,7 +140,6 @@ public class ChooseAIView extends javax.swing.JPanel {
                         .addComponent(btnBack)
                         .addContainerGap())))
         );
-
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnPlayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlayActionPerformed
@@ -165,6 +163,11 @@ public class ChooseAIView extends javax.swing.JPanel {
         this.difficultyLevel="Hard";
     }//GEN-LAST:event_rbHardActionPerformed
 
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        controller.openMainMenuView();
+        chooseAIFrame.setVisible(false);
+    }//GEN-LAST:event_btnBackActionPerformed
+
    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
@@ -175,7 +178,6 @@ public class ChooseAIView extends javax.swing.JPanel {
     private javax.swing.JRadioButton rbHard;
     private javax.swing.JRadioButton rbIntermediate;
     private javax.swing.JLabel sizeLabel;
-    private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
     
     public void setController(ChooseAIController control){

@@ -49,6 +49,8 @@ public class MainMenuController {
         model.openChooseAI();
     }
     
-   
+   public void openStatsView(){
+       model.openStats();
+   }
  
 }

@@ -1,12 +1,15 @@
 
 package gomokuonline;
 
+import javax.swing.JFrame;
+
 /**
  *
  * @author clarissapendleton
  */
 public class StatView extends javax.swing.JPanel {
-
+    private JFrame statFrame;
+    private StatController controller;
     /**
      * Creates new form StatsView
      */
@@ -69,12 +72,13 @@ public class StatView extends javax.swing.JPanel {
                 .addComponent(resultsTA, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnBack)
-                .addContainerGap(137, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-        // TODO add your handling code here:
+        statFrame.setVisible(false);
+        controller.openMainMenuView();
     }//GEN-LAST:event_btnBackActionPerformed
 
 
@@ -84,4 +88,20 @@ public class StatView extends javax.swing.JPanel {
     private javax.swing.JLabel resultLabel;
     private javax.swing.JScrollPane resultsTA;
     // End of variables declaration//GEN-END:variables
+
+
+public void makeVisible(){
+    statFrame.setVisible(true);
+    
+}
+
+
+public void setController(StatController controller) {
+    this.controller=controller;
+}
+
+public void setFrame(JFrame frame) {
+    this.statFrame=frame;
+}
+
 }

@@ -48,6 +48,11 @@ public class MainMenuView extends javax.swing.JPanel {
         });
 
         btnStats.setText("View Stats");
+        btnStats.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnStatsActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -94,6 +99,10 @@ public class MainMenuView extends javax.swing.JPanel {
     private void btnOfflineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOfflineActionPerformed
         btnOffline_Click();
     }//GEN-LAST:event_btnOfflineActionPerformed
+
+    private void btnStatsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStatsActionPerformed
+        btnStats_Click();
+    }//GEN-LAST:event_btnStatsActionPerformed
     /**
      * Sets this controller.
      * @param controller the MainMenuController object
@@ -128,8 +137,9 @@ public class MainMenuView extends javax.swing.JPanel {
         mainMenuFrame.setVisible(false);
         controller.openChooseAIView();
     }
-    private void btnStats_Click(java.awt.event.ActionEvent evt){
-    
+    private void btnStats_Click(){
+        mainMenuFrame.setVisible(false);
+        controller.openStatsView();
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnOffline;

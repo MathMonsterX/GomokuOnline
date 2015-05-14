@@ -40,8 +40,21 @@ public class ChooseAIController {
         this.model = model;
     }
     
+    /**
+     * This send the difficulty level and size to the model
+     * @param diffLevel the difficulty level of the AI
+     * @param size the size of the board
+     */
     public void play(String diffLevel, String size){
         model.playAI(diffLevel, size);
  
+    }
+    
+    /**
+     * This opens the log in view by calling the method in the model to open
+     * the log in view
+     */
+    public void openMainMenuView(){
+        model.openMainMenu();
     }
 }

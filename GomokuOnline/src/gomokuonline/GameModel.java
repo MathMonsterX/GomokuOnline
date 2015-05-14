@@ -240,8 +240,8 @@ public class GameModel implements Runnable{
                              && matrix[i+3][j]==playerChar&&matrix[i+4][j]==playerChar)
                          condition="true";
                      
-                     if(i-4>=0 && j-4>=0 && matrix[i-1][j-1]==playerChar && matrix[i-2][j-2]==playerChar
-                             && matrix[i-3][j-3]==playerChar&&matrix[i-4][j-4]==playerChar)
+                     if(i+4<size && j-4>=0 && matrix[i+1][j-1]==playerChar && matrix[i+2][j-2]==playerChar
+                             && matrix[i+3][j-3]==playerChar&&matrix[i+4][j-4]==playerChar)
                          condition="true";
                          
                  }       
@@ -345,8 +345,8 @@ public class GameModel implements Runnable{
                              && matrix[i+3][j]==pChar&&matrix[i+4][j]==pChar)
                          condition="true";
                      
-                     if(i-4>=0 && j-4>=0 && matrix[i-1][j-1]==pChar && matrix[i-2][j-2]==pChar
-                             && matrix[i-3][j-3]==pChar&&matrix[i-4][j-4]==pChar)
+                     if(i+4<size && j-4>=0 && matrix[i+1][j-1]==pChar && matrix[i+2][j-2]==pChar
+                             && matrix[i+3][j-3]==pChar&&matrix[i+4][j-4]==pChar)
                          condition="true";
                          
                  }       
