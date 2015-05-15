@@ -11,6 +11,7 @@ import java.awt.Container;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Arrays;
 import javax.swing.JFrame;
 
 
@@ -114,7 +115,10 @@ public class AdminModel implements Runnable{
                 }else if(input[0].equals("P2P")){
                     int size = Integer.parseInt(input[3]);
                     this.openGame(input[1], input[2], size);
+                }else if(input[0].equals("STATS")){
+                    this.postStats(Arrays.copyOfRange(input, 1, input.length));
                 }
+                
             }
         }catch(IOException ex){
             Logger.getLogger(AdminModel.class.getName()).log(Level.SEVERE, null, ex);
@@ -212,6 +216,15 @@ public class AdminModel implements Runnable{
     public void postList(String[] input){
         onlineMenuController.postList(input);
     }
+    
+    /**
+     * Sends the player stats to the StatController to be 
+     * posted in the OnlineMenuView
+     * @param input the list of online players
+     */
+    public void postStats(String[] stats){
+        this.statController.postStats(stats);
+    }
     /**
      * A method in the logInController is called to open the view that logs 
      * players in.
@@ -285,6 +298,7 @@ public class AdminModel implements Runnable{
         }
         else
             statController.openView();
+        statController.timedStatUpdate();
     }
       /**
      * Creates an instance of gameController and gameModel if gameController is null,
@@ -392,6 +406,19 @@ public class AdminModel implements Runnable{
            hard.createModel();
        }
 
+   }
+   
+   /**
+     * Writes to the server to request the stats for this user
+     */
+   public void getStats(){
+        try {
+            String message  = "GET_STATS " +this.username;
+            this.socketOut.write(message + "\n");
+            this.socketOut.flush();
+        } catch (IOException ex) {
+            Logger.getLogger(AdminModel.class.getName()).log(Level.SEVERE, null, ex);
+        }
    }
     
 

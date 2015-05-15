@@ -28,14 +28,14 @@ public class StatView extends javax.swing.JPanel {
 
         resultLabel = new javax.swing.JLabel();
         resultsTA = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        statTA = new javax.swing.JTextArea();
         btnBack = new javax.swing.JButton();
 
         resultLabel.setText("Game Results");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        resultsTA.setViewportView(jTextArea1);
+        statTA.setColumns(20);
+        statTA.setRows(5);
+        resultsTA.setViewportView(statTA);
 
         btnBack.setText("Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
@@ -84,9 +84,9 @@ public class StatView extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JLabel resultLabel;
     private javax.swing.JScrollPane resultsTA;
+    private javax.swing.JTextArea statTA;
     // End of variables declaration//GEN-END:variables
 
 
@@ -98,6 +98,10 @@ public void makeVisible(){
 
 public void setController(StatController controller) {
     this.controller=controller;
+}
+
+public void postStats(String message){
+    this.statTA.setText(message);
 }
 
 public void setFrame(JFrame frame) {
