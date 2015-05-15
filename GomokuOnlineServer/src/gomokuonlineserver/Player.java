@@ -36,6 +36,10 @@ public class Player implements Comparable<Player> {
         this.playerState = playerState;
     }
     
+    public String getStats(){
+        return "Games Played: " + this.stats.numGames() + " Wins: "+this.stats.getGamesWon() +" Losses: " + this.stats.getGamesLost() +" Average Gametime: " +this.stats.getAvgGameTime();
+    }
+    
     public boolean getPlayerState()
     {
         return playerState;
@@ -144,6 +148,8 @@ public class Player implements Comparable<Player> {
             }
             return totTied;
         }
+        
+       
         
         @Override
         public String toString()

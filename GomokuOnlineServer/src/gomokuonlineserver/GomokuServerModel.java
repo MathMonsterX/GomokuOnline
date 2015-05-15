@@ -211,9 +211,9 @@ public class GomokuServerModel {
      */
     public String authenticate(String uname, String pass){
         String response = "AUTHENTICATION fail";       
-        int playerIndex;
-        if(( playerIndex = this.players.indexOf(new Player(uname, null))) >= 0){
-            String storedPass = this.players.get(playerIndex).getPassword();
+        Player player = this.getPlayer(uname);
+        if(player!=null){
+            String storedPass = player.getPassword();
             if(storedPass.equals(pass)){
                response = "AUTHENTICATION success";
                onlineUsers.add(uname); 
@@ -221,6 +221,20 @@ public class GomokuServerModel {
         }
         
         return response;
+    }
+    
+    /**
+     * Gets the player object associated with the given username
+     * @param username username of player
+     * @return Player object with specified username, or null
+     * if no such player is found.
+     */
+    private Player getPlayer(String username){
+        int playerIndex;
+        if(( playerIndex = this.players.indexOf(new Player(username, null))) >= 0){
+            return this.players.get(playerIndex);
+        }
+        return null;
     }
     
     /**
@@ -299,5 +313,18 @@ public class GomokuServerModel {
         return response;
         
     } 
+   /**
+    * Gets the user statistics for the player with the given username
+    * @param username username of the player
+    * @return User's player statistics, or null if no Player with the
+    * specified username is found.
+    */
+   public String getStats(String username){
+       Player player = this.getPlayer(username);
+       if(player != null){
+           return "STATS " + player.getStats();
+       }
+       return null;
+   }
     
 }
