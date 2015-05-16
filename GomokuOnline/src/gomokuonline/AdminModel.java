@@ -39,7 +39,7 @@ public class AdminModel implements Runnable{
     private BufferedReader socketIn;
     
     private Thread worker;
-    public String username;
+    private String username;
     
     /**
      * Constructor, creates a new instance of AdminModel
@@ -116,6 +116,7 @@ public class AdminModel implements Runnable{
                     int size = Integer.parseInt(input[3]);
                     this.openGame(input[1], input[2], size);
                 }else if(input[0].equals("STATS")){
+                    this.openStats();
                     this.postStats(Arrays.copyOfRange(input, 1, input.length));
                 }
                 
@@ -382,7 +383,12 @@ public class AdminModel implements Runnable{
         int size = Integer.parseInt(gameSize);
         this.openGame(input[0], size);
     }
-
+    
+    /**
+     * Where the game between the AI and the player occurs
+     * @param diffLevel the difficulty level
+     * @param gameSize the size of the board
+     */
    public void playAI(String diffLevel, String gameSize){
        int size=30;//default board size
        if(gameSize.equals("30x30")){
