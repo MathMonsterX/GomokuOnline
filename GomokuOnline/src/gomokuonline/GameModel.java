@@ -259,7 +259,6 @@ public class GameModel implements Runnable{
         String message = "ROW " + row + " COLUMN " + column + " GAMEOVER "+ condition;
         if(condition.equals("true")){
             controller.endGame(row,column, "Winner", this.playerChar);
-            adminModel.getStats();
         }
         this.sendMessage(message);
         
