@@ -311,6 +311,7 @@ public class AdminModel implements Runnable{
                   gameModel = new GameModel(size,'O');
                   gameController = new GameController();
                   gameModel.setController(gameController);
+                  gameModel.setAdminModel(this);
                   gameController.setModel(gameModel);
                   gameController.createView();
                   gameController.setEndMoveEnabled(true);
@@ -338,6 +339,7 @@ public class AdminModel implements Runnable{
               gameModel = new GameModel(ip, connectPort, size, 'X');
               gameController = new GameController();
               gameModel.setController(gameController);
+             gameModel.setAdminModel(this);
               gameController.setModel(gameModel);
               gameController.createView();
               gameController.setEndMoveEnabled(false);
@@ -420,7 +422,20 @@ public class AdminModel implements Runnable{
             Logger.getLogger(AdminModel.class.getName()).log(Level.SEVERE, null, ex);
         }
    }
-    
-
+  
+/**
+ * This sets the gameController and gameModel to null.
+ */   
+public void setNull(){
+    this.gameController = null;
+    this.gameModel = null;
+}
+/**
+ * Returns this user's username
+ * @return the username
+ */
+public String getUsername() {
+    return this.username;
+}
  
 }

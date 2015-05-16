@@ -5,7 +5,7 @@ import javax.swing.ButtonGroup;
 import javax.swing.JFrame;
 
 /**
-     *
+ * This view lets the user choose the AI they want to play with
  * @author clarissapendleton
  */
 public class ChooseAIView extends javax.swing.JPanel {
@@ -179,16 +179,40 @@ public class ChooseAIView extends javax.swing.JPanel {
     private javax.swing.JRadioButton rbIntermediate;
     private javax.swing.JLabel sizeLabel;
     // End of variables declaration//GEN-END:variables
-    
+    /**
+     * controller setter
+     * @param control the ChooseAIController
+     */
     public void setController(ChooseAIController control){
         this.controller=control;
     }
-    
+    /**
+     * chooseAIFrame setter
+     * @param frame the JFrame
+     */
     public void setFrame(JFrame frame){
         this.chooseAIFrame = frame;
+        chooseAIFrame.addWindowListener(new java.awt.event.WindowAdapter(){
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent windowEvent){
+                btnCloseActionPerformed(windowEvent);
+            }
+            
+        });
     }
+    /**
+     * Sets the frame to visible
+     */
     public void makeVisible(){
         chooseAIFrame.setVisible(true);
+    }
+    /**
+     * Sets the frame to invisible and opens the main menu
+     * @param evt 
+     */
+    private void btnCloseActionPerformed(java.awt.event.WindowEvent evt){
+        chooseAIFrame.setVisible(false);
+        controller.openMainMenuView();
     }
     
 }

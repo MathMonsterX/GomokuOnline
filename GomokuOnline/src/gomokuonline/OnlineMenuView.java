@@ -224,9 +224,16 @@ public void updateRequests(Player player, Gomoku board){
         controller.accept(player);
         this.removePlayer(player);
     }
+    /**
+     * Removes a player from the list 
+     * @param player the player being removed
+     */
     private void btnDecline_Click(String player){
         this.removePlayer(player);
     }
+    /**
+     * Sets this view to invisible and goes back to the main menu
+     */
     private void btnBack_Click(){
         onlineMenuFrame.setVisible(false);
         controller.back();
@@ -258,6 +265,13 @@ public void updateRequests(Player player, Gomoku board){
     public void setFrame(JFrame frame) {
         this.onlineMenuFrame = frame;
         onlineMenuFrame.setTitle(controller.getUname() + ", Choose Your Game!");
+        onlineMenuFrame.addWindowListener(new java.awt.event.WindowAdapter(){
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent windowEvent){
+                btnCloseActionPerformed(windowEvent);
+            }
+            
+        });
     }
     /**
      * This updates the list of players on the view
@@ -268,7 +282,10 @@ public void updateRequests(Player player, Gomoku board){
         req[req.length-1] = player + " " + size;
         listReq.setListData(req);
     }
-    
+    /**
+     * Gets the list of requests and converts it to an array of Strings
+     * @return the array of requests
+     */
     private String[] getModel(){
         ListModel modelList = listReq.getModel();
         String[] req=new String[modelList.getSize()+1];
@@ -277,7 +294,10 @@ public void updateRequests(Player player, Gomoku board){
         }
         return req;
     }
-    
+    /**
+     * Removes a player from the list of requests
+     * @param player the player getting removed
+     */
     private void removePlayer(String player){
         String[] req=this.getModel();
         List requests = new ArrayList();
@@ -290,5 +310,14 @@ public void updateRequests(Player player, Gomoku board){
         }
         listReq.setListData(req);
         
+    }
+    
+    /**
+     * This sets this view to invisible and goes back to the main menu
+     * @param evt 
+     */
+    private void btnCloseActionPerformed(java.awt.event.WindowEvent evt){
+        onlineMenuFrame.setVisible(false);
+        controller.back();
     }
 }

@@ -204,6 +204,13 @@ public class RegisterView extends javax.swing.JPanel {
     public void setFrame(JFrame frame) {
         this.registerFrame = frame;
         registerFrame.setTitle("Create Account");
+        registerFrame.addWindowListener(new java.awt.event.WindowAdapter(){
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent windowEvent){
+                btnCloseActionPerformed(windowEvent);
+            }
+            
+        });
     }
     /**
      * Sets the frame visibility to false.
@@ -211,5 +218,12 @@ public class RegisterView extends javax.swing.JPanel {
     public void setInvisible() {
         registerFrame.setVisible(false);
     }
-
+    /**
+     * This sets this frame to invisible and goes back to the log in view
+     * @param evt click on close button
+     */
+    private void btnCloseActionPerformed(java.awt.event.WindowEvent evt){
+    registerFrame.setVisible(false);
+    controller.backClick();
+}
 }

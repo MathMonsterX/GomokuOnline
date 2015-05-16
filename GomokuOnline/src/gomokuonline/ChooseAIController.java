@@ -4,7 +4,7 @@ package gomokuonline;
 import javax.swing.JFrame;
 
 /**
- *
+ * This is the ChooseAIView's controller in the MVC design
  * @author clarissapendleton
  */
 public class ChooseAIController {

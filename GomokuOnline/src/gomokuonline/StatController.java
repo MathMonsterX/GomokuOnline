@@ -6,26 +6,33 @@ import java.util.logging.Logger;
 import javax.swing.JFrame;
 
 /**
- *
+ *This is the controller for the StatView.
  * @author clarissapendleton
  */
 public class StatController implements Runnable{
     private AdminModel model;
     private StatView view;
     private JFrame statFrame;
-
+    /**
+     * model setter
+     * @param model the AdminModel 
+     */
     public void setModel(AdminModel model) {
         this.model = model;
     }
-
+    /**
+     * Opens the StatView.
+     */
     public void openView(){
         view.makeVisible();
 
     }
-    
+    /**
+     * Creates the StatView.
+     */
     public void createView(){
         this.view = new StatView();
-        statFrame = new JFrame( );
+        statFrame = new JFrame();
         statFrame.setContentPane(view);
         statFrame.pack();
         statFrame.setVisible(true);
@@ -50,6 +57,9 @@ public class StatController implements Runnable{
             }
         }
     }
+    /**
+     * Opens the main menu.
+     */
     public void openMainMenuView(){
         model.openMainMenu();
     }

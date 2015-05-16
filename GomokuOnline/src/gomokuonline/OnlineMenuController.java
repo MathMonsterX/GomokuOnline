@@ -97,12 +97,19 @@ public class OnlineMenuController implements Runnable{
         model.accept(player);
     }
 
+    /**
+     * Returns the username of the player
+     * @return the player's username
+     */
     public String getUname() {
-        return model.username;
+        return model.getUsername();
     }
-    
+    /**
+     * Opens the main menu
+     */
     public void back(){
         model.openMainMenu();
     }
+    
 }
 

@@ -29,7 +29,7 @@ public class GameModel implements Runnable{
     private int size;
     private char playerChar;
     private AI AI;
-
+    private AdminModel adminModel; 
     /**
      * Constructor for AI Game Play
      * @param size 
@@ -143,7 +143,10 @@ public class GameModel implements Runnable{
             System.out.println("Error in sending message over server");
         }
     }
-    
+    /**
+     * controller setter
+     * @param control the GameController
+     */
     public void setController(GameController control){
         this.controller = control;
     }
@@ -353,6 +356,27 @@ public class GameModel implements Runnable{
              }  
         }
         return condition;
+    }
+    /**
+     * The setter for adminModel.
+     * @param aModel the AdminModel
+     */
+    public void setAdminModel(AdminModel aModel){
+        this.adminModel = aModel;
+    }
+    /**
+     * This will set gameController and gameModel to null in the AdminModel
+     */
+    public void setNull(){
+        adminModel.setNull();
+    }
+    
+    /**
+    * Returns this user's username
+    * @return the username
+    */
+    public String getUsername() {
+        return adminModel.getUsername();
     }
     
 }

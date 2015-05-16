@@ -132,11 +132,17 @@ public class MainMenuView extends javax.swing.JPanel {
         mainMenuFrame.setTitle("Main Menu");
     }
 
-
+    /**
+     * Sets this view to invisible and opens the view to choose an AI
+     */
     private void btnOffline_Click(){
         mainMenuFrame.setVisible(false);
         controller.openChooseAIView();
     }
+    
+    /**
+     * Sets this view to invisible and opens the statistics view.
+     */
     private void btnStats_Click(){
         mainMenuFrame.setVisible(false);
         controller.openStatsView();

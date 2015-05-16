@@ -44,11 +44,15 @@ public class MainMenuController {
     public void openView(){
         view.makeVisible();
     }
-    
+    /**
+     * Opens the view to choose an AI
+     */
     public void openChooseAIView(){
         model.openChooseAI();
     }
-    
+   /**
+    * Opens the view with statistics
+    */ 
    public void openStatsView(){
        model.openStats();
    }

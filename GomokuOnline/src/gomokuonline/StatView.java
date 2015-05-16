@@ -1,6 +1,4 @@
-
 package gomokuonline;
-
 import javax.swing.JFrame;
 
 /**
@@ -15,6 +13,7 @@ public class StatView extends javax.swing.JPanel {
      */
     public StatView() {
         initComponents();
+        
     }
 
     /**
@@ -89,23 +88,49 @@ public class StatView extends javax.swing.JPanel {
     private javax.swing.JTextArea statTA;
     // End of variables declaration//GEN-END:variables
 
-
+/**
+ * Sets this view to invisible and opens the main menu.
+ * @param evt 
+ */
+    private void btnCloseActionPerformed(java.awt.event.WindowEvent evt){
+    statFrame.setVisible(false);
+    controller.openMainMenuView();
+}
+/**
+* Sets this view to visible.
+*/
 public void makeVisible(){
     statFrame.setVisible(true);
     
 }
 
-
+/**
+ * controller setter
+ * @param controller the StatController 
+ */
 public void setController(StatController controller) {
     this.controller=controller;
 }
-
+/**
+ * Posts the statistics of this player to the view
+ * @param message 
+ */
 public void postStats(String message){
     this.statTA.setText(message);
 }
-
+/**
+ * Sets statFrame to frame
+ * @param frame the JFrame
+ */
 public void setFrame(JFrame frame) {
     this.statFrame=frame;
+    statFrame.addWindowListener(new java.awt.event.WindowAdapter(){
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent windowEvent){
+                btnCloseActionPerformed(windowEvent);
+            }
+            
+        });
 }
 
 }
