@@ -58,7 +58,6 @@ public class RegisterController {
     public void createView(){
         this.view = new RegisterView();
         registerFrame = new JFrame();
-        registerFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         registerFrame.setContentPane(view);
         registerFrame.pack();
         registerFrame.setVisible(true); 

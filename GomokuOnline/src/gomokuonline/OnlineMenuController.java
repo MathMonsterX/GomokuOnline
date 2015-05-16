@@ -21,7 +21,6 @@ public class OnlineMenuController implements Runnable{
     public void createView(){
         view = new OnlineMenuView();
         onlineMenuFrame = new JFrame( );
-        onlineMenuFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         onlineMenuFrame.setContentPane(view);
         onlineMenuFrame.pack();
         onlineMenuFrame.setVisible(true);

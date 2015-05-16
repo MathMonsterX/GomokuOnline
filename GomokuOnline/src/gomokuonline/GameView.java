@@ -229,7 +229,8 @@ public void updateBoard(int row, int column, char playerChar){
         
 }
 /**
- * This updates the last, or winning, move and ends the game
+ * This updates the last, or winning, move, ends the game and sets the 
+ * GameController and GameModel null
  * @param row the row of the winning move
  * @param column the column of the winning move
  * @param status Winner or Loser based off whether the player won or lost
@@ -239,6 +240,8 @@ public void endGame(int row, int column, String status, char playerChar){
        this.updateBoard(row, column, playerChar);
        btnEndMove.setText(status);
        btnEndMove.setEnabled(false);
+       controller.setNull();
+
 }
 /**
  * This sets this view to invisible and sets the GameController and GameModel null
@@ -247,6 +250,7 @@ public void endGame(int row, int column, String status, char playerChar){
 private void btnCloseActionPerformed(java.awt.event.WindowEvent evt){
         gameViewFrame.setVisible(false);
         controller.setNull();
+
     }
 }
 

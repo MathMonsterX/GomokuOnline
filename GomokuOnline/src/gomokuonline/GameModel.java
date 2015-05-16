@@ -223,13 +223,9 @@ public class GameModel implements Runnable{
     private String updateMatrix(int row, int column, char moveChar){
         String condition = "false";
         this.matrix[row][column]= moveChar;
-        System.out.println("Matrix: " +"n = "+this.matrix.length + " m = " + this.matrix[0].length);
         //search through to see if player won
-        System.out.println("Matrix size: "+matrix.length);
          for(int i=0; i<size; i++){
-             for(int j=0; j<size; j++){
-                 System.out.println("(i,j) = (" + i + "," + j+")") ;
-                 
+             for(int j=0; j<size; j++){                 
                  if(matrix[i][j]==playerChar){
                      if(j+4<size && matrix[i][j+1]==playerChar && matrix[i][j+2]==playerChar //changed i+4<=size to j+4<=size
                              && matrix[i][j+3]==playerChar&&matrix[i][j+4]==playerChar)
