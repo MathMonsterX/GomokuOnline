@@ -10,6 +10,9 @@ import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -30,6 +33,9 @@ public class GameModel implements Runnable{
     private char playerChar;
     private AI AI;
     private AdminModel adminModel; 
+    private String opponentName;
+    private long startTime;
+    
     /**
      * Constructor for AI Game Play
      * @param size 
@@ -42,7 +48,7 @@ public class GameModel implements Runnable{
      * Default constructor. Assumes this GameModel will  host the connection,
      * using an arbitrary available port
      */
-    GameModel(int size, char pChar){
+    GameModel(int size, char pChar, String opponent){
         try {
             this.size = size;
             this.matrix = new char[size][size];
@@ -70,8 +76,9 @@ public class GameModel implements Runnable{
      * @param ip network address of the Game's host
      * @param portNum port that the Host is receiving messages on
      */
-    GameModel(String ip, int portNum, int size, char pChar){
+    GameModel(String ip, int portNum, int size, char pChar, String opponent){
         try {
+            this.opponentName = opponent;
             this.size = size;
             this.matrix = new char[size][size];
             this.playerChar=pChar;
@@ -159,6 +166,7 @@ public class GameModel implements Runnable{
         }
         
         try {
+            this.startTime = new Date().getTime();
             
             String message;
            
@@ -193,6 +201,7 @@ public class GameModel implements Runnable{
     public void listen(){
         listenWorker = new Thread(this);
         listenWorker.start();
+        
     }
     
     /**
@@ -374,6 +383,22 @@ public class GameModel implements Runnable{
     */
     public String getUsername() {
         return adminModel.getUsername();
+    }
+    
+    
+    public void sendGameStats(boolean wonGame){
+        Date date = new Date();
+        SimpleDateFormat formatter  = new SimpleDateFormat("EEE/MMMd/yyyy");
+        String currentDate  = formatter.format(date);
+        int endTime = (int)(date.getTime() - startTime);
+        int result;
+        if(wonGame){
+            result =1;
+        }else{
+            result = 0;
+        }
+        this.adminModel.sendGameStats(currentDate, endTime, this.opponentName, result);
+        
     }
     
 }

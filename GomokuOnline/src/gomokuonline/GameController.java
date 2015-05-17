@@ -52,6 +52,10 @@ public class GameController {
      * @param playerChar the players character
      */
     public void endGame(int row, int column, String status, char playerChar){
+        boolean wonGame = true;
+        if(status.equals("Loser"))
+            wonGame = false;
+        this.model.sendGameStats(wonGame);
         view.endGame(row, column, status, playerChar);
     }
     
