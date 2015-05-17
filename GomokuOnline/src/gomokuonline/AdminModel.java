@@ -447,7 +447,6 @@ public void setNull(){
  */
 public String getUsername() {
     if(this.username==null){
-        System.out.println("HELLO");
         return "";
     }
     else

@@ -180,7 +180,10 @@ public class AI {
         model.setPlayerChar('O');
 
     }
-    
+    /**
+     * Sets the adminModel.
+     * @param model the AdminModel
+     */
     public void setAdmin(AdminModel model){
         this.adminModel = model;
     }
