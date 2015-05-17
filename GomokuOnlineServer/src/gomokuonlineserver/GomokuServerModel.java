@@ -11,6 +11,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -48,6 +49,7 @@ public class GomokuServerModel {
     private List<Player> players;
     private final File loginDatabase = new File("loginData.txt");
     private AtomicBoolean fileKey;
+    private final SimpleDateFormat formatter = new SimpleDateFormat("EEE/MMMd/yyyy");
     
     
     /**
@@ -103,6 +105,10 @@ public class GomokuServerModel {
         }
     }*/
     
+    
+    /**
+     * Updates the database with the player information currently stored in list of players
+     */
     private void updateDatabase(){
         try {
             while(!fileKey.compareAndSet(true, false));
@@ -130,7 +136,7 @@ public class GomokuServerModel {
             Scanner scan = new Scanner(this.loginDatabase);
             while(scan.hasNext()){
                 String[] login = scan.nextLine().split("\\s+");
-                System.out.println("loginsize " +login.length);
+               
                 if(login.length > 1){
                     Player player = new Player(login[0], login[1]);
                     int numGames = scan.nextInt();
@@ -177,6 +183,31 @@ public class GomokuServerModel {
     public void addConnection(Connection con){
         this.connections.add(con);
        
+    }
+    
+    /**
+     * Adds the statistics for a game to a player object in the list of players
+     * @param uname username of the player for whom statistics will be added
+     * @param date date of the game
+     * @param time game duration
+     * @param opponent name of the opponent in the game
+     * @param result 1 if player uname won, 0 if player uname lost
+     * @return Message detailing the success or failure of the attempted update
+     */
+    public String addStats(String uname, String date, int time, String opponent, int result){
+        String response = "STATS_UPDATE fail";
+        Player player = this.getPlayer(uname);
+        if(player != null){
+            try {
+                player.addGameStats(formatter.parse(date), time, new Player(opponent, null), result);
+                response = "STATS_UPDATE success";
+                this.updateDatabase();
+            } catch (ParseException ex) {
+                Logger.getLogger(GomokuServerModel.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
+        return response;
     }
     
     /**
@@ -300,8 +331,8 @@ public class GomokuServerModel {
      * @param username the user receiving the IP address
      * @return the sent status represented as a String
      */
-   public String sendIP(String ip, String portNum, String username, String size){
-        String message = "P2P " + ip + " " + portNum + " " + size;
+   public String sendIP(String ip, String portNum, String username, String size, String opponentName){
+        String message = "P2P " + ip + " " + portNum +" "+size+ " " + " " + opponentName;
         String response = "IP NOT SENT TO " + username.toUpperCase();
         for(int i=0; i< connections.size();i++){
             if(this.connections.get(i).uname.equals(username)){
