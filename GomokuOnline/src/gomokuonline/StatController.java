@@ -72,10 +72,15 @@ public class StatController implements Runnable{
     
     
     public void postStats(String[] stats){
-        String statMessage = "";
-        for(int i = 0; i < stats.length; i+=2){
-            statMessage += stats[i] + " " + stats[i+1] + "\n";
-        }
-        this.view.postStats(statMessage);
+        System.out.println(stats[9]);
+        int timeInMili = Integer.parseInt(stats[9]);
+        double timeInMinutes = (timeInMili/1000.0)/60.0;
+        timeInMinutes = Math.round(10000.0*timeInMinutes)/10000.0;
+             
+        
+        String message = stats[0] + " "+stats[1] + " " + stats[2]+"\n"
+                + stats[3] + " " + stats[4] + "\n" + stats[5] + " " + stats[6] + "\n"
+                +stats[7] + " " +stats[8] + " "+ timeInMinutes + " minutes";
+        this.view.postStats(message);
     }
 }
