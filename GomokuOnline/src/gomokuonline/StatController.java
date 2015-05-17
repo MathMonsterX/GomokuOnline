@@ -69,9 +69,10 @@ public class StatController implements Runnable{
         thread.start();
     }
     
+    
+    
     public void postStats(String[] stats){
         String statMessage = "";
-
         for(int i = 0; i < stats.length; i+=2){
             statMessage += stats[i] + " " + stats[i+1] + "\n";
         }

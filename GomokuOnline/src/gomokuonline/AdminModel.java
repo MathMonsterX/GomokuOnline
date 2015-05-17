@@ -119,7 +119,7 @@ public class AdminModel implements Runnable{
                     int size = Integer.parseInt(input[3]);
                     this.openGame(input[1], input[2], size, input[4]);
                 }else if(input[0].equals("STATS")){
-                    this.openStats();
+                   // this.openStats();
                     this.postStats(Arrays.copyOfRange(input, 1, input.length));
                 }
                 
