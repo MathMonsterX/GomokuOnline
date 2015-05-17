@@ -66,44 +66,7 @@ public class GomokuServerModel {
         this.readFromDatabase();
     }
     
-    /**
-     * Gets usernames and passwords from the database file
-     */ 
-   /* private void getLoginsFromDatabase(){
-        try{
-            if( !loginDatabase.exists() ){ loginDatabase.createNewFile(); }
-        } catch (IOException ex) {
-            Logger.getLogger(GomokuServerModel.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        try {
-            Scanner scan = new Scanner(this.loginDatabase);
-            while(scan.hasNext()){
-                String[] login = scan.nextLine().split("\\s+");
-                if(login.length > 1)
-                    this.userLogins.put(login[0], login[1]);
-            }
-            scan.close();
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(GomokuServerModel.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }*/
     
-    /**
-     * 
-     * Updates the database with the given username and password pair
-     * @param uname username to be added
-     * @param pass password to be added
-     */
-    /*private void updateDatabase(String uname, String pass){
-        try {
-            FileWriter writer = new FileWriter(loginDatabase, true);
-            writer.append(uname + " " + pass + "\n");
-            writer.flush();
-            writer.close();
-        } catch (IOException ex) {
-            Logger.getLogger(GomokuServerModel.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }*/
     
     
     /**
