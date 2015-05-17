@@ -115,8 +115,9 @@ public class AdminModel implements Runnable{
                 }else if(input[0].equals("INVITED_BY")){
                     onlineMenuController.updateRequests(input[1],input[2]);
                 }else if(input[0].equals("P2P")){
+                    
                     int size = Integer.parseInt(input[3]);
-                    this.openGame(input[1], input[2], size);
+                    this.openGame(input[1], input[2], size, input[4]);
                 }else if(input[0].equals("STATS")){
                     this.openStats();
                     this.postStats(Arrays.copyOfRange(input, 1, input.length));
@@ -311,7 +312,7 @@ public class AdminModel implements Runnable{
       public void openGame(String player, int size){
           
               try {
-                  gameModel = new GameModel(size,'O');
+                  gameModel = new GameModel(size,'O', player);
                   gameController = new GameController();
                   gameModel.setController(gameController);
                   gameModel.setAdminModel(this);
@@ -320,7 +321,7 @@ public class AdminModel implements Runnable{
                   gameController.setEndMoveEnabled(true);
                   String hostIP = gameModel.getServerIP();
                   int portNum = gameModel.getServerPort();
-                  socketOut.write("CREATE_P2P "  + hostIP + " " + portNum + " " + player + " " + size+"\n"); 
+                  socketOut.write("CREATE_P2P "  + hostIP + " " + portNum + " " + player + " " + size+  " " + this.username + "\n"); 
                   gameModel.listen();
                   
               } catch (IOException ex) {
@@ -335,11 +336,11 @@ public class AdminModel implements Runnable{
      * is not null, a method in the controller is called to open the view
      * @param ip the IP address this user will connect to
      */
-      public void openGame(String ip, String port, int size){
+      public void openGame(String ip, String port, int size, String opponent){
           int connectPort = Integer.parseInt(port);
           
           if(gameController==null){
-              gameModel = new GameModel(ip, connectPort, size, 'X');
+              gameModel = new GameModel(ip, connectPort, size, 'X', opponent);
               gameController = new GameController();
               gameModel.setController(gameController);
              gameModel.setAdminModel(this);
@@ -384,6 +385,16 @@ public class AdminModel implements Runnable{
         String gameSize = input[1].charAt(0) + ""+input[1].charAt(1);
         int size = Integer.parseInt(gameSize);
         this.openGame(input[0], size);
+    }
+    
+    public void sendGameStats(String date, int endTime, String opponent, int result){
+        try {
+            String message = "UPDATE_STATS " + this.username + " " + date + " " + endTime + " " + opponent + " " + result;
+            socketOut.write(message + "\n");
+            socketOut.flush();
+        } catch (IOException ex) {
+            Logger.getLogger(AdminModel.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     /**
@@ -446,11 +457,9 @@ public void setNull(){
  * @return the username
  */
 public String getUsername() {
-    if(this.username==null){
+    if(this.username==null)
         return "";
-    }
-    else
-        return this.username;
+    else 
+        return username;
 }
- 
 }
