@@ -21,6 +21,7 @@ public class AI {
     private int row;
     private int column;
     private int count;
+    private AdminModel adminModel;
     
     /**
      * The constructor for the AI. Initializes size, difflvl, and count.
@@ -174,9 +175,14 @@ public class AI {
         controller = new GameController();
         controller.setModel(model);
         model.setController(controller);
+        model.setAdminModel(adminModel);
         controller.createView();
         model.setPlayerChar('O');
 
+    }
+    
+    public void setAdmin(AdminModel model){
+        this.adminModel = model;
     }
     
      

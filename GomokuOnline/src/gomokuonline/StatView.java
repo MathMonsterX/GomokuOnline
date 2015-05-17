@@ -92,7 +92,7 @@ public class StatView extends javax.swing.JPanel {
  * Sets this view to invisible and opens the main menu.
  * @param evt 
  */
-    private void btnCloseActionPerformed(java.awt.event.WindowEvent evt){
+ private void btnCloseActionPerformed(java.awt.event.WindowEvent evt){
     statFrame.setVisible(false);
     controller.openMainMenuView();
 }
