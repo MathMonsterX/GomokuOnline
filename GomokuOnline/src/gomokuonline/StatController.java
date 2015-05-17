@@ -72,7 +72,6 @@ public class StatController implements Runnable{
     
     
     public void postStats(String[] stats){
-        System.out.println(stats[9]);
         int timeInMili = Integer.parseInt(stats[9]);
         double timeInMinutes = (timeInMili/1000.0)/60.0;
         timeInMinutes = Math.round(10000.0*timeInMinutes)/10000.0;
