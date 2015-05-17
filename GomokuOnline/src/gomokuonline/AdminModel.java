@@ -445,7 +445,6 @@ public class AdminModel implements Runnable{
         }
    }
   
-<<<<<<< HEAD
     /**
      * This sets the gameController and gameModel to null.
      */   
@@ -453,6 +452,7 @@ public class AdminModel implements Runnable{
         this.gameController = null;
         this.gameModel = null;
     }
+    
     /**
      * Returns this user's username
      * @return the username
@@ -460,26 +460,5 @@ public class AdminModel implements Runnable{
     public String getUsername() {
         return this.username;
     }
-=======
-/**
- * This sets the gameController and gameModel to null.
- */   
-public void setNull(){
-    this.gameController = null;
-    this.gameModel = null;
-}
-/**
- * Returns this user's username
- * @return the username
- */
-public String getUsername() {
-    if(this.username==null){
-        System.out.println("HELLO");
-        return "";
-    }
-    else
-        return this.username;
-}
->>>>>>> origin/master
  
 }
