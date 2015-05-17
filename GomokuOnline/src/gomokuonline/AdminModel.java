@@ -46,6 +46,7 @@ public class AdminModel implements Runnable{
      */
     public AdminModel(){
         try{
+            
             clientSock = new Socket( InetAddress.getLocalHost().getHostAddress(), port ) ;
             is = clientSock.getInputStream() ;
             os = clientSock.getOutputStream() ;
@@ -66,6 +67,7 @@ public class AdminModel implements Runnable{
      */
     public AdminModel(String address, int port){
         try{
+            
             clientSock = new Socket(address, port);
             is = clientSock.getInputStream();
             os = clientSock.getOutputStream() ;
@@ -414,14 +416,17 @@ public class AdminModel implements Runnable{
        
        if(diffLevel.equals("Easy")){
                AI easy = new AI(size,0);
+               easy.setAdmin(this);
                easy.createModel();  
        }
        else if(diffLevel.equals("Intermediate")){
             AI medium = new AI(size,1);
+            medium.setAdmin(this);
                medium.createModel();
        }
        else{
            AI hard = new AI(size,2);
+           hard.setAdmin(this);
            hard.createModel();
        }
 
@@ -440,6 +445,7 @@ public class AdminModel implements Runnable{
         }
    }
   
+<<<<<<< HEAD
     /**
      * This sets the gameController and gameModel to null.
      */   
@@ -454,5 +460,26 @@ public class AdminModel implements Runnable{
     public String getUsername() {
         return this.username;
     }
+=======
+/**
+ * This sets the gameController and gameModel to null.
+ */   
+public void setNull(){
+    this.gameController = null;
+    this.gameModel = null;
+}
+/**
+ * Returns this user's username
+ * @return the username
+ */
+public String getUsername() {
+    if(this.username==null){
+        System.out.println("HELLO");
+        return "";
+    }
+    else
+        return this.username;
+}
+>>>>>>> origin/master
  
 }

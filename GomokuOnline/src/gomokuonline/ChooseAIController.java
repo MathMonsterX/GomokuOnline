@@ -18,7 +18,6 @@ public class ChooseAIController {
     public void createView(){
         view = new ChooseAIView();
         chooseAIFrame = new JFrame( );
-        chooseAIFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         chooseAIFrame.setContentPane(view);
         chooseAIFrame.pack();
         chooseAIFrame.setVisible(true);
