@@ -136,17 +136,15 @@ public class GomokuServerModel {
             Scanner scan = new Scanner(this.loginDatabase);
             while(scan.hasNext()){
                 String[] login = scan.nextLine().split("\\s+");
-               for(String token : login)
-                   System.out.println("token " + token);
+               
                 if(login.length > 1){
                     Player player = new Player(login[0], login[1]);
                     int numGames = scan.nextInt();
                     scan.nextLine();
-                    System.out.println(numGames);
+                    
                     for(int i = 0; i < numGames; i++){
                         String[] gameData = scan.nextLine().split("\\s+");
-                        for(String token : gameData)
-                            System.out.println("token " + token);
+                        
                         player.addGameStats(formatter.parse(gameData[0]), 
                                 Integer.parseInt(gameData[1]), new Player(gameData[2], null), Integer.parseInt(gameData[3]));
                     }
