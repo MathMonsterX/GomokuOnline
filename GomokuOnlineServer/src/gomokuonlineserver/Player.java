@@ -5,6 +5,7 @@
  */
 package gomokuonlineserver;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -17,6 +18,7 @@ public class Player implements Comparable<Player> {
     private  String password;
     private boolean playerState;
     private Stats stats;
+    private final SimpleDateFormat formatter = new SimpleDateFormat("EEE/MMMd/yyyy");
 
     /**
      * The constructor for the Player class. 
@@ -295,7 +297,7 @@ public class Player implements Comparable<Player> {
             @Override
             public String toString()
             {
-                return datePlayed.toString() + " " + time + " " + opponent.getUserName() + " " + gameResult;
+                return formatter.format(datePlayed) + " " + time + " " + opponent.getUserName() + " " + gameResult;
             }
         }
         
