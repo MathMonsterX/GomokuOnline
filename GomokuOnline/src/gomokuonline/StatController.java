@@ -75,11 +75,14 @@ public class StatController implements Runnable{
         int timeInMili = Integer.parseInt(stats[9]);
         double timeInMinutes = (timeInMili/1000.0)/60.0;
         timeInMinutes = Math.round(10000.0*timeInMinutes)/10000.0;
+        
+        double seconds = 60*(timeInMinutes - Math.floor(timeInMinutes));
+        
              
         
         String message = stats[0] + " "+stats[1] + " " + stats[2]+"\n"
                 + stats[3] + " " + stats[4] + "\n" + stats[5] + " " + stats[6] + "\n"
-                +stats[7] + " " +stats[8] + " "+ timeInMinutes + " minutes";
+                +stats[7] + " " +stats[8] + " "+ (int)Math.floor(timeInMinutes) + " minutes " + (int)Math.floor(seconds) + " seconds" ;
         this.view.postStats(message);
     }
 }
