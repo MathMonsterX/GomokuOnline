@@ -56,13 +56,21 @@ public class OnlineMenuController implements Runnable{
         String users;
         while(onlineMenuFrame!=null){
             try {
-                model.getLoggedInList();
+                this.getLoggedInList();
                 sleep(15000);
             } catch (InterruptedException ex) {
                 Logger.getLogger(OnlineMenuController.class.getName()).log(Level.SEVERE, null, ex);
                 System.out.println("Timer was interrupted");
             }
         }
+    }
+    
+    /**
+     * Requests an update to the list of online players
+     * from the server
+     */
+    public void getLoggedInList(){
+        model.getLoggedInList();
     }
     /**
      * This instantiates a new thread to request a list of online players and 

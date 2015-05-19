@@ -145,7 +145,7 @@ public class GameModel implements Runnable{
         try {
             dataOut.writeBytes(message + "\n");
             dataOut.flush();
-            System.out.println("Just sent " + message);
+            
         } catch (IOException ex) {
             Logger.getLogger(GameModel.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println("Error in sending message over server");
@@ -172,7 +172,7 @@ public class GameModel implements Runnable{
             String message;
            
             while((message = dataIn.readLine()) != null){
-                System.out.println("Just received " + message);
+                
                 this.processMessage(message);
                 
             }
@@ -377,7 +377,9 @@ public class GameModel implements Runnable{
     public void setNull(){
         adminModel.setNull();
     }
-    
+    public void removeThisGame(){
+        this.adminModel.removeGame(this);
+    }
     /**
     * Returns this user's username
     * @return the username

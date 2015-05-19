@@ -3,6 +3,7 @@
 package gomokuonline;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import javax.accessibility.AccessibleContext;
 import javax.swing.JFrame;
@@ -220,9 +221,10 @@ public void updateRequests(Player player, Gomoku board){
      * in the controller
      */
     private void btnAccept_Click(String player){
-        System.out.println("Player: " + player);
-        controller.accept(player);
+        
         this.removePlayer(player);
+        controller.accept(player);
+        
     }
     /**
      * Removes a player from the list 
@@ -249,14 +251,28 @@ public void updateRequests(Player player, Gomoku board){
      * @param players the list of online players
      */
     public void post(String[] players){
-        String[] onlinePlayers = new String[players.length];
+       // String[] onlinePlayers = new String[players.length];
+        ArrayList<String> onlinePlayers = new ArrayList<>();
         int count=0;
-        for(int i=0;i<players.length;i++){
-            if(!players[i].equals(controller.getUname()))
-                onlinePlayers[count]=players[i];
-            count++;
+        ArrayList<String> requests = new ArrayList<>(Arrays.asList(this.getRequests()));
+        ArrayList<String> names = new ArrayList<>();
+        
+        for(String request: requests){
+                if(request != null){
+                String[] temp = request.split("\\s+");
+                names.add(temp[0]);
+            }
         }
-        listOnlinePlayers.setListData(onlinePlayers);
+        
+        for(int i=0;i<players.length;i++){
+            if(!players[i].equals(controller.getUname()) && !names.contains(players[i])){
+                onlinePlayers.add(players[i]);
+                //onlinePlayers[count]=players[i];
+               // count++;
+            }
+        }
+        listOnlinePlayers.setListData(onlinePlayers.toArray(new String[onlinePlayers.size()]));
+        
     }
     /**
      * Sets this frame 
@@ -274,21 +290,25 @@ public void updateRequests(Player player, Gomoku board){
         });
     }
     /**
-     * This updates the list of players on the view
+     * This updates the list of requests on the view
      * @param player the username of the player that sent an invitation
+     * @param size the size of the board
      */
     public void updateRequests(String player, String size){
-        String[] req=this.getModel();
-        req[req.length-1] = player + " " + size;
-        listReq.setListData(req);
+        ArrayList<String> req=new ArrayList<>(Arrays.asList(this.getRequests()));
+        String newRequest = player + " " + size;
+        if(!req.contains(newRequest))
+            req.add(newRequest);
+        listReq.setListData(req.toArray(new String[req.size()]));
+        this.controller.getLoggedInList();
     }
     /**
      * Gets the list of requests and converts it to an array of Strings
      * @return the array of requests
      */
-    private String[] getModel(){
+    private String[] getRequests(){
         ListModel modelList = listReq.getModel();
-        String[] req=new String[modelList.getSize()+1];
+        String[] req=new String[modelList.getSize()];
         for(int i=0; i < modelList.getSize(); i++){
             req[i] = (String)modelList.getElementAt(i);  
         }
@@ -299,16 +319,11 @@ public void updateRequests(Player player, Gomoku board){
      * @param player the player getting removed
      */
     private void removePlayer(String player){
-        String[] req=this.getModel();
-        List requests = new ArrayList();
-        for(int i = 0; i<req.length;i++){
-            requests.add(req[i]);
-        }
+        ArrayList<String> requests = new ArrayList<>(Arrays.asList(this.getRequests()));
+        
         requests.remove(player);
-        for(int i = 0; i<req.length-1;i++){
-            req[i] = (String)requests.get(i);
-        }
-        listReq.setListData(req);
+        
+        listReq.setListData(requests.toArray(new String[requests.size()]));
         
     }
     

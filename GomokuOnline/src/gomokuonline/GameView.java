@@ -240,6 +240,7 @@ public void endGame(int row, int column, String status, char playerChar){
        this.updateBoard(row, column, playerChar);
        btnEndMove.setText(status);
        btnEndMove.setEnabled(false);
+       controller.removeGame();
        controller.setNull();
 
 }
@@ -249,6 +250,7 @@ public void endGame(int row, int column, String status, char playerChar){
  */
 private void btnCloseActionPerformed(java.awt.event.WindowEvent evt){
         gameViewFrame.setVisible(false);
+        controller.removeGame();
         controller.setNull();
 
     }

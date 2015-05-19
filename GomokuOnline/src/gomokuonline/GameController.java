@@ -103,6 +103,10 @@ public class GameController {
     public void setNull(){
         model.setNull();
     }
+    
+    public void removeGame(){
+        this.model.removeThisGame();
+    }
     /**
     * Returns this user's username
     * @return the username

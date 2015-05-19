@@ -11,7 +11,10 @@ import java.awt.Container;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import javax.swing.JFrame;
 
 
@@ -24,12 +27,13 @@ import javax.swing.JFrame;
 public class AdminModel implements Runnable{
     private ChooseAIController AIController;
     private GameController gameController;
+    private List<GameModel> games;
     private LogInController logInController;
     private MainMenuController mainMenuController;
     private OnlineMenuController onlineMenuController;
     private RegisterController registerController;
     private StatController statController;
-    private GameModel gameModel;
+    
     
     private int port = 8080;
     private Socket clientSock;
@@ -46,7 +50,7 @@ public class AdminModel implements Runnable{
      */
     public AdminModel(){
         try{
-            
+            this.games = Collections.synchronizedList(new ArrayList<GameModel>());
             clientSock = new Socket( InetAddress.getLocalHost().getHostAddress(), port ) ;
             is = clientSock.getInputStream() ;
             os = clientSock.getOutputStream() ;
@@ -67,7 +71,7 @@ public class AdminModel implements Runnable{
      */
     public AdminModel(String address, int port){
         try{
-            
+            this.games = Collections.synchronizedList(new ArrayList<GameModel>());
             clientSock = new Socket(address, port);
             is = clientSock.getInputStream();
             os = clientSock.getOutputStream() ;
@@ -312,8 +316,8 @@ public class AdminModel implements Runnable{
       public void openGame(String player, int size){
           
               try {
-                  gameModel = new GameModel(size,'O', player);
-                  gameController = new GameController();
+                  GameModel gameModel = new GameModel(size,'O', player);
+                  GameController gameController = new GameController();
                   gameModel.setController(gameController);
                   gameModel.setAdminModel(this);
                   gameController.setModel(gameModel);
@@ -323,6 +327,7 @@ public class AdminModel implements Runnable{
                   int portNum = gameModel.getServerPort();
                   socketOut.write("CREATE_P2P "  + hostIP + " " + portNum + " " + player + " " + size+  " " + this.username + "\n"); 
                   gameModel.listen();
+                  games.add(gameModel);
                   
               } catch (IOException ex) {
                   Logger.getLogger(AdminModel.class.getName()).log(Level.SEVERE, null, ex);
@@ -339,16 +344,17 @@ public class AdminModel implements Runnable{
       public void openGame(String ip, String port, int size, String opponent){
           int connectPort = Integer.parseInt(port);
           
-          if(gameController==null){
-              gameModel = new GameModel(ip, connectPort, size, 'X', opponent);
-              gameController = new GameController();
+         // if(gameController==null){
+              GameModel gameModel = new GameModel(ip, connectPort, size, 'X', opponent);
+              GameController gameController = new GameController();
               gameModel.setController(gameController);
-             gameModel.setAdminModel(this);
+              gameModel.setAdminModel(this);
               gameController.setModel(gameModel);
               gameController.createView();
               gameController.setEndMoveEnabled(false);
               gameModel.listen();
-          }
+              games.add(gameModel);
+         // }
       }
       /**
      * Closes the socket
@@ -407,10 +413,10 @@ public class AdminModel implements Runnable{
        if(gameSize.equals("30x30")){
           size=30; 
        }
-       else if(gameSize.equals("30x30")){
+       else if(gameSize.equals("40x40")){
            size=40;
        }
-       else if(gameSize.equals("30x30")){
+       else if(gameSize.equals("50x50")){
            size=50;
        }   
        
@@ -450,7 +456,11 @@ public class AdminModel implements Runnable{
  */   
 public void setNull(){
     this.gameController = null;
-    this.gameModel = null;
+    
+}
+
+public void removeGame(GameModel game){
+    this.games.remove(game);
 }
 /**
  * Returns this user's username
