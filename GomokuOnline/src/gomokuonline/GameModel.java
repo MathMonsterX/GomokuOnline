@@ -43,6 +43,7 @@ public class GameModel implements Runnable{
     GameModel(int size){
         this.size = size;
         this.matrix = new char[size][size];
+        this.startTime = new Date().getTime();
     }
     /**
      * Default constructor. Assumes this GameModel will  host the connection,
