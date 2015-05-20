@@ -20,11 +20,12 @@ public class GameController {
         gameViewFrame = new JFrame();
         //gameViewFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         gameViewFrame.setContentPane(view);
-        gameViewFrame.setVisible(true);
         view.setController(this);
         view.setFrame(gameViewFrame);
+        view.setCloseBehavior();
         view.setupBoard(model.getSize(), model.getSize());
         gameViewFrame.pack();
+        gameViewFrame.setVisible(true);
 
     }
     /**

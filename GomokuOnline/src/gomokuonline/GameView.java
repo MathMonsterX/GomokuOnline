@@ -6,6 +6,8 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JRadioButton;
@@ -25,7 +27,8 @@ public class GameView extends javax.swing.JPanel {
         initComponents();
         lblPlayer.setText("");
         lblPlayerMove.setVisible(false);
-        lblOpponentMove.setVisible(false);
+        lblOpponentMove.setVisible(false); 
+        
         
     }
     
@@ -60,7 +63,11 @@ public class GameView extends javax.swing.JPanel {
         this.add(this.btnEndMove, BorderLayout.PAGE_END);
         
     }
-     
+    
+    /**
+     * Marks a button as selected
+     * @param evt user clicks on a button on the board
+     */ 
     private void gameButtonActionPerformed(java.awt.event.ActionEvent evt){
         for(GameButton[] buttons : buttonGrid){
             for(GameButton button : buttons){
@@ -179,6 +186,10 @@ public class GameView extends javax.swing.JPanel {
         }
     }                                          
 
+    /**
+     * Enables and disables the End Move button.
+     * @param enabled true to enable, false to disable
+     */
     public void setbtnEndMOveEnabled(boolean enabled){
         this.btnEndMove.setEnabled(enabled);
     }
@@ -189,71 +200,85 @@ public class GameView extends javax.swing.JPanel {
     private javax.swing.JLabel lblOpponentMove;
     private javax.swing.JLabel lblPlayer;
     private javax.swing.JLabel lblPlayerMove;
-    // End of variables declaration                   
-/**
- * GameController setter
- * @param controller the GameController
- */
-public void setController(GameController controller){
-    this.controller = controller;
-}
-
-/**
- * gameViewFrame setter.
- * @param frame the JFrame
- */
-public void setFrame(JFrame frame){
-    this.gameViewFrame = frame;
-    gameViewFrame.setTitle("Let's Play Gomoku "+controller.getUsername()+"!");
-
-}
-
-/**
- * This updates the board on the view
- * @param row the row of the move
- * @param column the column of the move
- * @param playerChar the player's character
- */
-public void updateBoard(int row, int column, char playerChar){
-     GameButton button = buttonGrid[row][column];
-     button.setEnabled(false);
-     if(playerChar == 'X')
-        button.setBackground(Color.black);
-     else
-         button.setBackground(Color.yellow);
-     button.setOpaque(true);
-     button.setBorderPainted(false);
-     //button.removeActionListener(button.getActionListeners()[0]);
-     button.setSelected(false);
+    // End of variables declaration        
     
-        
-}
-/**
- * This updates the last, or winning, move, ends the game and sets the 
- * GameController and GameModel null
- * @param row the row of the winning move
- * @param column the column of the winning move
- * @param status Winner or Loser based off whether the player won or lost
- * @param playerChar the player's character
- */    
-public void endGame(int row, int column, String status, char playerChar){
-       this.updateBoard(row, column, playerChar);
-       btnEndMove.setText(status);
-       btnEndMove.setEnabled(false);
-       controller.removeGame();
-       controller.setNull();
+    /**
+     * GameController setter
+     * @param controller the GameController
+     */
+    public void setController(GameController controller){
+        this.controller = controller;
+    }
 
-}
-/**
- * This sets this view to invisible and sets the GameController and GameModel null
- * @param evt click on the close button
- */
-private void btnCloseActionPerformed(java.awt.event.WindowEvent evt){
-        gameViewFrame.setVisible(false);
-        controller.removeGame();
-        controller.setNull();
+    /**
+     * gameViewFrame setter.
+     * @param frame the JFrame
+     */
+    public void setFrame(JFrame frame){
+        this.gameViewFrame = frame;
+        gameViewFrame.setTitle("Let's Play Gomoku "+controller.getUsername()+"!");
+        
 
     }
-}
+    
+    public void setCloseBehavior(){
+        this.gameViewFrame.addWindowListener( new WindowAdapter()
+        {
+            @Override
+            public void windowClosing(WindowEvent evt){
+                gameViewFrame.setVisible(false);
+                controller.removeGame();
+                controller.setNull();
+                
+                
+
+                }
+        });
+    }
+
+    
+    
+    
+    /**
+     * This updates the board on the view
+     * @param row the row of the move
+     * @param column the column of the move
+     * @param playerChar the player's character
+     */
+    public void updateBoard(int row, int column, char playerChar){
+         GameButton button = buttonGrid[row][column];
+         button.setEnabled(false);
+         if(playerChar == 'X')
+            button.setBackground(Color.black);
+         else
+             button.setBackground(Color.yellow);
+         button.setOpaque(true);
+         button.setBorderPainted(false);
+         //button.removeActionListener(button.getActionListeners()[0]);
+         button.setSelected(false);
+
+
+    }
+    /**
+     * This updates the last, or winning, move, ends the game and sets the 
+     * GameController and GameModel null
+     * @param row the row of the winning move
+     * @param column the column of the winning move
+     * @param status Winner or Loser based off whether the player won or lost
+     * @param playerChar the player's character
+     */    
+    public void endGame(int row, int column, String status, char playerChar){
+           this.updateBoard(row, column, playerChar);
+           btnEndMove.setText(status);
+           btnEndMove.setEnabled(false);
+           controller.removeGame();
+           controller.setNull();
+
+    }
+
+
+
+    
+    }
 
 

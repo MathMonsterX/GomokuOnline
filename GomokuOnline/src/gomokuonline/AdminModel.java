@@ -127,6 +127,7 @@ public class AdminModel implements Runnable{
                     this.postStats(Arrays.copyOfRange(input, 1, input.length));
                 }
                 
+                
             }
         }catch(IOException ex){
             Logger.getLogger(AdminModel.class.getName()).log(Level.SEVERE, null, ex);
