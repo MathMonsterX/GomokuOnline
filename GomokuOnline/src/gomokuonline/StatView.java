@@ -32,6 +32,7 @@ public class StatView extends javax.swing.JPanel {
 
         resultLabel.setText("Game Results");
 
+        statTA.setEditable(false);
         statTA.setColumns(20);
         statTA.setRows(5);
         resultsTA.setViewportView(statTA);
